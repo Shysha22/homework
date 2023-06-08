@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+    
+</head>
+<body>
+    <p>
+        Завдання : Обчислити значення виразів
+    </p>
+    <img src="../resources/9ikf6y8l.png" alt="expression">
+    <script defer>
+        let a = parseInt(prompt("Введіть число 'a'","12"));
+        let b = parseInt(prompt("Введіть число 'b'","23"));
+        let c = parseInt(prompt("Введіть число 'c'","33"));
+
+        const firstExample = a + 12 + b;
+        const secondExample = Math.sqrt( (a + b) / (2 *a))
+        const thirdExample = Math.cbrt( (a + b) * c);
+        const fourthExample = Math.sin(a /-b)
+
+        document.write(`
+        <div class = "decision0">
+            S1 = ${firstExample}</br>
+            S2 = ${secondExample.toFixed(2)}</br>
+            S3 = ${thirdExample.toFixed(2)}</br>
+            S4 = ${fourthExample.toFixed(2)}</br>
+        </div>
+        `)
+    </script>
+</body>
+</html>

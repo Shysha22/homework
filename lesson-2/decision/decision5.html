@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>decisionSix</title>
+    <link rel="stylesheet" href="../css/style.css">
+    
+</head>
+<body>
+    <p>
+        Завдання : Дано кількість секунд, що пройшла від початку доби. Визначити скільки це годин і хвилин.
+    </p>
+    <script >
+
+        let numberSeconds = parseInt(prompt("Введіть кількість секунд"))
+
+        // let numberMinutes = numberSeconds / 60;
+        // let numberHours = numberMinutes / 60;
+        let numberSecondsKemainder = numberSeconds % 3600;
+        let numberHours = (numberSeconds - numberSecondsKemainder) / 3600
+        let numberMinutes = numberSecondsKemainder / 60
+
+        document.write(
+        `
+            <div>Кількіть хвилин становить = ${Math.floor(numberMinutes)}<div>
+            <div>Кількість годин становить = ${numberHours}<div>
+        `)
+
+    </script>
+    
+    
+</body>
+</html>

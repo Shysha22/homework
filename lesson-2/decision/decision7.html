@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>decisionEight</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <p>
+        Завдання : Знайти суму випадкового номера місяця (від 1 до 12) та випадкового номера дня (від 0 до 6).
+    </p>
+    <script>
+        let minMonth = 1;
+        let maxMonth = 12;
+
+        let randomNumMonth = minMonth + Math.floor(Math.random() * (maxMonth - minMonth + 1))
+
+        let minDay = 0;
+        let maxDay = 6
+
+        let randomNumDay = minDay + Math.floor(Math.random() * (maxDay - minDay + 1))
+
+        let total = randomNumMonth + randomNumDay;
+
+        document.write(
+        `
+            <div>Сума випадкових чисел = ${total}<div>
+        `)
+    </script>
+
+    
+</body>
+</html>

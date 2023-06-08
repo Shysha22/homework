@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>desionFive</title>
+    <link rel="stylesheet" href="../css/style.css">
+ 
+</head>
+<body>
+
+    <p>
+        Завдання : Дано довжину у сантиметрах. Визначати скільки це метрів і кілометрів.
+    </p>
+    <script defer>
+
+        let lenghtCentimeters = parseInt(prompt("Введіть довжину в сантиметрах"))
+        let lenghtMeters = lenghtCentimeters / 100;
+        let lenghtKilometers = lenghtMeters / 1000;
+
+        document.write(
+        `
+            <div>Довжина в метрах становить = ${lenghtMeters}<div>
+            <div>Довжина в кілометрах становить = ${lenghtKilometers}<div>
+        `)
+    </script>
+    
+</body>
+</html>

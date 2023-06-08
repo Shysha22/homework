@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>decisionFour</title>
+    <link rel="stylesheet" href="../css/style.css">
+    
+</head>
+<body>
+
+    <p>
+        Завдання : Дано вартість одиниці товару і кількість. Знайти загальну вартість та ПДВ (5% від загальної вартості).
+    </p>
+
+    <script>
+        let vat = 5
+
+        let priceProduct = parseFloat(prompt("Ціна товару"))
+        let quantityGoods = parseInt(prompt("Кількість товару"))
+
+        let totalCost = priceProduct * quantityGoods;
+        let goodsTax = (totalCost * vat) / 100;
+
+        document.write(
+        `
+            <div>Загальна вартість становить = ${totalCost.toFixed(2)}<div>
+            <div>ПДВ становить = ${goodsTax.toFixed(2)}<div>
+        `)
+
+    </script>
+    
+</body>
+</html>
