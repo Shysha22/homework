@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <button class="btnBack"><a href="../lesson3.html">До завдань</a></button>
+
+    <!-- Задача -->
+    <!--З клавіатури вводиться ціна товару і кількість грошей. Якщо грошей не вистачає то відмовляємо у покупці, інакше, якщо ще залишаються гроші, то пропонуємо купити лотерею за 4 грн. -->
+
+    <script>
+
+    let priceProduct = parseFloat(prompt("Введіть ціну товару","200грн")),
+        amountMoney = parseFloat(prompt("Введіть кількість грошей"));
+
+    const priceLottery = 4
+    if(priceProduct > amountMoney)
+        alert("Нажаль у вас не вистачає коштів((");
+    else if(priceProduct === amountMoney)
+        alert(`Дякуємо за покупку`)
+    else if(priceProduct < amountMoney){
+        let restMoney = amountMoney - priceProduct;
+        let numLottery = Math.floor(restMoney / priceLottery);
+        alert(`Дякуємо за покупку,у вас залишилося ${restMoney} грн, пропонуємо придбати лотерею за 4 грн,у вас вийде ${numLottery} штук`)
+    }
+    else{
+        alert("Нажаль щось пішло не так((")
+    }
+    </script>
+</body>
+</html>

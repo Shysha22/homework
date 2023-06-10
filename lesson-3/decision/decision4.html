@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!-- Задача -->
+    <!-- З клавіатури вводиться вік людини. Вивести на екран ким він є (дитиною у садочку, школярем, студентом, працівником, пенсіонером)  -->
+
+    <script>
+
+        let humanAge = parseInt(prompt("Введіть вік людини"))
+
+        let whoPerson
+
+        if(humanAge > 0 && humanAge < 7 )
+            whoPerson = "Дитина"
+        else if(humanAge >= 7 && humanAge < 17)
+            whoPerson = "Школяр"
+        else if(humanAge >= 17 && humanAge <= 22)
+            whoPerson = "Студент"
+        else if(humanAge > 22 && humanAge < 60 )
+            whoPerson = "Працівник"
+        else if(humanAge >= 60 && humanAge < 90 )
+            whoPerson = "Пенсіонер"
+        else{
+            whoPerson = "введіть конкретні данні"
+        }
+
+        document.write(`
+            <div class = "humanAge"> Ваша відповідь : <span>${whoPerson}</span></div>
+            <button class="btnBack"><a href="../lesson3.html">До завдань</a></button>
+        `)
+     
+        
+
+    </script>
+</body>
+</html>

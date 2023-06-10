@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!-- Задача -->
+    <!-- З клавіатури вводяться імена двох дітей та кількість у них цукерок. Вивести не екран ім’я тієї дитини, у якої кількість цукерок є більшою, або вивести, що кількість однакова. -->
+
+    <script>
+
+        let firstChildName = prompt("Введіть ім'я 1 дитини","Іван"),
+            candyFirstChild = parseInt(prompt(`Скільки цукерок має ${firstChildName}`));
+
+        let secondChildName = prompt("Введіть ім'я 2 дитини","Марина"),
+            candySecondChild = parseInt(prompt(`Скільки цукерок має ${secondChildName}`));
+
+        let childMoreCandies
+
+        if(candyFirstChild > candySecondChild)
+            childMoreCandies = firstChildName;
+        else if (candyFirstChild === candySecondChild) 
+            childMoreCandies = `${firstChildName} та ${secondChildName}`;
+        else
+            childMoreCandies = secondChildName;
+           
+
+            document.write(`
+            <div class = "humanAge"> Більше цукерок має: <span>${childMoreCandies}</span></div>
+            <button class="btnBack"><a href="../lesson3.html">До завдань</a></button>
+        `)  
+
+
+    </script>
+</body>
+</html>

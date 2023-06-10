@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- Задача -->
+    <!--З клавіатури вводиться номер дня тижня. Вивести на екран назву дня.  -->
+
+
+    <script>
+
+        let numDayWeek = parseInt(prompt("Введіть номер дня тижня (від 1 до 7)","2"))
+
+        let dayWeek
+
+        switch (numDayWeek) {
+            case 1:
+                dayWeek = "Понеділок"
+                break;
+            case 2:
+                dayWeek = "Вівторок"
+                break;
+            case 3:
+                dayWeek = "Середа"
+                break;
+            case 4:
+                dayWeek = "Четверг"
+                break;
+            case 5:
+                dayWeek = "П'ятниця"
+                break;
+            case 6:
+                dayWeek = "Субота"
+                break;
+            case 7:
+                dayWeek = "Неділя"
+                break;
+        
+            default:
+                dayWeek = "Введіть будь ласка конкретні данні"
+                break;
+        }
+        
+
+        document.write(`
+            <div class = "humanAge"> День тижня : <span>${dayWeek}</span></div>
+            <button class="btnBack"><a href="../lesson3.html">До завдань</a></button>
+        `)
+     
+        
+
+    </script>
+</body>
+</html>

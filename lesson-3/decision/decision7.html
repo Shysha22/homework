@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- Задача -->
+    <!--З клавіатури вводиться номер місяця. Вивести до якої пори він відноситься-->
+
+
+    <script>
+
+        let numMonth = parseInt(prompt("Введіть номер місяця (від 1 до 12)","2"))
+
+        let season
+
+        if( numMonth === 12 ||numMonth ===  1 ||numMonth ===  2)
+            season = "Зима"
+        else if(numMonth === 3 ||numMonth === 4 ||numMonth === 5)
+            season = "Весна"
+        else if(numMonth === 6||numMonth === 7||numMonth === 8)
+            season = "Літо"
+        else if(numMonth === 9||numMonth === 10||numMonth === 11)
+            season = "Осінь"
+        else{
+            season = "Введіть конкретні данні"
+        }
+        console.log(season)
+        
+
+        document.write(`
+            <div class = "humanAge"> Цей номер відносится до пори року: <span>${season}</span></div>
+            <button class="btnBack"><a href="../lesson3.html">До завдань</a></button>
+        `)
+     
+        
+
+    </script>
+</body>
+</html>
