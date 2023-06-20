@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!-- Задача -->
+    <!-- 15. Користувача поступово вводить показники температури протягом року. Знайти середню температуру. . -->
+
+
+
+    <script>
+
+       const months = 12
+       let sumTemp = 0,
+           audit = false
+
+       alert("Введіть показники температури протягом року(12 місяців)")
+
+       exit : for( let i = 1; i <= months; i++){
+        let monthTemp = parseInt(prompt(`Введіть температуру за ${i} місяць`))
+        if( monthTemp <= -30 || monthTemp > 50){
+            alert("Ви напевно зробили помилку,занадто жарко( або холодно)")
+            audit = true
+            break exit
+        }
+        sumTemp += monthTemp
+       }
+
+       if(!audit){
+        let result = sumTemp / months;
+        alert(`Середня температура за ${months} місяців становить ${Math.floor(result)}`)
+       }
+
+        document.write(" <button class='btnBack'><a href='../lesson5.html'>До завдань</a></button>")
+
+    </script>
+</body>
+</html>

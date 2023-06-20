@@ -1,0 +1,117 @@
+.container{
+    width: 100%;
+}
+body{
+    margin: 0;
+}
+h2{
+    text-align: center;
+}
+ul{
+    display: flex;
+    flex-wrap: wrap;
+
+}
+body{
+    text-align: center;
+}
+.li_style_lesson_wrapper{
+    list-style-type: none;
+    width: 250px;
+    height: 200px;
+    border: 1px solid #000;
+    margin: 10px;
+    border-radius: 20px;
+    overflow: hidden;
+    padding: 10px;
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color:antiquewhite
+    
+}
+.btn{
+    width: 120px;
+    height: 40px;
+    background-color: aqua;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    border-radius:10px;
+}
+.btnBack{
+    width: 200px;
+    height: 70px;
+    background-color: aqua;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius:10px;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+.btnBack a{
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 500px;
+    color:#000;
+    padding: 10px;
+}
+.expression{
+    width: 110px;
+    height: 110px;
+    padding-bottom: 5px;
+}
+p{
+   
+}
+table{
+    margin: 0 auto;
+}
+.decision0{
+    font-size: 20px;
+    margin-top: 10px;
+}
+.table{
+    border: 1px solid #000;
+    display: inline-block;
+    margin-right: 40px
+}
+.table td{
+    padding: 5px;
+    border: 1px solid #000;
+    margin:3px
+}
+.humanAge{
+    margin: 0 auto;
+    margin-top: 100px;
+    font-size: 30px;
+    width: 700px;
+    border-bottom: 2px solid #000;
+    padding-bottom: 5px;
+    font-weight: 600;
+}
+.humanAge span{
+    font-size: 30px;
+    color: rgb(134, 122, 122)
+}   
+/* lesson 5 */
+
+.li_less_5{
+    font-size: 18px;
+}
+/* lesson 5 */
+h1{
+    margin: 0;
+}
+
+.lesson_cycle_seven{
+    background-color:rgb(145, 156, 152);
+    width: 500px;
+    padding: 20px;
+    text-align: start;
+}

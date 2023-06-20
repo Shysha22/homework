@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!-- Задача -->
+    <!-- 11.Знайти суму 5 непарних чисел, що знаходяться між заданими користувачем числами. -->
+
+    <script>
+
+        alert("Для коректного обчислення введіть 2 числа від 0 до 50")
+
+        const firstNum = parseInt(prompt("Введіть перше число")),
+              secondNum = parseInt(prompt("Введіть друге число"))
+
+        let sum = 0;
+
+        let total = 5;
+
+        if(firstNum < 0 || secondNum > 100)
+            alert("Введіть коректні данні")
+        else{
+            for(let i = firstNum; i <= secondNum;i++){
+                if(total > 0){
+                    if( i  % 2 !== 0){
+                    sum += i
+                    total--
+                    }
+                }
+            }
+
+                alert(`Сума перших 5  непарних чисел становить = ${sum}`)
+
+        }
+        
+        document.write(" <button class='btnBack'><a href='../lesson5.html'>До завдань</a></button>")
+
+
+
+    </script>
+</body>
+</html>

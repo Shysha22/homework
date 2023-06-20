@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!-- Задача -->
+    <!-- 14.Каса. Користувачу повідомляють суму, яку йому треба сплатити. Користувач поступово вводить суму грошей до тих пір, поки суми не буде достатньо для оплати товарів (кожного разу користувачу повідомляють, яку ще суму потрібно ввести). . -->
+
+
+    <script>
+
+        let priceProduct = 1000
+        let total = 0
+
+        let showPrice = alert(`Вам потрібно сплатити ${priceProduct} грн`)
+
+        do{
+
+            let userPay = parseFloat(prompt("Введіть суму"))
+            total += userPay;
+
+            if(priceProduct > total){
+                alert(`Вам необхідно доплатити ${Math.floor(priceProduct - total)} грн`)
+            }
+           
+        }while(priceProduct > total){
+            alert("Вітаємо вас з покупкою")
+        }
+
+             
+        document.write(" <button class='btnBack'><a href='../lesson5.html'>До завдань</a></button>")
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!-- Задача -->
+    <!-- 13. Морський бій. Комп’ютер випадково розташовує одиночний корабель на полі розміром N*M. Маючи К снарядів користувач намагається потопити корабель. -->
+
+
+    <script>
+
+        const fieldSize = parseInt(prompt("Вітаю вас у грі 'Морськтй бій'.Введіть будь ласка розмір поля(максимальне значення 20)"));
+
+        let attemptUser = 3
+        
+        if(fieldSize <=0 || fieldSize > 20)
+        {
+            alert("Введіть коректне значення")
+        }
+         else if(fieldSize){
+            alert(`Для влучання в ціль у вас є ${attemptUser} спроби`)
+             const shipsPosition = 1 + Math.floor(Math.random() * fieldSize);
+
+            exit : for( let i = 1; i <= attemptUser ; i++){
+                let shotUser =  parseInt(prompt(`Ваша спроба № ${i}`))
+                if(shotUser === shipsPosition){
+                    alert(`Вітаю ви влучили)позиція корабля ${shipsPosition}`)
+                    break exit
+                }
+                else alert("Не влучили!")
+
+                if(i === 3) alert("Нажаль ваші спроби закінчилися(Спробуйте пізніше")
+            }
+         }
+
+             
+        document.write(" <button class='btnBack'><a href='../lesson5.html'>До завдань</a></button>")
+
+    </script>
+</body>
+</html>

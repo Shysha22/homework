@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!-- Задача -->
+    <!--9.Користувач загадує число. Комп’ютер задає питання поки не вгадає число користувача . -->
+
+    <script>
+
+
+        const userNum = confirm("Загадайте число від 1  до 25")
+
+            exit : for(let i = 1; i <= 25 ; i++){
+                let randomNum = 1 + Math.floor(Math.random() * 25);
+                let compAttempt = confirm(`Спроба № ${i},ваше число - ${randomNum}?`)
+                if(compAttempt){
+                    alert("Комп'ютер вгадав ваше число))")
+                    break exit
+                }
+            }
+
+            document.write(" <button class='btnBack'><a href='../lesson5.html'>До завдань</a></button>")
+
+
+
+    </script>
+</body>
+</html>
