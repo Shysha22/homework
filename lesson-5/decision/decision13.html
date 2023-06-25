@@ -26,11 +26,11 @@
             alert(`Для влучання в ціль у вас є ${attemptUser} спроби`)
              const shipsPosition = 1 + Math.floor(Math.random() * fieldSize);
 
-            exit : for( let i = 1; i <= attemptUser ; i++){
+           for( let i = 1; i <= attemptUser ; i++){
                 let shotUser =  parseInt(prompt(`Ваша спроба № ${i}`))
                 if(shotUser === shipsPosition){
                     alert(`Вітаю ви влучили)позиція корабля ${shipsPosition}`)
-                    break exit
+                    break 
                 }
                 else alert("Не влучили!")
 

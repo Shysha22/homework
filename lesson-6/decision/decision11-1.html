@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!-- Задача -->
+    <!-- 11.1. Вивести на екран усі трицифрові числа, у яких перша цифра є більшою або рівною за суму другої і третьої.-->
+
+
+    <script>
+
+        for(let i = 1; i <=9 ; i++){
+            for( let j = 0; j <= 9; j++){
+                 for(let c = 0; c <= 9; c++){
+                    if( i >= (j + c))
+                        document.write(`${i}${j}${c} <br>`)
+                 }
+            }
+        }
+
+        document.write(" <button class='btnBack'><a href='../lesson6.html'>До завдань</a></button>")
+
+    </script>
+</body>
+</html>

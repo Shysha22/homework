@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!-- Задача -->
+     <!-- 16.23. Розпочавши тренування, спортсмен першого дня пробіг 10 км. Щодня він збільшував денну норму на 10% від норми попереднього дня. Який сумарний шлях пробіжить спортсмен за 7 днів? Якого дня вперше спортсмен пробіжить понад 20 км? Якого дня вперше сумарний шлях перевищить 60 км? -->
+
+
+    <script>
+
+
+        const distanceFirstDay = 10;
+        const runningDays = 7; 
+
+
+        let distanceTraveled = 0
+        let distanceEveryDay = distanceFirstDay
+
+
+
+              for(let day = 1 ; day <= runningDays;day++){
+
+
+                distanceEveryDay = (distanceEveryDay / 100) * 10 + distanceEveryDay
+                distanceTraveled += distanceEveryDay
+                    if(distanceEveryDay >= 20)
+                        alert(`Спортсмен пробіг 20 км на ${day} день`)
+                    else if(distanceTraveled > 60 )
+                        document.write(`<div>На ${day} день сумарний шлях перевищив 60 км</div>`)
+                    
+              }
+
+
+        document.write(" <button class='btnBack'><a href='../lesson6.html'>До завдань</a></button>")
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!-- Задача -->
+     <!-- 16. У бригаді, що працює на сінокосі, є N сінокосарок. Перша сінокосарка працювала m годин, а кожна наступна на 10 хв більше, ніж попередня. Скільки годин працювала вся бригада? -->
+
+
+    <script>
+
+        const numMowers = parseInt(prompt("Введіть кількість сінокосарок"));
+        let numHoursWorked = parseInt(prompt("Введіть скільки годин відпрацювала перша сінокосарка"))
+
+        let minute = numHoursWorked * 60;
+
+
+        let totalTime = 0;
+
+        for( let i = 0, m = 0 ; i < numMowers; i++,m += 10){
+            let spendMoverTime = minute + m
+            totalTime += spendMoverTime
+        }
+       
+        let minutesWorked = totalTime % 60
+        
+        let hoursWorked = ( totalTime - minutesWorked ) / 60
+
+        document.write(`Вся бригада працювала ${hoursWorked} годин та ${minutesWorked} хвилин`)
+
+        document.write(" <button class='btnBack'><a href='../lesson6.html'>До завдань</a></button>")
+
+    </script>
+</body>
+</html>

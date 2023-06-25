@@ -16,12 +16,12 @@
 
         const userNum = confirm("Загадайте число від 1  до 25")
 
-            exit : for(let i = 1; i <= 25 ; i++){
+             for(let i = 1; i <= 25 ; i++){
                 let randomNum = 1 + Math.floor(Math.random() * 25);
-                let compAttempt = confirm(`Спроба № ${i},ваше число - ${randomNum}?`)
+                let compAttempt = confirm(`Спроба № ${i},ваше число : ${randomNum}?`)
                 if(compAttempt){
                     alert("Комп'ютер вгадав ваше число))")
-                    break exit
+                    break 
                 }
             }
 

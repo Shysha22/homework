@@ -21,12 +21,12 @@
 
        alert("Введіть показники температури протягом року(12 місяців)")
 
-       exit : for( let i = 1; i <= months; i++){
+       for( let i = 1; i <= months; i++){
         let monthTemp = parseInt(prompt(`Введіть температуру за ${i} місяць`))
         if( monthTemp <= -30 || monthTemp > 50){
             alert("Ви напевно зробили помилку,занадто жарко( або холодно)")
             audit = true
-            break exit
+            break 
         }
         sumTemp += monthTemp
        }
