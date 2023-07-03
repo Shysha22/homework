@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!-- Задача -->
+    <!-- Задача 5. Дано послідовність оцінок учня. Підрахувати кількість:
+                1)	двійок
+                2)	кількість хороших оцінок (добре, відмінно);
+                3)	кількість оцінок, які нижче середнього. -->
+
+
+    <script>
+
+        // Вводимо кількість оцінок
+        const numGrades = parseInt(prompt( "Введіть кількість оцінок "))
+
+
+
+        function getValueGrades(numGrades){
+
+            //Масив для оцінок
+            let listGrades = []
+
+            //Створю лічильники для підрахунку
+            let  numBadGrades = 0
+            let  numBelowAverageGrades  = 0
+            let  numGoodGrades = 0
+
+            //Добавляю оцінки в масив
+            for( let i = 0; i < numGrades; i++){
+                const grade = parseInt(prompt(`Введіть ${i + 1}  оцінку учня`))
+                listGrades.push(grade)
+            }
+
+            //Сортую оцінки
+            for(let i = 0; i <= listGrades.length; i++){
+                if(listGrades[i] === 2)
+                    numBadGrades++
+                else if( listGrades[i] <=  6 )
+                    numBelowAverageGrades++
+                else if(listGrades[i] >= 9 && listGrades[i] <=  12 )
+                    numGoodGrades++
+            }   
+
+            return [numBadGrades,numBelowAverageGrades,numGoodGrades]
+
+
+        }
+
+        //Викликаю
+        const result = getValueGrades(numGrades)
+
+
+        //Виводжу результат
+        document.write("<div class = 'result_block result_block_lesson_two' >")
+
+        document.write(`<div>Кількість двійок становить =  ${result[0]}</div>`)
+        document.write(`<div>Кількість оцінок нижче середнього = ${result[1]}</div>`)
+        document.write(`<div>Кількість оцінок (добре,відмінно) становить =  ${result[2]}</div>`)
+
+        document.write("</div>")
+
+
+        document.write(" <button class='btnBack'><a href='../lesson8.html'>До завдань</a></button>")
+
+    </script>
+</body>
+</html>

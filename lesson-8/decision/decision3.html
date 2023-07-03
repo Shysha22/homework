@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!-- Задача -->
+    <!-- Задача 7. Дано послідовність платіжок протягом року. Знайти сумарну кількість грошей за:
+                    за весь рік;
+                    у першій половині року;
+                    у другій половині року;
+                    за літо;
+                    за ІІ квартал;
+                    за парні місяці (з парними номерами);
+                    за місяці, які є початковими у сезоні (весна, літо, осінь, зима). -->
+    
+
+
+    <script>
+
+        // створим масиви місяців та характеристика платіжок
+        const months = ['Січень','Лютий','Березень','Квітень','Травень','Червень','Липень','Серпень','Вересень','Жовьень','Листопад','Грудень']
+        const characteristicPayment  = ['за весь рік','перша половина року','друга половина року','за літо','за 2 квартал','за парні місяці (з парними номерами)','за місяці, які є початковими сезона']
+
+
+
+        function getAmountMoneyPerPeriod (months){
+
+            // масив платіжок які вводить користувач
+            let listPayment = []
+
+            for( let i = 0; i < months.length; i++){
+                const payment = parseInt(prompt(`Введіть суму платіжки за "${months[i]}"`))
+                listPayment.push(payment)
+            }
+
+            // змінні для знаходження сумарної кількості грошей за певний період
+            let amountMoneyPerYear = 0,
+                firstHalfYear = 0,
+                secondHalfYear = 0,
+                forSummer = 0,
+                secondQuarter = 0,
+                evenMonths = 0,
+                forFirstMonthsSeason = 0;
+
+
+            // сортування платіжок
+            for( let i = 0; i < listPayment.length;i++) amountMoneyPerYear += listPayment[i]
+
+            for(let i = 0; i < 6;i++) firstHalfYear += listPayment[i]
+
+            for(let i = 6; i < 12;i++) secondHalfYear += listPayment[i]
+
+            for(let i = 6; i < 9;i++) forSummer+= listPayment[i]
+
+            for(let i = 4; i < 7;i++) secondQuarter += listPayment[i]
+
+            for(let i = 0; i < 12;i++) i %2 === 0 ?  evenMonths += listPayment[i] : null
+
+            for(let i = 3; i < 12;i = i +3) forFirstMonthsSeason += listPayment[i]
+
+
+            return[amountMoneyPerYear,firstHalfYear,secondHalfYear,forSummer,secondQuarter,evenMonths,forFirstMonthsSeason]
+
+
+
+        }
+
+        const result = getAmountMoneyPerPeriod(months)
+
+        console.log(result)
+
+    
+
+
+        // Виводжу результат
+
+        document.write("<div class = 'result_block_lesson_three' >")
+        document.write("<div class = 'labe_lesson_three'>Платіжки  : </div>")
+
+            document.write("<table class = 'table' >")
+            for (let i = 0; i < characteristicPayment.length; i++){
+
+                document.write("<tr>")
+
+                    document.write(`<td> ${characteristicPayment[i]}</td>`)
+                    document.write(`<td> ${result[i]}</td>`)
+
+                document.write("</tr>")
+
+            }
+
+            document.write("</table>")
+
+        document.write("</div>")
+
+
+        document.write(" <button class='btnBack'><a href='../lesson8.html'>До завдань</a></button>")
+
+    </script>
+</body>
+</html>

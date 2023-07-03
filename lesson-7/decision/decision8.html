@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!-- Задача -->
+     <!--Задача 8. Створити функцію, яка виводить банер (у функцію передаються: зображення, заголовок та посилання, куди переходимо при кліку на зображення (тег img повине знаходитись у середині тега a: <a> <img src=”шлях”> </a>-->
+
+    <script>
+
+        const img = "../resource/facebook.png",
+              table = 'Facebook допомагає тримати звязок з рідними та близькими',
+              link = "https://uk-ua.facebook.com/"
+
+        const randomShowImg = (img,table,link) =>{
+
+            document.write("<div class = 'banner'>")
+            document.write(`<div class = 'banner-wrapper' ><a  href = ${link} ><img class = 'banner-img'  src = ${img} ></a> ${table}`)
+            document.write("/<div>")
+            }    
+
+        randomShowImg(img,table,link)
+
+
+
+        // document.write(" <button class='btnBack'><a href='../lesson7.html'>До завдань</a></button>")
+
+    </script>
+</body>
+</html>

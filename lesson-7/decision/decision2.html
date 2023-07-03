@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!-- Задача -->
+     <!-- Задача 2. Створити функцію, яка за номером дня дозволяє з’ясувати чи є цей день робочим. -->
+
+
+    <script>
+
+        const dayNumber = parseInt(prompt("Введіть номер дня"))
+
+
+        function getValueDay(day){
+
+            let meaningDay
+
+            if(day > 0 && day <=5 )
+                meaningDay = (`${day} день - робочий`)
+            else if (day > 0 && day <=7)
+                meaningDay = (`${day} день - вихідний`)
+            else
+                meaningDay = ("Помилка")
+
+            return meaningDay
+        }
+
+        alert( getValueDay(dayNumber))
+
+       
+
+
+        document.write(" <button class='btnBack'><a href='../lesson7.html'>До завдань</a></button>")
+
+    </script>
+</body>
+</html>

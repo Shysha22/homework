@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!-- Задача -->
+     <!--Задача 5. Створити окремі функції, які переводять:
+            Сантиметри у дюйми;
+            Кілограми у фунти;
+            Кілометри у милі.
+            -->
+
+
+    <script>
+
+        const centimeters = parseInt(prompt("Введіть довжину у сантиметрах")),
+              kilograms = parseInt(prompt("Введіть вагу в кілограмах")),
+              kilometers = parseInt(prompt("Введіть відстань у кілометрах"));
+
+
+
+
+       
+
+       const getInchFromCentimeters = (centimeters) =>{
+        let inch = 2.54
+
+        let result = centimeters / inch
+
+        return result.toFixed(2)
+
+        }
+
+        
+       const getPoundFromKilograms = (kilograms) =>{
+
+        let pound = 2.20462
+
+        let result = kilograms * pound 
+
+        return result.toFixed(2)
+
+        }
+
+       const getMileFromKilometers = (kilometers) =>{
+
+        let mile = 1.609
+        let result = kilometers / mile
+
+        return result.toFixed(2)
+
+        }
+       
+
+        document.write(`
+                 Ви ввели ${centimeters} сантиметрів =  ${getInchFromCentimeters(centimeters)} дюймів <br>
+                 Ви ввели ${kilograms} кілограмів=  ${getPoundFromKilograms(kilograms)} фунтів<br>
+                 Ви ввели ${kilometers} кілометрів =  ${getMileFromKilometers(kilometers)} миль<br>
+                 `)
+        
+
+
+        document.write(" <button class='btnBack'><a href='../lesson7.html'>До завдань</a></button>")
+
+    </script>
+</body>
+</html>

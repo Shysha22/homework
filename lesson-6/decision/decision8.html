@@ -16,8 +16,7 @@
         const gymGoers = parseInt(prompt("Введіть кількість людей які сьогодні відвідали спортзал"))
 
         let youngVisitor = Infinity,
-            oldVisitor = -Infinity,
-            yearsBox = 0;
+            oldVisitor = -Infinity;
         let middleAge = 0;
     
 
@@ -25,12 +24,11 @@
             let ageVisitor = parseInt(prompt(`Введіть вік відвідувача ${i} `))
             
             middleAge += ageVisitor
-            yearsBox = ageVisitor
 
-            if(yearsBox < youngVisitor)
-                youngVisitor = yearsBox
-            else if ( yearsBox> oldVisitor)
-                oldVisitor = yearsBox
+            if(ageVisitor < youngVisitor)
+                youngVisitor = ageVisitor
+            else if ( ageVisitor> oldVisitor)
+                oldVisitor = ageVisitor
         }
         document.write(`
                         <div>Вік найстаршого відвідувача : ${oldVisitor}</div>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+        
+    <!-- Задача 9. Дано покази температур (довільна кількість). Розробити функцію, яка дозволить підрахувати кількість від’ємних показів температури. -->
+    <script>
+
+        const getNumNegativeIndicators = (numIndicatorsTemp) =>{
+
+        let resultNegativeIndicators = 0
+
+            for( let i = 1 ; i <= numIndicatorsTemp; i++){
+
+            const enterTempReading = parseFloat(prompt(`Введіть показик температури № ${i} `))
+            if( enterTempReading < 0 ) resultNegativeIndicators++
+
+            }
+
+            return resultNegativeIndicators
+
+    }
+
+        const numIndicatorsTemp = parseInt(prompt("Введіть кількість показників які збираєтесь вводити"))
+
+
+       
+
+        document.write(`<div style = "margin-top : 50px">Кількість від'ємних чисел становить =   ${getNumNegativeIndicators(numIndicatorsTemp)}<div>`)
+
+
+        document.write(" <button class='btnBack'><a href='../lesson7.html'>До завдань</a></button>")
+
+    </script>
+</body>
+</html>

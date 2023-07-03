@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!-- Задача -->
+    <!-- Задача 8. Дано одновимірний масив, у якому зберігається певна виграшна сума (елементи заповнюються випадковим чином значеннями від -500 до 500). Надаючи користувачу можливість вибирати номери елементів  (поки він не відмовиться). Знаходити сумарний виграш. -->
+    
+
+    <script>
+        
+        // Користувач задає кількість лотерейок
+        const numLotteryTickets = parseInt(prompt("Введіть кількість лотерейок які бажаєте взяти?"))
+
+
+        // Створюю функцію для заповнення масива лотереями
+        function getLotteryTickets (numLotteryTickets){
+        
+        const minValue = -500
+              maxValue = 500
+
+        // масив з лотерейками
+        let arrLottery = []
+
+        for( let i = 0; i < numLotteryTickets; i++){
+
+            let randomSum = minValue + Math.floor(Math.random() * (maxValue - minValue + 1))
+            arrLottery.push(randomSum)
+
+        }
+
+    
+        return arrLottery
+
+        }
+
+        // const resultLotteryTickets = getLotteryTickets(numLotteryTickets)
+
+
+        // Функція (користувачу вгадує лотерейки та сумується його виграш)
+        function userAttemptWin(resultLotteryTickets){
+
+            let sumWin = 0
+            let userAttempt 
+
+            do { 
+                userAttempt = parseInt(prompt(`Введіть число від 1 до ${resultLotteryTickets.length}.Якщо бажаєте завершити гру,напишіть '999' `))
+               
+                if(userAttempt ===  999) alert("Ви достроково завершили гру")
+
+                else if (userAttempt < 0 || userAttempt > resultLotteryTickets.length) alert("Введіть коректне число!")
+
+                else{
+                    sumWin += resultLotteryTickets[userAttempt - 1]
+                    alert(`Ваш виграш становить  ${sumWin}`)
+                } 
+
+                
+            } while (userAttempt !== 999 )
+
+            return sumWin
+
+
+        }
+
+        
+        const resultUserAttempt = userAttemptWin(getLotteryTickets(numLotteryTickets))
+
+        
+        document.write(`<div class = "result_block">Ваш виграш становить ${resultUserAttempt}</div>`)
+
+        document.write(" <button class='btnBack'><a href='../lesson8.html'>До завдань</a></button>")
+
+    </script>
+</body>
+</html>

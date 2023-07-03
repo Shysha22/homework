@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!-- Задача -->
+     <!-- Задача 3. Дано масив імен учнів. З’ясувати скільки разів зустрічається ім’я «Іван». -->
+
+
+    <script>
+
+
+        function getNumNames(studens) {
+
+            let studensList = []
+
+            // лічильник певного ім'я
+            let countName = 0
+
+            // вводимо імена студентів та додаємо до масиву
+            for( let i = 0; i < studens; i++){
+
+                const enterNameStudent = prompt("Введіть ім'я студента")
+
+                studensList.push(enterNameStudent)
+            }
+
+            // перебираємо масив та знаходимо потрібне нам ім'я
+            for( let i = 0; i < studensList.length;i++){
+
+                if(studensList[i] === "Іван" || studensList[i] === "іван") countName++
+
+            }
+
+            return countName
+
+
+        }
+
+        //Вводимо кількість імен
+        const numStudentsEntered = parseInt(prompt("Введіть кількість імен учнів які ви будете вводити"))
+
+        const result = getNumNames(numStudentsEntered)
+
+
+        document.write(`<div class = "result_block">Ви ввели ім'я "Іван" = ${result} рази </div>`)
+
+
+        document.write(" <button class='btnBack'><a href='../lesson8.html'>До завдань</a></button>")
+
+    </script>
+</body>
+</html>

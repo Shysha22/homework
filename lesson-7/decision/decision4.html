@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!-- Задача -->
+     <!--Задача 4. Створити функцію, яка для 3 заданих чисел знаходить одночасно декілька результатів: кількість парних, кількість додатних, кількість більших за 100.-->
+
+
+    <script>
+
+        const numberOne = parseInt(prompt("Введіть число 1")),
+              numberTwo = parseInt(prompt("Введіть число 2")),
+              numberThree = parseInt(prompt("Введіть число 3"));
+
+
+
+
+        const  getSumNum = (num1,num2,num3) =>{
+
+            let numPositive = 0,
+                numEven = 0,
+                numMoreThan100 = 0
+
+            
+                if(num1 > 0) numPositive++
+                if(num2 > 0) numPositive++
+                if(num3 > 0) numPositive++
+
+                if(num1 %2 === 0) numEven++
+                if(num2 %2 === 0) numEven++
+                if(num3 %2 === 0) numEven++
+
+
+                if(num1 > 100) numMoreThan100++
+                if(num2 > 100) numMoreThan100++
+                if(num3 > 100) numMoreThan100++
+
+                return [numPositive,numEven,numMoreThan100]
+
+        }
+
+       let result =  getSumNum(numberOne,numberTwo,numberThree)
+       
+
+        document.write(`
+                 кількість додатних =   ${result[0]}<br>
+                 кількість парних =  ${result[1]}<br>
+                 кількість більших за 100 = ${result[2]}<br>
+                 `)
+        
+
+
+        document.write(" <button class='btnBack'><a href='../lesson7.html'>До завдань</a></button>")
+
+    </script>
+</body>
+</html>

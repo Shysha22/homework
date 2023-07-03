@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!-- Задача -->
+    <!-- Задача 6. Дано послідовність цін товарів та назв (у окремих масивах). Вивести на екран ті, які може собі дозволити користувач (кількість грошей задається). -->
+
+
+    <script>
+
+
+        let priceGoods = [350,450,1200,4000,6660]
+            listGoods = ['Сорочка','Шорти','Кросівки','Костюм','Телефон']
+
+
+            function getProductAvailableForUser(priceGoods,listGoods,userMoney){
+
+                document.write(`<div class = "label">Список доступних вам товарів </div>`)
+                document.write("<table class = 'table'>")
+
+                for( let i = 0 ; i < priceGoods.length ; i++){
+                    document.write("<tr>")
+                    
+                    if( priceGoods[i] <= userMoney){
+                        document.write(` <td>Ціна ${priceGoods[i]}</td>`)
+                        document.write(`<td>"${listGoods[i]}"</td>`)
+                    }
+                    document.write("</tr>")
+
+                       
+                }
+                document.write("</table>")
+
+            }
+
+            const userMoney = parseFloat(prompt("Введіть кількість ваших коштів", "1500"))
+
+            const result = getProductAvailableForUser(priceGoods,listGoods,userMoney)
+
+
+
+
+
+
+
+        document.write(" <button class='btnBack'><a href='../lesson8.html'>До завдань</a></button>")
+
+    </script>
+</body>
+</html>
