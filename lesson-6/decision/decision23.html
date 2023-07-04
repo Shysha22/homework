@@ -14,29 +14,31 @@
 
     <script>
 
-
         const distanceFirstDay = 10;
-
 
         let distanceTraveled = 0
         let distanceEveryDay = distanceFirstDay
+        let dayMoreTwentyForDay = 0
+        let dayDistanceMoreSixty = 0
 
-        console.log(distanceTraveled)
+
+        for(let i = 0;i < 7;i++){
+            distanceEveryDay = (distanceEveryDay / 100) * 10 + distanceEveryDay
+            distanceTraveled += distanceEveryDay
+            if (distanceTraveled >= 20 ) dayMoreTwentyForDay = i
+            if(distanceTraveled > 60 && distanceTraveled < 70) dayDistanceMoreSixty = i
+        }
 
 
 
-              for(let day = 1 ; day <= 7;day++){
+        if(distanceEveryDay >= 20)
+            document.write(`<div>На ${dayMoreTwentyForDay}день спортсен пробіг 20 км</div>`)
+        else
+            document.write(`<div>Нажаль спортсен не зміг подолати 20 км за 1 день</div>`)
 
-                distanceEveryDay = (distanceEveryDay / 100) * 10 + distanceEveryDay
-                distanceTraveled += distanceEveryDay
-                    if(distanceEveryDay >= 20)
-                        alert(`Спортсмен пробіг 20 км на ${day} день`)
-                    else if(distanceTraveled > 60 )
-                        document.write(`<div>На ${day} день сумарний шлях перевищив 60 км</div>`)
-                    
-              }
-        console.log(distanceTraveled)
+        document.write(`<div>На ${dayDistanceMoreSixty} день,спортсмен подолав сумарну відстань більше за 60км</div>`)
 
+        document.write(`<div>За 7 днів спортсмен пробіг ${Math.floor(distanceTraveled)} км</div>`)
 
 
         document.write(" <button class='btnBack'><a href='../lesson6.html'>До завдань</a></button>")
