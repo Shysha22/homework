@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!-- Задача 9. Дано масив імен. Сформувати масив з перших літер цих імен. -->
+
+
+    <script>
+
+        //******************************************** Варіант 1*************************************
+
+        // створим масив імен
+        let arrNamesFormed = ['Данило','Ярослав','Карина','Ульяна','Юрій']
+
+        function gerFirstLatter(arr){
+
+            // масив для перших літер
+            let firstLettersArr = []
+
+
+            // перебрав масив з іменами та з кожного імені взяв першу літеру
+            arr.forEach(element =>{
+                firstLettersArr.push(element[0])
+            })
+
+            return firstLettersArr
+        }
+
+        const result = gerFirstLatter(arrNamesFormed)
+        document.write('<div class = "result_block">')
+            document.write(`Масив імен =  ${arrNamesFormed}<br>`)
+            document.write(`Перші літери =  ${result.join(', ')}`)
+        document.write('</div>')
+
+        document.write(" <button class='btnBack'><a href='../lesson9.html'>До завдань</a></button>")
+        // ****************************************************************************
+
+
+
+
+
+
+        // *****************************************Варіант 2*********************************************
+        // В цьому варіанті намагався добавити трішки валідації(Використав і в наступній задачі)
+
+        // питаю користувача чи хоче він вводити данні чи використовувати підготовлені
+        // let userSelectsArray  = confirm("Ви бажаєте ввести список імен (так), чи використувати підготовлений (ні)")
+
+            // масив який створюэ користувач
+        // let arrNamesUser = []
+            // пыдготовлений масив
+        // let arrNamesFormed = new Array()
+
+
+        // перувіряю чи userSelectsArray = true
+        // if(userSelectsArray){
+        //     numElementArr = parseInt(prompt("Введіть кількість елементів масива"))
+
+            // перувіряю чи userSelectsArray більше за 0
+        //     if(numElementArr <= 0){
+        //         alert (`${numElementArr} = не підходить,число повинно бути більше 0`)
+        //         numElementArr = parseInt(prompt("Введіть кількість елементів масива"))
+
+        //     }
+            
+        // користувач додає імена
+        //     for(let i = 0; i < numElementArr; i++){
+        //         let names = prompt(`Введіть ${i + 1} Ім'я : `)
+        //         arrNamesUser.push(names)
+        //     }
+        // }
+        // якщо  userSelectsArray = false використовую підготовлений масив
+        // else
+        //     arrNamesFormed = ['Данило','Ярослав','Карина','Ульяна','Юрій']
+        
+
+
+        // function gerFirstLatter(arr){
+
+            // масив для перших літер
+        //     let firstLettersArr = []
+
+            // перебрав масив з іменами та з кожного імені взяв першу літеру
+        //     arr.forEach(element =>{
+        //     firstLettersArr.push(element[0])
+
+        //     })
+
+        //     return firstLettersArr
+        // }
+
+        // document.write('<div class = "result_block">')
+        //     document.write('<table class = "table">')
+        //                     document.write('<tr>')
+        //                         document.write(`<td>Масив імен</td>`)
+        //                         document.write(`<td> ${userSelectsArray ? arrNamesUser : arrNamesFormed}</td>`)
+        //                     document.write('</tr>')
+        //                     document.write('<tr>')
+        //                         document.write(`<td>Перші букви імен </td>`)
+        //                         document.write(`<td>${userSelectsArray ? gerFirstLatter(arrNamesUser) : gerFirstLatter(arrNamesFormed)}</td>`)
+        //                     document.write('</tr>')
+        //     document.write('</table>')
+            
+        // document.write('</div>')
+
+        // document.write(" <button class='btnBack'><a href='../lesson9.html'>До завдань</a></button>")
+        // ***********************************************************************************************************
+
+
+    </script>
+</body>
+</html>

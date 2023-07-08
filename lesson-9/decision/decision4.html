@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!-- 10. Дано масив цін у грн. Податок складає 20%. Сформувати масив, який буде містити величину сплаченого податку у грн.-->
+
+
+    <script>
+
+        // *****************************Варіант 1 *******************************
+        
+        // // сворюю масив цін
+        let arrPices = [3400,2102,402,444,6000,1203]
+
+
+
+        function getTax(arr){
+
+                // масив для пдв 20%
+                let arrTax = []
+
+                // перебираю свій масив цін
+                arr.forEach(element =>{
+                    // випаховую пдв
+                    tax =  (element * 20) / 100
+                    arrTax.push(tax)
+                })
+
+                return arrTax
+        }
+
+        document.write(`<div class = "result_block">
+                            Масив цін = ${arrPices.join(', ')}
+                            <br>
+                            <br>
+                            ПДВ 20% становить =  ${getTax(arrPices).join(', ')}</div>`)
+
+        document.write(" <button class='btnBack'><a href='../lesson9.html'>До завдань</a></button>")
+
+        // **********************************************************************************
+
+
+
+
+        //   *********************************************************  варіант 2 ***************************************************
+        // В цьому варіанті намагався добавити трішки валідації
+
+        // питаю користувача чи хоче він вводити данні чи використовувати підготовлені
+        // let userSelectsArray  = confirm("Ви бажаєте ввести список цін (так), чи використувати підготовлений (ні)")
+
+        // //  масив який створить користувач
+        // let arrPricesUser = [] 
+        //     // масив який уже підготовлений
+        // let arrPriceaFormed = []
+
+
+        // // перувіряю чи userSelectsArray = true
+        // if(userSelectsArray){
+        //     let numElementArr = parseInt(prompt("Введіть кількість елементів масива"))
+
+        //     // перувіряю чи userSelectsArray більше за 0
+        //     if(numElementArr <= 0){
+        //         alert (`${numElementArr} = не підходить,число повинно бути більше 0`)
+        //         numElementArr = parseInt(prompt("Введіть кількість елементів масива"))
+
+        //     }
+            
+        //     // користувач додає ціну
+        //     for(let i = 0; i < numElementArr; i++){
+        //         let prices = prompt(`Введіть ${i + 1} ціну : `)
+        //         arrPricesUser.push(prices)
+        //     }
+        // }
+        // else
+        //     arrPriceaFormed =  [3400,2102,402,444,6000,1203]
+
+
+        // function getTax(arr){
+
+        //      // масив для пдв 20%
+        //     let arrTax = []
+
+
+        //     // перебираю свій масив цін
+        //     arr.forEach(element =>{
+        //         tax =  (element * 20) / 100
+        //         arrTax.push(tax)
+        //     })
+
+        //     return arrTax
+        // }
+
+
+        // document.write('<div class = "result_block">')
+            
+        //     document.write('<table class = "table">')
+        //                     document.write('<tr>')
+        //                         document.write(`<td>Ціни </td>`)
+        //                         document.write(`<td>${userSelectsArray ? arrPricesUser : arrPriceaFormed .join(', ')}</td>`)
+        //                     document.write('</tr>')
+        //                     document.write('<tr>')
+        //                         document.write(`<td>Податок 20%</td>`)
+        //                         document.write(`<td>${userSelectsArray ? getTax(arrPricesUser) : getTax(arrPriceaFormed) .join(',  ')}</td>`)
+        //                     document.write('</tr>')
+        //     document.write('</table>')
+            
+        // document.write('</div>')
+
+        // document.write(" <button class='btnBack'><a href='../lesson9.html'>До завдань</a></button>")
+
+        // ******************************************************************************************************************
+    </script>
+</body>
+</html>

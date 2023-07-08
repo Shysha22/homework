@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!-- Задача 7.Дано масив цін. Змінити цей масив так, що на ціни товарів, які більші за 1000 грн. дати 30% знижки.-->
+
+
+    <!-- користувач вводить кількіть елементів масива
+    заповнює масив
+    перебрати та на елементи що більше 1000 зробити знижку 30% від ціни  товару -->
+
+    <script>
+
+            // користувач вводить кількість елементів масиву
+            const numElementArr = parseInt(prompt("Введіть кількість елементів масива"))
+
+          
+
+
+            // створю функцію для зручності
+            function getDiscountsOnGoods(numElementArr){
+                  // створюю маисив
+                let arr = []
+
+
+                // користувач заповнює кожен елемент масиву
+                for(let i = 0; i < numElementArr; i++){
+                    const valueElementsArr = parseInt(prompt(`Введіть значення елемента ${i + 1}`))
+                    arr.push(valueElementsArr)
+                }
+
+
+                // роблю копію масиву для того щоб порівняти ціни
+                let arrDiscount = [...arr]
+
+                // перевіряю кожен елемент
+                arrDiscount.forEach((element,i,arr) =>{
+                    if(element >= 1000){
+                        let discount = (element * 30) / 100
+                        arr[i] = element - discount
+                    }
+                })
+                
+                return [arr,arrDiscount]
+            }   
+
+            const result = getDiscountsOnGoods(numElementArr)
+
+
+        document.write("<div class = 'result_block_lesson9' >")
+
+            document.write('<table class = "table">')
+                            document.write('<tr>')
+                                document.write(`<td>Ціни які ви ввели </td>`)
+                                document.write(`<td> ${result[0]}</td>`)
+                            document.write('</tr>')
+                            document.write('<tr>')
+                                document.write(`<td>Ціни товарів зі знижкою</td>`)
+                                document.write(`<td>${result[1]}</td>`)
+                            document.write('</tr>')
+            document.write('</table>')
+
+        document.write("</div>")
+
+
+        document.write(" <button class='btnBack'><a href='../lesson9.html'>До завдань</a></button>")
+
+    </script>
+</body>
+</html>

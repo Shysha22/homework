@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!-- Задача 5.Дано масив елементів. Знайти добуток додатних елементів -->
+
+    <script>
+
+         // користувач вводить кількість елементів масиву
+        const numElementArr = parseInt(prompt("Введіть кількість елементів масива"))
+
+        // створюю маисив
+        let arr = []
+        
+
+        // користувач заповнює кожен елемент масиву
+        for(let i = 0; i < numElementArr; i++){
+             const valueElementsArr = parseInt(prompt(`Введіть значення елемента ${i + 1}`))
+             arr.push(valueElementsArr)
+        }
+
+        // створрю перемінню для знаходження добутку(заздалегідь ставлю її значееня 1 )
+        let productElement = 1
+        
+        // перевіряю кожен елемент масиву та знаходжу добуток додатніх
+        for (const element of arr)  element > 0 ? productElement *= element : null
+        
+
+        document.write(`<div class = "result_block">Добуток додатніх елементів становить =  ${productElement}</div>`)
+
+        document.write(" <button class='btnBack'><a href='../lesson9.html'>До завдань</a></button>")
+
+    </script>
+</body>
+</html>

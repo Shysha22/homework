@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!-- Задача 3. Користувач вводить кількість елементів. Створити масив, у якому перші 5 елементів заповнені 1-цями, а інші до кінця масиву заповнені 7-ками. -->
+
+    <script>
+
+        // користувач вводить кількість елементів масиву
+        const numElementArr = parseInt(prompt("Введіть кількість елементів масива"))
+
+        // створюю масив
+        let arr = new Array(numElementArr)
+
+        // перевіряю коректність введених данних користувачем
+        if(numElementArr){
+            // формую масив
+            arr.fill(1,0,5)
+            arr.fill(7,5)
+        }else throw new Error("Ви ввели некоректне число")
+
+
+        document.write(`<div class = "result_block">Ваш масив ${arr}</div>`)
+
+        document.write(" <button class='btnBack'><a href='../lesson9.html'>До завдань</a></button>")
+
+    </script>
+</body>
+</html>
