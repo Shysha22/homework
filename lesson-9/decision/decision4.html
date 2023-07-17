@@ -26,11 +26,11 @@
                 let arrTax = []
 
                 // перебираю свій масив цін
-                arr.forEach(element =>{
-                    // випаховую пдв
-                    tax =  (element * 20) / 100
-                    arrTax.push(tax)
-                })
+                for (const element of arr) {
+                         // випаховую пдв
+                         tax =  (element * 20) / 100
+                         arrTax.push(tax)
+                }
 
                 return arrTax
         }

@@ -14,13 +14,9 @@
 
     <script>
 
-
-        function getNumNames(studens) {
+        function getListNames(studens){
 
             let studensList = []
-
-            // лічильник певного ім'я
-            let countName = 0
 
             // вводимо імена студентів та додаємо до масиву
             for( let i = 0; i < studens; i++){
@@ -29,6 +25,18 @@
 
                 studensList.push(enterNameStudent)
             }
+
+            return studensList
+
+
+        }
+
+        function getNumNamesIvan(studensList) {
+
+
+            // лічильник певного ім'я
+            let countName = 0
+
 
             // перебираємо масив та знаходимо потрібне нам ім'я
             for( let i = 0; i < studensList.length;i++){
@@ -45,7 +53,8 @@
         //Вводимо кількість імен
         const numStudentsEntered = parseInt(prompt("Введіть кількість імен учнів які ви будете вводити"))
 
-        const result = getNumNames(numStudentsEntered)
+
+        const result = getNumNamesIvan(getListNames(numStudentsEntered))
 
 
         document.write(`<div class = "result_block">Ви ввели ім'я "Іван" = ${result} рази </div>`)

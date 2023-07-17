@@ -30,9 +30,8 @@
        const getInchFromCentimeters = (centimeters) =>{
         let inch = 2.54
 
-        let result = centimeters / inch
 
-        return result.toFixed(2)
+        return centimeters / inch
 
         }
 
@@ -43,7 +42,7 @@
 
         let result = kilograms * pound 
 
-        return result.toFixed(2)
+        return result
 
         }
 
@@ -52,15 +51,15 @@
         let mile = 1.609
         let result = kilometers / mile
 
-        return result.toFixed(2)
+        return result
 
         }
        
 
         document.write(`
-                 Ви ввели ${centimeters} сантиметрів =  ${getInchFromCentimeters(centimeters)} дюймів <br>
-                 Ви ввели ${kilograms} кілограмів=  ${getPoundFromKilograms(kilograms)} фунтів<br>
-                 Ви ввели ${kilometers} кілометрів =  ${getMileFromKilometers(kilometers)} миль<br>
+                 Ви ввели ${centimeters} сантиметрів =  ${getInchFromCentimeters(centimeters).toFixed(2)} дюймів <br>
+                 Ви ввели ${kilograms} кілограмів=  ${getPoundFromKilograms(kilograms).toFixed(2)} фунтів<br>
+                 Ви ввели ${kilometers} кілометрів =  ${getMileFromKilometers(kilometers).toFixed(2)} миль<br>
                  `)
         
 

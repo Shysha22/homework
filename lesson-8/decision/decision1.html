@@ -21,21 +21,17 @@
 
             function getProductAvailableForUser(priceGoods,listGoods,userMoney){
 
-                document.write(`<div class = "label">Список доступних вам товарів </div>`)
-                document.write("<table class = 'table'>")
+                let availableGoods =[]
+                let availablePrice = []
 
                 for( let i = 0 ; i < priceGoods.length ; i++){
-                    document.write("<tr>")
-                    
                     if( priceGoods[i] <= userMoney){
-                        document.write(` <td>Ціна ${priceGoods[i]}</td>`)
-                        document.write(`<td>"${listGoods[i]}"</td>`)
+                        availableGoods.push(listGoods[i])
+                        availablePrice.push(priceGoods[i])
                     }
-                    document.write("</tr>")
-
-                       
                 }
-                document.write("</table>")
+
+                return [availableGoods,availablePrice]
 
             }
 
@@ -43,8 +39,15 @@
 
             const result = getProductAvailableForUser(priceGoods,listGoods,userMoney)
 
-
-
+            document.write(`<div class = "label">Список доступних вам товарів </div>`)
+            document.write("<table class = 'table'>")
+                for(let i = 0;i < result[0].length;i++){
+                    document.write("<tr>")
+                        document.write(` <td>${result[0][i]}</td>`)
+                        document.write(`<td>"${result[1][i]}"</td>`)
+                document.write("</tr>")
+                }
+            document.write("</table>")
 
 
 

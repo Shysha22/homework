@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!--Задача 3. Морський бій. Випадковим чином на двовимірному полі розміром 6*6 розташовується 5 кораблів. Користувач стріляє вказуючи координати. Гра продовжується поки не потоплено усі кораблі або у користувача не закінчаться снаряди: -->
+
+
+    <script>
+
+        let arrRow = new Array(6).fill([0,0,0,0,0,0])
+        let ships = 5
+
+      
+
+        function addShip(arrRow,min,max,ships){
+            let positionRow 
+            let positionCol 
+            for(let i = 0;i < ships;){
+                 positionRow = randomNum = min + Math.floor(Math.random() * max)
+                positionCol =  randomNum = min + Math.floor(Math.random() * max)
+                if(arrRow[positionRow][positionCol] === 0){
+                    arrRow[positionRow][positionCol] = 1
+                    i++
+                }
+               
+            }
+
+
+            return arrRow
+        }
+
+        let result = addShip(arrRow,1,5,ships)
+
+        console.log(result)
+
+
+
+
+        // --------------------------------------Розв`язки------------------------------------
+    document.write('<div class = "result_block">')
+
+        document.write('<div>')
+
+        
+        // document.write(" <button class='btnBack'><a href='../lesson11.html'>До завдань</a></button>")
+
+    </script>
+</body>
+</html>

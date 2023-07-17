@@ -26,55 +26,40 @@
         const months = ['Січень','Лютий','Березень','Квітень','Травень','Червень','Липень','Серпень','Вересень','Жовьень','Листопад','Грудень']
         const characteristicPayment  = ['за весь рік','перша половина року','друга половина року','за літо','за 2 квартал','за парні місяці (з парними номерами)','за місяці, які є початковими сезона']
 
-
-
-        function getAmountMoneyPerPeriod (months){
-
-            // масив платіжок які вводить користувач
-            let listPayment = []
+        function getListPayment(months){
+             // масив платіжок які вводить користувач
+             let listPayment = []
 
             for( let i = 0; i < months.length; i++){
                 const payment = parseInt(prompt(`Введіть суму платіжки за "${months[i]}"`))
                 listPayment.push(payment)
             }
-
-            // змінні для знаходження сумарної кількості грошей за певний період
-            let amountMoneyPerYear = 0,
-                firstHalfYear = 0,
-                secondHalfYear = 0,
-                forSummer = 0,
-                secondQuarter = 0,
-                evenMonths = 0,
-                forFirstMonthsSeason = 0;
+            return listPayment
+        }
 
 
-            // сортування платіжок
-            for( let i = 0; i < listPayment.length;i++) amountMoneyPerYear += listPayment[i]
+        function getAmountMoneyPerPeriod (payments,countStart,countEnd,step = 1){
 
-            for(let i = 0; i < 6;i++) firstHalfYear += listPayment[i]
+            let paymentResult = 0
 
-            for(let i = 6; i < 12;i++) secondHalfYear += listPayment[i]
+            for( let i = countStart; i < countEnd;i += step)
+            paymentResult += payments[i]
 
-            for(let i = 6; i < 9;i++) forSummer+= listPayment[i]
-
-            for(let i = 4; i < 7;i++) secondQuarter += listPayment[i]
-
-            for(let i = 0; i < 12;i++) i %2 === 0 ?  evenMonths += listPayment[i] : null
-
-            for(let i = 3; i < 12;i = i +3) forFirstMonthsSeason += listPayment[i]
-
-
-            return[amountMoneyPerYear,firstHalfYear,secondHalfYear,forSummer,secondQuarter,evenMonths,forFirstMonthsSeason]
-
+           return paymentResult
 
 
         }
 
-        const result = getAmountMoneyPerPeriod(months)
+        let paymentsList = getListPayment(months)
 
-        console.log(result)
+        let amountMoneyPerYear = getAmountMoneyPerPeriod(paymentsList,0,12)
+        let  firstHalfYear =  getAmountMoneyPerPeriod(paymentsList,0,6)
+        let secondHalfYear =  getAmountMoneyPerPeriod(paymentsList,7,12)
+        let forSummer =  getAmountMoneyPerPeriod(paymentsList,5,8)
+        let  secondQuarter =  getAmountMoneyPerPeriod(paymentsList,3,6)
+        let  evenMonths = getAmountMoneyPerPeriod(paymentsList,1,12,2)
+        let forFirstMonthsSeason = getAmountMoneyPerPeriod(paymentsList,2,12,3)
 
-    
 
 
         // Виводжу результат
@@ -82,19 +67,14 @@
         document.write("<div class = 'result_block_lesson_three' >")
         document.write("<div class = 'labe_lesson_three'>Платіжки  : </div>")
 
-            document.write("<table class = 'table' >")
-            for (let i = 0; i < characteristicPayment.length; i++){
+           document.write(`<div>за весь рік ${amountMoneyPerYear}</div>`)
+           document.write(`<div>у першій половині року${firstHalfYear}</div>`)
+           document.write(`<div>у другій половині року ${secondHalfYear}</div>`)
+           document.write(`<div>за літо  ${forSummer}</div>`)
+           document.write(`<div>за ІІ квартал  ${secondQuarter}</div>`)
+           document.write(`<div>за парні місяці (з парними номерами) ${evenMonths}</div>`)
+           document.write(`<div>за місяці, які є початковими у сезоні (весна, літо, осінь, зима) ${forFirstMonthsSeason}</div>`)
 
-                document.write("<tr>")
-
-                    document.write(`<td> ${characteristicPayment[i]}</td>`)
-                    document.write(`<td> ${result[i]}</td>`)
-
-                document.write("</tr>")
-
-            }
-
-            document.write("</table>")
 
         document.write("</div>")
 

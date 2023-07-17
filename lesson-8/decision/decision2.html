@@ -22,47 +22,68 @@
 
 
 
-        function getValueGrades(numGrades){
+        function getListGarden(numGrades){
 
-            //Масив для оцінок
-            let listGrades = []
+             //Масив для оцінок
+             let listGrades = []
+             //Добавляю оцінки в масив
+                for( let i = 0; i < numGrades; i++){
+                    const grade = parseInt(prompt(`Введіть ${i + 1}  оцінку учня`))
+                    listGrades.push(grade)
+                }
 
-            //Створю лічильники для підрахунку
-            let  numBadGrades = 0
-            let  numBelowAverageGrades  = 0
-            let  numGoodGrades = 0
-
-            //Добавляю оцінки в масив
-            for( let i = 0; i < numGrades; i++){
-                const grade = parseInt(prompt(`Введіть ${i + 1}  оцінку учня`))
-                listGrades.push(grade)
-            }
-
-            //Сортую оцінки
-            for(let i = 0; i <= listGrades.length; i++){
-                if(listGrades[i] === 2)
-                    numBadGrades++
-                else if( listGrades[i] <=  6 )
-                    numBelowAverageGrades++
-                else if(listGrades[i] >= 9 && listGrades[i] <=  12 )
-                    numGoodGrades++
-            }   
-
-            return [numBadGrades,numBelowAverageGrades,numGoodGrades]
-
-
+            return listGrades
         }
 
+        function getBadGrades(arrGrades){
+
+            let  numBadGrades = 0
+
+            for(let i = 0; i <= arrGrades.length; i++){
+                if(arrGrades[i] === 2)
+                    numBadGrades++
+            }
+
+            return numBadGrades
+        }
+
+
+        function getBelowAverageGrades(arrGrades){
+
+            let  numBelowAverageGrades  = 0
+
+            for(let i = 0; i <= arrGrades.length; i++){
+                if(arrGrades[i] <= 6)
+                numBelowAverageGrades++
+            }
+
+            return numBelowAverageGrades
+        }
+
+        function getGoodGrades(arrGrades){
+
+            let  numGoodGrades  = 0
+
+            for(let i = 0; i <= arrGrades.length; i++){
+                if(arrGrades[i] >= 9 && arrGrades[i] <=  12  )
+                numGoodGrades++
+            }
+
+            return numGoodGrades
+        }
+
+
+
         //Викликаю
-        const result = getValueGrades(numGrades)
+        const result = getListGarden(numGrades)
 
 
         //Виводжу результат
         document.write("<div class = 'result_block result_block_lesson_two' >")
 
-        document.write(`<div>Кількість двійок становить =  ${result[0]}</div>`)
-        document.write(`<div>Кількість оцінок нижче середнього = ${result[1]}</div>`)
-        document.write(`<div>Кількість оцінок (добре,відмінно) становить =  ${result[2]}</div>`)
+        document.write(`<div>Кількість двійок становить =  ${getBadGrades(result)}</div>`)
+        document.write(`<div>Кількість оцінок нижче середнього = ${getBelowAverageGrades(result)}</div>`)
+        document.write(`<div>Кількість оцінок (добре,відмінно) становить =  ${getGoodGrades(result)}</div>`)
 
         document.write("</div>")
 

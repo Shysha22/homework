@@ -29,7 +29,10 @@
         let productElement = 1
         
         // перевіряю кожен елемент масиву та знаходжу добуток додатніх
-        for (const element of arr)  element > 0 ? productElement *= element : null
+        for (const element of arr) {
+            if(element > 0)
+            productElement *= element
+        }
         
 
         document.write(`<div class = "result_block">Добуток додатніх елементів становить =  ${productElement}</div>`)

@@ -16,13 +16,13 @@
         
         // Користувач задає кількість лотерейок
         const numLotteryTickets = parseInt(prompt("Введіть кількість лотерейок які бажаєте взяти?"))
+        const minValue = -500,maxValue = 500
 
 
         // Створюю функцію для заповнення масива лотереями
-        function getLotteryTickets (numLotteryTickets){
+        function getLotteryTickets (numLotteryTickets,maxValue,minValue){
         
-        const minValue = -500
-              maxValue = 500
+       
 
         // масив з лотерейками
         let arrLottery = []
@@ -31,6 +31,7 @@
 
             let randomSum = minValue + Math.floor(Math.random() * (maxValue - minValue + 1))
             arrLottery.push(randomSum)
+            console.log(randomSum)
 
         }
 
@@ -38,8 +39,6 @@
         return arrLottery
 
         }
-
-        // const resultLotteryTickets = getLotteryTickets(numLotteryTickets)
 
 
         // Функція (користувачу вгадує лотерейки та сумується його виграш)
@@ -69,7 +68,7 @@
         }
 
         
-        const resultUserAttempt = userAttemptWin(getLotteryTickets(numLotteryTickets))
+        const resultUserAttempt = userAttemptWin(getLotteryTickets(numLotteryTickets,500,-500))
 
         
         document.write(`<div class = "result_block">Ваш виграш становить ${resultUserAttempt}</div>`)

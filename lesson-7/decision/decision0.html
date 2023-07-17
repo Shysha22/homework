@@ -17,18 +17,21 @@
         const monthNumber = parseInt(prompt("Введіть номер місяця від 1 до 12"))
 
         function getNameSeason(num){
+            let resultTask
             if( num < 3 || num === 12)
-                alert("Зима")
+                 resultTask = "Зима"
             else if ( num < 6)
-                alert("Весна")
+                    resultTask = "Весна"
             else if ( num < 9)
-                alert("літо")
+                resultTask = "літо"
             else if ( num < 12)
-                alert("осінь")
+                resultTask = "осінь"
+
+                return resultTask
 
         }
 
-        getNameSeason(monthNumber)
+        alert(getNameSeason(monthNumber))
 
 
        

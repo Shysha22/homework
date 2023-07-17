@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!--Задача 2. Дано інформацію про прибуток К магазинів протягом тижня. Знайти : -->
+
+    <script>
+
+        const numStores = parseInt(prompt("Введіть кількість магазинів"))
+
+        const minValue = 1
+        const maxValue = 2000
+        const days = 7
+
+        // створюю масив з рандомними числами(Один робочий тиждень)
+        function getArrWeekStoreProfit(days,minValue,maxValue){
+
+            let profitArr =  []
+
+            for( let i = 0; i < days;i++){
+                let randomNum = minValue + Math.floor(Math.random() * maxValue)
+                profitArr.push(randomNum)
+
+            }
+            return profitArr
+        }
+
+        // створюю двовимірний масив  (довжину масиву вказує користувач)
+        function getListStore(numStores,days,minValue,maxValue){
+
+        let arrStores =  []
+
+        for( let i = 0; i < numStores;i++){
+            // викликаю функцію масиву з рандомними числами createArrRandom та додаю в двомимірний масив
+            let weekProfit =  getArrWeekStoreProfit(days,minValue,maxValue)
+            arrStores.push(weekProfit)
+
+        }
+        return arrStores
+
+        }
+
+        // масив з яким далі будемо працювати
+        let arrStoreList = getListStore(numStores,days,minValue,maxValue)
+
+        console.log(arrStoreList)
+
+
+        // --------------------------------------Розв`язки------------------------------------
+    document.write('<div class = "result_block">')
+
+    // виводжу початковий масив
+    document.write('<div>Початковий масив</div>')
+    document.write('<table class = "table">')
+
+        for( let i = 0; i < arrStoreList.length;i++){
+            document.write(`<tr>`)
+            for(let j = 0; j < arrStoreList[i].length;j++){
+                document.write(`<td>${arrStoreList[i][j]}</td>`)
+            }
+            document.write('</tr>')
+        }
+
+        document.write('</table>')
+    // <!-- 1) загальний прибуток кожного масиву за тиждень; -->
+
+    function weekStoreProfit(storeList){
+
+        let weekProfit = []
+
+        for(let i = 0; i <storeList.length;i++){
+            let sum = storeList[i].reduce((prevSum,el) => {
+                prevSum+=el
+                return prevSum
+            },0)
+            weekProfit.push(sum)
+        }
+        return weekProfit
+    }
+    const result = weekStoreProfit(arrStoreList)
+    document.write(`<br><div>Загальний прибуток магазтну за тиждень</div>`)
+    result.forEach((el,i) =>{
+        document.write(`${i + 1} Магазин.Прибуток становить = ${el} грн<br>`)
+    })
+
+
+    // Функція для знаходження суми по дням
+
+    function getProfitCertainDays(storeList,startDay,endDay){
+
+    let sum = 0
+    for(let i = 0; i <storeList.length;i++){
+           for(let k = startDay; k < endDay ;k++){
+                sum+=storeList[i][k]
+           }
+        }
+
+        return sum
+
+}
+  // 2) загальний прибуток усіх магазинів по дням (загальний прибуток усіх магазинів за понеділок, за вівторок, і т.д.);
+
+  document.write(`<br>Прибуток за понеділок = ${getProfitCertainDays(arrStoreList,0,1)},<br>
+    вівторок = ${getProfitCertainDays(arrStoreList,1,2)},<br>
+    середа = ${getProfitCertainDays(arrStoreList,2,3)},<br>
+    четвер = ${getProfitCertainDays(arrStoreList,3,4)},<br>
+    п'ятницю = ${getProfitCertainDays(arrStoreList,4,5)},<br>
+    суботу = ${getProfitCertainDays(arrStoreList,5,6)},<br>
+    неділю = ${getProfitCertainDays(arrStoreList,6,7)},<br>
+  `)
+
+
+    // 3) загальний прибуток за робочі дні
+
+document.write(`<br><div>Загальний прибуток магазину за робочі дні ${ getProfitCertainDays(arrStoreList,0,5)}</div>`)
+
+document.write('<br>')
+
+// 4) загальний прибуток за вихідні дні
+document.write(`<div>Загальний прибуток магазину за Вихідні дні = ${getProfitCertainDays(arrStoreList,5,7)}</div>`)
+
+// 5) максимальний прибуток за середу
+
+
+function getMaxProfitWednesday(storeList,startDay,endDay){
+
+    let profirForWednesday = []
+    for(let i = 0; i <storeList.length;i++){
+           for(let k = startDay; k < endDay ;k++){
+                profirForWednesday.push(storeList[i][k])
+           }
+        }
+
+        console.log(profirForWednesday)
+
+    return Math.max(...profirForWednesday)
+    
+}
+document.write(`<br><div>Максимальний прибуток за середу ${ getMaxProfitWednesday(arrStoreList,2,3)}</div>`)
+        
+        // document.write(" <button class='btnBack'><a href='../lesson11.html'>До завдань</a></button>")
+
+    </script>
+</body>
+</html>

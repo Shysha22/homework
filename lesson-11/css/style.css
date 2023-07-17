@@ -82,8 +82,8 @@ table{
     margin-top: 10px;
 }
 .result_block{
-    width: 500px;
-    height: 250px;
+    max-width: 1000px;
+    /* height: 150px; */
     background-color:blanchedalmond;
     margin: 0 auto;
     margin-top: 120px;
@@ -93,9 +93,11 @@ table{
     justify-content: center;
     border: 1px solid #000;
     box-shadow: 0 0 10px #000;
+    padding: 50px;
+    flex-direction: column;
 }
 .result_block_lesson_two{
-    flex-direction: column;
+    /* flex-direction: column; */
 }
 .result_block_lesson_three{
     width: 500px;
@@ -118,4 +120,19 @@ table{
     margin: 0 auto;
     margin-top: 40px;
     padding-bottom: 10px;
+}
+.result_block_lesson9{
+    /* min-width: 300px; */
+    width: 500px;
+    height: 150px;
+    background-color:blanchedalmond;
+    margin: 0 auto;
+    margin-top: 120px;
+    border-radius:20px;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    border: 1px solid #000;
+    box-shadow: 0 0 10px #000;
+    flex-direction: column;
 }

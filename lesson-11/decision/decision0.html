@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!-- Задача 1. Знайти суми елементів у вказаній області (масиви розділені на 4 рівні частини -  не звертаємо увагу на криві малюнки ☺ ). -->
+
+    <script>
+
+        // питаюся користувача кількість рядків та колонок масиву
+        const sizeArrRow = parseInt(prompt("Введіть розмір масиву(рядків)"))
+        const sizeArrCol = parseInt(prompt("Введіть розмір масиву(колонок)"))
+
+        // значення для кожного елемента масиву
+        const minValue = 1
+        const maxValue = 50
+
+  
+
+        // створюю масив з рандомними числами(довжину масиву вказує користувач)
+        function createArrRandom(sizeArrCol,minValue,maxValue){
+
+            let arr =  []
+
+            for( let i = 0; i < sizeArrCol;i++){
+                let randomNum = minValue + Math.floor(Math.random() * maxValue)
+                arr.push(randomNum)
+
+            }
+            return arr
+        }
+
+        // створюю двовимірний масив  (довжину масиву вказує користувач)
+        function createTwoDimensionalArr(sizeArrRow,sizeArrCol,minValue,maxValue){
+
+            let arr =  []
+
+            for( let i = 0; i < sizeArrRow;i++){
+                // викликаю функцію масиву з рандомними числами createArrRandom та додаю в двомимірний масив
+                let randomArr =  createArrRandom(sizeArrCol,minValue,maxValue)
+                arr.push(randomArr)
+
+            }
+            return arr
+
+        }
+
+        // масив з яким далі будемо працювати
+        let arr = createTwoDimensionalArr(sizeArrRow,sizeArrCol,minValue,maxValue)
+
+
+
+
+        // тут ділю рядки масиву навпіл щоб дізнатися середину(якщо число не парне заокругюю до найближчого числа)
+        let halfRow = ((arr.length / 2) %2 !== 0) ? Math.round(arr.length / 2) : arr.length / 2
+        // записав довжину масиву в перемінну для зручності
+        let lenghtRow =  arr.length
+        console.log(halfRow)
+
+
+        // тут ділю рядки колонки навпіл щоб дізнатися середину(якщо число не парне заокругюю до найближчого числа)
+        let halfCol = ((arr[i = 0].length / 2) %2 !== 0) ? Math.round(arr[i = 0].length / 2) : arr[i = 0].length / 2
+        // записав довжину двовимірного масиву(колонки) в перемінну для зручності
+        let lenghtCol = arr[i = 0].length
+        console.log(halfCol)
+
+
+
+        // перемінні для визначення суми різних частин масиву
+        let sumFirstPart = 0
+        let sumSecondPart = 0
+        let sumThirdPart = 0
+        let sumFourthPart = 0
+
+
+        // намагався написати 1 функцію для визначення суми всіх 4 частин
+        function findPartArr(startRow,endRow,startCol,endCol,sum){
+
+            for( let i = startRow; i < endRow ;i++){
+
+                for(let j = startCol; j < endCol; j++)
+                    sum += arr[i][j]
+                
+            }
+
+            return sum
+        }
+
+        // викликаю функцію та передаю параметри
+        let firstPart = findPartArr(0,halfRow,0,halfCol,sumFirstPart)
+        let secondPart = findPartArr(0,halfRow,halfCol,lenghtCol,sumSecondPart)
+        let thirdPart = findPartArr(halfRow,lenghtRow,0,halfCol,sumThirdPart)
+        let fourthPart = findPartArr(halfRow,lenghtRow,halfCol,lenghtCol,sumFourthPart)
+
+
+
+        // Функція для знаходження парних рядків
+        function getSumRow(arr){
+            let sum = 0
+            for(let i = 1; i < arr.length;i+=2){
+                arr[i].forEach(el =>  sum = sum + el);
+                
+            }
+            return sum
+
+        }
+        let sumEvenRows = getSumRow(arr)
+
+
+         // Функція для знаходження не парних стовбців
+        function getSumCol(arr){
+            let sum = 0
+            for(let i = 0; i < arr.length;i+=1){
+                for(let j = 0; j < arr[i].length; j+=2)
+                    sum +=arr[i][j]
+
+            }
+            return sum
+
+        }
+        let sumOddCols =  getSumCol(arr)
+
+
+        // Функція У парних рядках – непарні стовпці, у непарних – парні.
+        function getSumEvenAndOddCol(arr){
+            let sumEvenCol = 0
+            let sumOddCol = 0
+
+            for(let i = 1; i < arr.length;i+=2){
+                for(let j = 0; j < arr[i].length; j+=2){
+                    sumEvenCol += arr[i][j]
+                }
+            }
+            for(let i = 0; i < arr.length;i+=3){
+                for(let j = 0; j < arr[i].length; j+=2){
+                    sumOddCol += arr[i][j]
+                }
+            }
+
+            return [sumEvenCol,sumOddCol]
+        }
+
+        let sumEvenAndOddCol = getSumEvenAndOddCol(arr)
+
+
+        // ------------------------------------Виведення---------------------------------
+
+        document.write('<div class = "result_block">')
+            document.write('<table class = "table">')
+
+        for( let i = 0; i < arr.length;i++){
+            document.write('<tr>')
+            for(let j = 0; j < arr[i].length;j++){
+                document.write(`<td>${arr[i][j]}</td>`)
+            }
+            document.write('</tr>')
+        }
+
+        document.write('</table><br>')
+        document.write(`<div>Сума першої частини = ${firstPart}</div>`)
+        document.write(`<div>Сума другої частини = ${secondPart}</div>`)
+        document.write(`<div>Сума третої частини = ${thirdPart}</div>`)
+        document.write(`<div>Сума четвертої частини = ${fourthPart}</div>`)
+
+        document.write('<br>')
+
+        document.write(`<div>Сума парних рядків = ${sumEvenRows}</div>`)
+        document.write(`<div>Сума непарних стовбців = ${sumOddCols}</div><br>`)
+        document.write(`<div> У парних рядках – непарні стовпці, у непарних – парні. = <br> Сума парних = ${sumEvenAndOddCol[0]} : Сума непарних = ${sumEvenAndOddCol[1]}</div><br>`)
+
+
+
+
+
+        document.write('<div>')
+
+        
+        document.write(" <button class='btnBack'><a href='../lesson11.html'>До завдань</a></button>")
+
+    </script>
+</body>
+</html>
