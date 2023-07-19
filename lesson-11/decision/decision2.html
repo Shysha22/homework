@@ -10,45 +10,95 @@
 
     <!--Задача 3. Морський бій. Випадковим чином на двовимірному полі розміром 6*6 розташовується 5 кораблів. Користувач стріляє вказуючи координати. Гра продовжується поки не потоплено усі кораблі або у користувача не закінчаться снаряди: -->
 
+    
 
     <script>
 
-        let arrRow = new Array(6).fill([0,0,0,0,0,0])
-        let ships = 5
-
-      
-
-        function addShip(arrRow,min,max,ships){
-            let positionRow 
-            let positionCol 
-            for(let i = 0;i < ships;){
-                 positionRow = randomNum = min + Math.floor(Math.random() * max)
-                positionCol =  randomNum = min + Math.floor(Math.random() * max)
-                if(arrRow[positionRow][positionCol] === 0){
-                    arrRow[positionRow][positionCol] = 1
-                    i++
-                }
-               
-            }
+        // описую змінні
+      const arrRow = 6,arrCol = 6
+      const min = 1
+      const max = 6
+      let ships = 5
+      let ammunition = 5
 
 
-            return arrRow
+    //   створбб функцію для створення масиву
+       function createTwoBimensionalArr(arrRow,arrCol){
+
+        let arr = []
+        for(let i = 0; i < arrRow; i++){
+              arrCols = new Array(arrCol).fill(0)
+              arr.push(arrCols)
         }
 
-        let result = addShip(arrRow,1,5,ships)
-
-        console.log(result)
-
-
+        return arr
+       }
+       let arrPlayingField = createTwoBimensionalArr(arrRow,arrCol)
 
 
-        // --------------------------------------Розв`язки------------------------------------
-    document.write('<div class = "result_block">')
+    //    функція рандомного числа
+       function randomNum(min,max){
 
-        document.write('<div>')
+        let randomNum =  min + Math.floor(Math.random() * max )
+
+        return randomNum
+
+       }
+
+
+    //    функція розташування кораблів
+       function setPositionShip(arrPlayingField,ships,min,max){
+
+        for(let i = 0; i < ships;){
+            let randomRow = randomNum(min,max)
+            let randomCol = randomNum(min,max)
+            if(arrPlayingField[randomRow][randomCol] === 0){
+                arrPlayingField[randomRow][randomCol] = 1
+                i++
+            }
+        }
+
+        return arrPlayingField
+
+       }
+       let playingFieldForUser = setPositionShip(arrPlayingField,ships,min,max,)
+
+    //    функція користувач намагається попасти
+       function getGame(playingFieldForUser,ammunition,ships){
+        let resultGame;
+
+        do {
+
+            let positonRowUser = parseInt(prompt('Введіть позицію рядка'))
+            let positonColUser = parseInt(prompt('Введіть позицію колонки'))
+                ammunition--
+            if(playingFieldForUser[positonRowUser][positonColUser] === 1){
+                playingFieldForUser[positonRowUser][positonColUser] = 0
+                alert("Ви попали")
+                ships--
+            }
+            else{
+                alert(`Нажаль ви не попали,у вас залишилося  ${ammunition} снаряди`)
+            }
+            } 
+            while ( ammunition !== 0);
+
+
+
+            if(ships === 0)
+                resultGame = alert("Вітаю!Ви перемогли")
+            else
+                resultGame = alert("Ви програли")
+
+            return resultGame
+
+       }
+
+       let overGame = getGame(playingFieldForUser,ammunition,ships)
+
 
         
-        // document.write(" <button class='btnBack'><a href='../lesson11.html'>До завдань</a></button>")
+        document.write(" <button class='btnBack'><a href='../lesson11.html'>До завдань</a></button>")
 
     </script>
 </body>
