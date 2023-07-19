@@ -52,8 +52,8 @@
         for(let i = 0; i < ships;){
             let randomRow = randomNum(min,max)
             let randomCol = randomNum(min,max)
-            if(arrPlayingField[randomRow][randomCol] === 0){
-                arrPlayingField[randomRow][randomCol] = 1
+            if(arrPlayingField[randomRow - 1][randomCol - 1] === 0){
+                arrPlayingField[randomRow - 1][randomCol - 1] = 1
                 i++
             }
         }
@@ -72,8 +72,8 @@
             let positonRowUser = parseInt(prompt('Введіть позицію рядка'))
             let positonColUser = parseInt(prompt('Введіть позицію колонки'))
                 ammunition--
-            if(playingFieldForUser[positonRowUser][positonColUser] === 1){
-                playingFieldForUser[positonRowUser][positonColUser] = 0
+            if(playingFieldForUser[positonRowUser - 1][positonColUser - 1] === 1){
+                playingFieldForUser[positonRowUser - 1][positonColUser - 1] = 0
                 alert("Ви попали")
                 ships--
             }
