@@ -43,8 +43,11 @@ h1{
     text-align: center;
 }
 li:hover{
-    background-color:rgb(151, 136, 113)
+    background-color:rgb(151, 136, 113);
+    box-shadow: 0 0 10px bisque;
+    transition: 0.2s all;
 }
 li:hover a{
     color: black;
+    transition: 0.2s all;
 }
