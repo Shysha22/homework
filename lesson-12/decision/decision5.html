@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!--Задача 5. Дано масив імен. Застосовуючи відповідне сортування та бінарний пошук визначити, чи є у масиві ім’я «Olga» і під яким індексом. -->
+
+
+
+
+    <script>
+        document.write(`<div class = "result_block_sort">`)
+
+        // масив імен
+        let arrNames = ["Alex","Viktoria","Yriy","Pavel","Stepan","Taras","Petro","Pep","Ivan","Natalia","Olga"]
+        // потрібне ім'я
+        const searchName = "Olga"
+
+        document.write(arrNames)
+        document.write('<br>')
+        // сортую масив
+        arrNames.sort()
+        document.write(arrNames)
+
+
+        // застосовую бінарний пошук та знаходжу певне ім'я
+        function getBinarySort(arrNames,name){
+
+            let startArr = 0
+            let endArr = arrNames.length - 1
+          
+
+            while(startArr <= endArr){
+                let middle = Math.floor((endArr + startArr) / 2)
+                if(arrNames[middle] === name)  return  middle
+                
+                if(arrNames[middle] < name)  startArr = middle + 1
+                  
+                if(arrNames[middle] > name)  endArr = middle - 1
+                    
+            }
+
+            return false
+
+        }
+        const resultFindName = getBinarySort(arrNames,searchName)
+
+        if(resultFindName === false) 
+            document.write(`<div>Нажаль імя ${searchName} немає в масиві</div>`)
+        else
+            document.write(`<div>Імя ${searchName} є в масиві.Номер ім'я = ${resultFindName + 1}</div>`)
+
+     document.write("</div>")
+     document.write(" <button class='btnBack'><a href='../lesson12.html'>До завдань</a></button>")
+  
+    
+    </script>
+</body>
+</html>

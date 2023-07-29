@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!--Задача 3. Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів під час сортування включеннями. -->
+
+
+
+
+    <script>
+
+    const min = 1,
+          max = 50
+    const arrLength = 30
+
+    // функція  заповнення масиву з 30 різних чисел 
+    function createArrRandomNums(arrLength,min,max){
+        let arr = []
+        for(let i = 0; i < arrLength;i++){
+            let randomNum = min + Math.floor(Math.random() * (max + min))
+            arr.push(randomNum)
+        }
+        return arr
+    }
+    let arrBasic = createArrRandomNums(arrLength,min,max)
+
+
+
+    document.write(`<div class = "result_block">`)
+    document.write(`Початковий масив = ${arrBasic}<br>`)
+    
+
+    let counter = 0
+
+    function getInerSort(arr){
+
+        
+        for(let k = 1; k < arr.length;k++){
+            let currentElement = arr[k]
+            let i = k - 1
+            while(arr[i] >= 0 & arr[i] > currentElement){
+                arr[ i + 1] = arr[i]
+                counter++
+                i = i - 1
+            }
+            arr[ i + 1] = currentElement
+
+        }
+
+        return arr
+
+
+    }
+
+
+    const resulExchanges = getInerSort(arrBasic) 
+ 
+
+        document.write(`Відфільтрований масив = ${resulExchanges}<br>`)
+        document.write (`Кількість обмінів становить = ${counter}`)
+
+
+     document.write("</div>")
+
+     document.write(" <button class='btnBack'><a href='../lesson12.html'>До завдань</a></button>")
+  
+    
+    </script>
+</body>
+</html>

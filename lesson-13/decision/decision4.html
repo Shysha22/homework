@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!--Задача 4. З використанням замикань розробити ітератор, тобто функцію, що буде поступово за окремими викликами видавати по одну букву наперед заданого слова. З використанням нього розробити гру «Прекладач». Виводимо для користувача опис цього слова і по одну букву користувач вводить переклад цього слова. Підрахувати кількість вгаданих букв. -->
+
+    <script>
+
+        // загадую користувачу загадку
+        let mystery = alert("Куди люди їздять кожне літо?(Відповідб введіть англійською)")
+
+        // загадане слово
+        let wordRiddle = 'SEA'
+
+
+        // Функція яка поступово за викликом видаватиме по одній букві
+        function getLetterAhead(world){
+
+            // буква яка повертатиметься
+            let letter = ""
+            // позиція цієї букви
+            let positionLetter =  0
+
+            function getLetter(){
+
+                letter = world[positionLetter]
+                positionLetter++
+
+                return letter
+            }
+
+            return getLetter
+
+
+        }
+
+        let resultHelpUser = getLetterAhead(wordRiddle)
+
+   
+        // функція порівняння букв
+
+        function letterComparison(word){
+
+        // лічильник правильх вгадуваннь
+        let counter = 0
+
+            // користувач вводить букви порівнюю
+            for(let i = 0; i < word.length;){
+                let userLetters = prompt(`Введіть букву №${i+1},якщо бажаєте допомоги напишіть help`).toUpperCase()
+
+                // викликаю ітератор за необхідністю (використав різні змінні для prompt що не викликати лишній раз   resultHelpUser() та незміщувати позицію букви-підказки через 1)
+                    if(userLetters === "HELP"){
+                        let userHelp = prompt(`Літера № ${i + 1}`,`${resultHelpUser()}`)
+                         ++counter
+                    }
+
+                    if(word[i] === userLetters){
+                        ++counter
+                        resultHelpUser()
+                    }
+                    i++
+            }
+
+            return counter
+
+        }
+
+
+        document.write(`<div class = "result_block">`)
+
+        document.write(`Загадане слово = ${wordRiddle}</br>`)
+        document.write(`Кількість вгаданих букв = ${letterComparison(wordRiddle)}`)
+
+
+    document.write("</div>")
+
+     document.write(" <button class='btnBack'><a href='../lesson13.html'>До завдань</a></button>")
+    
+    </script>
+</body>
+</html>

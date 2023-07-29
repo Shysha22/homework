@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!--Задача 3.  З використанням замикань розробити ітератор, тобто функцію, що буде поступово за окремими викликами видавати по одне значення від заданого мінімального до заданого максимального. Якщо значення досягне максимального, то наступним буде мінімальне значення. З використанням цієї функції реалізувати перебір номерів місяців.  -->
+
+
+
+
+    <script>
+
+        // користувач вводить кількість викликів
+        const numCallMonths = parseInt(prompt("Введіть кількість викликів"))
+
+
+        // функція ітератор
+        function getListMonths(min = 1,max = 12){
+
+            // лічильник який рахує місяці
+            let counter = min - 1
+
+            // функція по зміні лічильника
+            function changeCounter(){
+                if(counter === max ) counter = min
+                else 
+                    ++counter
+
+                 return counter
+            }
+
+            return changeCounter
+
+        }
+ 
+        let listMonths = getListMonths()
+       
+
+
+
+     document.write(`<div class = "result_block">`)
+
+        // Виводжу результат
+        for(let i = 0; i < numCallMonths;i++){
+            document.write(`${listMonths()}, `)
+            
+        }
+
+    document.write("</div>")
+
+     document.write(" <button class='btnBack'><a href='../lesson13.html'>До завдань</a></button>")
+    
+    </script>
+</body>
+</html>

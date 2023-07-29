@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+
+   <!-- Задача 2. Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів під час сортування змішуванням. -->
+
+
+
+    <script>
+
+    const min = 1,
+          max = 50
+    const arrLength = 30
+
+    function createArrRandomNums(arrLength,min,max){
+        let arr = []
+        for(let i = 0; i < arrLength;i++){
+            let randomNum = min + Math.floor(Math.random() * (max + min))
+            arr.push(randomNum)
+        }
+        return arr
+    }
+    let arrBasic = createArrRandomNums(arrLength,min,max)
+
+    document.write(`<div class = "result_block">`)
+    document.write(`Початковий масив = ${arrBasic}<br>`)
+
+
+    let counter = 0
+    let leftIndex = 0
+    let rightIndex = arrBasic.length - 1
+
+    function swap(array,idx,idxStep){
+        let num = array[idx]
+        array[idx] =  array[idxStep]
+        array[idxStep] = num
+
+        return array
+
+    }
+
+    function getMixingSortMethod(arr,counter,leftIndex,rightIndex){
+
+
+        while(leftIndex < rightIndex){
+
+        for(let idx = leftIndex; idx < rightIndex;idx++){
+            if(arr[idx] > arr[idx + 1]){
+                swap(arr,idx,idx + 1)
+                 counter++
+            }
+            }
+            rightIndex--
+
+        for(let idx = rightIndex; idx > leftIndex;idx-- ){
+            if(arr[idx] < arr[idx - 1]){
+                swap(arr,idx,idx - 1)
+                counter++
+            }
+            }
+            leftIndex++
+        }
+
+        return [arr,counter]
+    }
+    const resulExchanges = getMixingSortMethod(arrBasic,counter,leftIndex,rightIndex)
+    
+    document.write(`Відфільтрований масив = ${resulExchanges[0]}<br>`)
+    document.write (`Кількість обмінів становить = ${resulExchanges[1]}`)
+
+     document.write("</div>")
+     document.write(" <button class='btnBack'><a href='../lesson12.html'>До завдань</a></button>")
+    
+    </script>
+</body>
+</html>

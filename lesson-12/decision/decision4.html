@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- Задача 4. Для розглянутих методів сортування спробувати вивести етапи сортування шляхом виведення відповідних таблиць за зразком. -->
+
+
+
+
+    <script>
+
+    document.write(`<div class = "result_block_sort">`)
+
+        // базовий масив
+        let arrBase = [9,3,5,1,4,2,]
+        document.write('<div class = "method_sort">')
+            document.write('<div style = "border-bottom: 1px solid #000">Базовий масив</div>')
+            document.write(`<div>${arrBase}</div>`)
+        document.write('</div>')
+
+
+    // бульбашковий медот сортування
+    let arrBubbleSort = [...arrBase]
+    document.write('<div class = "method_sort">')
+    document.write('<div style = "border-bottom: 1px solid #000">Метод бульбашкою</div>')
+            function getBubbleSortingMethod(arr){
+                let changed
+                document.write(`${arr}<br>`)
+                do {
+                    changed = false
+                    for(let i = 1;i < arr.length;i++){
+                        if(arr[i-1] > arr[i]){
+                            let num = arr[i - 1]
+                            arr[i - 1] = arr[i]
+                            arr[i] = num
+                            document.write(`${arr}<br>`)
+                            changed = true
+                        }
+
+                    }
+                    
+                }
+                while (changed);
+            }
+
+        getBubbleSortingMethod(arrBubbleSort)
+
+    document.write('</div>')
+
+
+// Метод сортування змішування 
+let arrMixingSort = [...arrBase]
+document.write('<div class = "method_sort">')
+document.write('<div style = "border-bottom: 1px solid #000">Метод змішування</div>')
+        function swap(array,idx,idxStep){
+            let num = array[idx]
+            array[idx] =  array[idxStep]
+            array[idxStep] = num
+
+        return array
+        }
+
+        function getMixingSortingMethod(arr){
+            document.write(`${arr}<br>`)
+
+            let leftIndex = 0
+            let rightIndex = arr.length - 1
+
+            while( leftIndex < rightIndex){
+
+                for(let idx = leftIndex; idx < rightIndex;idx++){
+                    if(arr[idx] > arr[idx + 1]){
+                        swap(arr,idx,idx + 1)
+                    }
+
+                }
+                rightIndex--
+                document.write(`${arr}<br>`)
+
+
+                for(let idx = rightIndex; idx > leftIndex;idx-- ){
+                    if(arr[idx] < arr[idx - 1]){
+                        swap(arr,idx,idx - 1)
+                    }
+
+                }
+                leftIndex++
+                document.write(`${arr}<br>`)
+
+            }
+        }
+
+        getMixingSortingMethod(arrMixingSort)
+    
+    document.write('</div>')
+
+    // Метод сортування включення
+    document.write('<divstyle class = "method_sort">')
+    document.write('<div style = "border-bottom: 1px solid #000">Метод включення</div>')
+
+    let arrIner = [...arrBase]
+
+        document.write('<div class = "method_sort">')
+
+        function inerSort(arr){
+
+        document.write(`${arr}<br>`)
+        
+
+        for(let k = 1; k < arr.length;k++){
+            let currentElement = arr[k]
+            let i = k - 1
+            while(arr[i] >= 0 & arr[i] > currentElement){
+                arr[ i + 1] = arr[i]
+                i = i - 1
+            }
+            arr[ i + 1] = currentElement
+            document.write(`${arr}<br>`)
+        }
+
+        }
+
+    inerSort(arrIner) 
+    document.write('</div>')
+
+
+
+     document.write("</div>")
+
+     document.write(" <button class='btnBack'><a href='../lesson12.html'>До завдань</a></button>")
+  
+    
+    </script>
+</body>
+</html>

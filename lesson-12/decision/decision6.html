@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- Задача 6. Дано масив імен. Застосовуючи відповідне сортування та бінарний пошук визначити, чи є у масиві ім’я довжиною 5 символів і під яким індексом. -->
+
+
+
+
+    <script>
+        // масив імен
+        let arrNames = ["Alex","Viktoria","Yriy","Pavel","Stepan","Tarass","Petroo","Pep","Ivan","Natalia","Olga"]
+        // потрібна довжина імені
+        let nameLenght = 5
+
+
+        document.write(`<div class = "result_block">`)
+
+        document.write(`<div>${arrNames}</div>`)
+
+        // сортую
+        arrNames.sort((a,b) => a.length - b.length)
+
+        // функція бінарного пошуку
+        function getBinarySort(arrNames,nameLenght){
+
+        let startArr = 0
+        let endArr = arrNames.length - 1
+
+
+        while(startArr <= endArr){
+            let middle = Math.floor((endArr + startArr) / 2)
+            if(arrNames[middle].length === nameLenght)  return  arrNames[middle]
+            
+            if(arrNames[middle].length < nameLenght)  startArr = middle + 1
+            
+            if(arrNames[middle].length > nameLenght)  endArr = middle - 1
+                
+        }
+
+        return false
+
+        }
+        const resultSearch = getBinarySort(arrNames,nameLenght)
+        
+        document.write(`<div class = "fillter_arr">${arrNames}</div>`)
+
+        if(resultSearch === false) 
+            document.write('<div>Нажаль з такою довжиною немає </div>')
+        else
+            document.write(`<div>Так,ім'я з довжиною ${nameLenght} символів є в масиві = ${resultSearch}</div>`)
+
+     document.write("</div>")
+     document.write(" <button class='btnBack'><a href='../lesson12.html'>До завдань</a></button>")
+
+  
+    
+    </script>
+</body>
+</html>

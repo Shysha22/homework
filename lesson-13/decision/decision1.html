@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!--Задача 1. Визначити (x0 = 1, xi = xi-1 + 2i, де i = 1,2,...Визначити x10). Розв’язати з використанням рекурсивних і нерекурсивних алгоритмів -->
+
+
+
+
+    <script>
+
+        // початкове значення
+        const i = 15
+
+        // Розв'язок рекурсією
+        function getSolutionRecursiveMethod(i){
+            if( i === 0) return 1
+            else
+                return getSolutionRecursiveMethod(i - 1) + 2 * i
+        } 
+        let  resultRecursion = getSolutionRecursiveMethod(i)
+
+        
+        // Розв'язок нерекурсивним алгоритмом
+        function getSolutionNoRecursiveAlgorithm(num){
+
+            let value = 1
+
+            if(i === 0) return value 
+
+            for( let i = num; i > 0;i-- ){
+                value += 2 * i
+                console.log(value)
+            }
+
+            return value
+        }
+
+        let  resultNoRecursiveAlgorithm = getSolutionNoRecursiveAlgorithm(i)
+        
+        
+    
+    document.write(`<div class = "result_block">`)
+
+        document.write(`<div>${resultRecursion} = Рекурсивний метод </div>`)
+        document.write(`<div>${resultNoRecursiveAlgorithm} = Нерекурсивний алгоритм</div>`)
+
+
+    document.write("</div>")
+
+     document.write(" <button class='btnBack'><a href='../lesson13.html'>До завдань</a></button>")
+    
+    </script>
+</body>
+</html>

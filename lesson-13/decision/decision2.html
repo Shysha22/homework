@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!--Задача 2. Реалізувати бінарний пошук (розглядали на попередніх уроках) з використанням рекурсивного алгоритму. -->
+
+
+
+
+    <script>
+
+        // масив з числами
+        let arr = [8,7,32,1,41,153,6,9,12,15,30,32]
+
+        // початок та кінець масиву
+        let arrStart = 0
+        let arrEnd = arr.length - 1
+
+        // сортування масиву
+        arr.sort((a,b) => a - b)
+
+        // число яке шукаємо
+        const num = 9
+
+    
+        // функція бінарного пошуку з використанням рекурсивного алгоритму
+        function getBinarySort(arr,num,arrStart,arrEnd){
+
+        let middle = Math.floor((arrEnd + arrStart) / 2)
+
+            if( arrStart <= arrEnd){
+                if( arr[middle] === num) return middle
+                if(arr[middle] < num) return getBinarySort(arr,num,middle + 1,arrEnd)
+                if(arr[middle] > num) return getBinarySort(arr,num,arrStart,arrEnd - 1)
+
+            }
+
+            return false
+        }
+
+        const resultSearch = getBinarySort(arr,num,arrStart, arrEnd)
+
+
+        // перевіряю чи знаєдено число та виводжу його
+        document.write(`<div class = "result_block">`)
+
+        document.write(`<div> Масив чисел = ${arr}</div>`)
+
+            if(resultSearch === false) 
+                document.write('<div>Нажаль такого числа немає </div>')
+            else
+                document.write(`<div>Так,ми знайшли число : ${arr[resultSearch]},номер в масиві : ${resultSearch + 1}  </div>`)
+
+
+        document.write("</div>")
+
+        document.write(" <button class='btnBack'><a href='../lesson13.html'>До завдань</a></button>")
+    
+    </script>
+</body>
+</html>

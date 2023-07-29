@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!--Задача 5. Тренажер додавання. Кожні 10 секунд користувачу задають випадковий приклад з додавання двох цифр і робиться перевірка.-->
+
+    <script>
+
+// функція рандомного числа
+    function getRandomNum(min = 1,max = 10){
+
+        let num = min + Math.floor(Math.random() * max + 1)
+
+        return num
+    }   
+    getExampleForUser()
+
+
+// функція перевірки відповіді крпистувача
+    function getExampleForUser(){
+
+        let num1 = getRandomNum()
+        let num2 =  getRandomNum()
+
+        let sumNums = num1 + num2
+
+        alert(`Додайте ${num1} + ${num2}`)
+
+        let userAnswer = parseFloat(prompt("Ваша відповідь? "))
+
+        let result 
+
+        if( sumNums === userAnswer)
+            result = alert(`Ви молодець.Сума чисел = ${sumNums} `)
+        else
+            result = alert(`Ви помилились.Сума чисел = ${sumNums} `)
+        
+
+        return result
+
+    } 
+
+// повторяю функцію
+    let showExample = setInterval(() =>{
+            getExampleForUser()
+        },10000)
+
+
+    document.write(`<div class = "result_block">Кожні 10 секунд користувачу задають випадковий приклад з додавання двох цифр і робиться перевірка.</div>`)
+
+
+     document.write(" <button class='btnBack'><a href='../lesson13.html'>До завдань</a></button>")
+    
+    </script>
+</body>
+</html>

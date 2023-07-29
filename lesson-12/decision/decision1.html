@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!--Задача 1. Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів під час сортування бульбашкою : -->
+
+
+
+
+    <script>
+
+    const min = 1,
+          max = 50
+    const arrLength = 30
+
+    function createArrRandomNums(arrLength,min,max){
+        let arr = []
+        for(let i = 0; i < arrLength;i++){
+            let randomNum = min + Math.floor(Math.random() * max + min)
+            arr.push(randomNum)
+        }
+        return arr
+    }
+    let arrBasic = createArrRandomNums(arrLength,min,max)
+    console.log(arrBasic)
+
+    document.write(`<div class = "result_block">`)
+    document.write(`Початковий масив = ${arrBasic}<br>`)
+
+    let changed
+    let counter = 0
+
+    function getBubbleSortMethod(arr,counter,changed){
+        do {
+        changed = false
+
+        for(let i = 1;i < arr.length;i++){
+            if(arr[i-1] > arr[i]){
+                let num = arr[i - 1]
+                arr[i - 1] = arr[i]
+                arr[i] = num
+                counter++
+                 changed = true
+            }
+
+        }
+        
+        }
+         while (changed);
+
+         return [arr,counter]
+
+    }
+    const resulExchanges = getBubbleSortMethod(arrBasic,counter,changed)
+        
+
+        document.write(`Відфільтрований масив = ${resulExchanges[0]}<br>`)
+        document.write (`Кількість обмінів становить = ${resulExchanges[1]}`)
+
+
+     document.write("</div>")
+
+     document.write(" <button class='btnBack'><a href='../lesson12.html'>До завдань</a></button>")
+    
+    </script>
+</body>
+</html>
