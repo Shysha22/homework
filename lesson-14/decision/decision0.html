@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!-- Задача 1. Описати масив об’єктів – сайтів розроблених компанією з такими властивостями
+    ----- Властивості ------
+    назва компанії на час розробки (назву періодично змінюють)
+    власник компанії
+    споснсори (масив спонсорів)
+          * прізвище спонсора
+          * ім’я  спонсора
+          * сума вкладень спонсора
+    рік випуску
+    вартість сайту
+    Знайти:
+    1) загальну вартість усіх сайтів
+    2) кількість сайтів, що було зроблено між 2000 та 2009 рр.
+    3) кількість сайтів, де сума спонсорських вкладень була більшою за 100000
+    4) створити загальний список усіх спонсорів (поки можуть повторюватись, просто зібрати усі у масив)
+    5) знайти рік, коли прибуток був найбільшим
+    6) упорядкувати список за спаданням прибутку
+    7) Створити 2 окремих списки з копіями об’єктів, що містять сайти з вартість до 10000 і більше 10000
+     -->
+
+
+
+
+    <script>
+
+    let listSites = [
+        {
+            nameCompany : "In-create",
+            ownerCompany : "Shevchenko Oleksandr",
+            sponsors : {
+                secondNameSponsor: "Ivanov",
+                nameSponsor : "Ivan",
+                investing : 120000,
+            },
+            graduationYear : 2007,
+            costSite: 12000,
+
+        },
+        {
+            nameCompany : "Uk-wix",
+            ownerCompany : "Ivanov Oleksandr",
+            sponsors : {
+                secondNameSponsor: "Sevchenko",
+                nameSponsor : "Ivan",
+                investing : 80000,
+            },
+            graduationYear : 2010,
+            costSite: 5000,
+
+        },
+        {
+            nameCompany : "Sndi",
+            ownerCompany : "Litvinov Vitaliy",
+            sponsors : {
+                secondNameSponsor: "Mykolenko",
+                nameSponsor : "Vlad",
+                investing : 50000,
+            },
+            graduationYear : 2004,
+            costSite: 2000,
+
+        },
+        {
+            nameCompany : "Quazom",
+            ownerCompany : "Gudkov Mykola",
+            sponsors : {
+                secondNameSponsor: "Bobko",
+                nameSponsor : "Yuriy",
+                investing : 150000,
+            },
+            graduationYear : 2014,
+            costSite: 20500,
+
+        },
+        {
+            nameCompany : "It-rating",
+            ownerCompany : "Angel Petro",
+            sponsors : {
+                secondNameSponsor: "Stepanenko",
+                nameSponsor : "Oleksandr",
+                investing : 90000,
+            },
+            graduationYear : 2006,
+            costSite: 5000,
+
+        },
+    ]
+    document.write(`<div class = "result_block">`)
+    // 1) загальну вартість усіх сайтів
+    const costAllSites = listSites.reduce((prevSum,priceSite) => prevSum + priceSite.costSite,0)
+    document.write(`<div>1.Загальну вартість всіх сайтів - ${costAllSites}</div><br>`)
+
+    // 2) кількість сайтів, що було зроблено між 2000 та 2009 рр.
+    const numSitesByYears = listSites.reduce((prevNum,yearSite) => {
+        if(2000 < yearSite.graduationYear &&  yearSite.graduationYear < 2009)
+            prevNum++
+        else
+            prevNum
+
+        return prevNum
+    },0)
+    document.write(`<div>2.Кількість сайтів, що було зроблено між 2000 та 2009 рр. - ${numSitesByYears} сайти</div><br>`)
+
+    // 3) кількість сайтів, де сума спонсорських вкладень була більшою за 100000
+    const sumSponsorsInvesting = listSites.reduce((prevSum,investingSum) => investingSum.sponsors.investing > 100000 ? ++prevSum : prevSum,0)
+    document.write(`<div>3.Кількість сайтів, де сума спонсорських вкладень була більшою за 100000 - ${sumSponsorsInvesting}</div><br>`)
+
+    // 4) створити загальний список усіх спонсорів (поки можуть повторюватись, просто зібрати усі у масив)
+    const listSponsors = listSites.map(sponsor =>{
+        let name = `'${sponsor.sponsors.secondNameSponsor} ${sponsor.sponsors.nameSponsor}' `
+        return name
+    })
+    document.write(`<div>4.Список всіх спонсорів - ${listSponsors}</div><br>`)
+
+    // 5) знайти рік, коли прибуток був найбільшим?
+
+    const biggestProfit = listSites.reduce((prevProfit,profit) =>prevProfit < profit.costSite ?  prevProfit = profit.costSite :  prevProfit,0)
+    const yearBiggestProfit = listSites.find(site => biggestProfit === site.costSite ? site.graduationYear : null )
+    document.write(`<div>5.Знайти рік, коли прибуток був найбільшим - ${yearBiggestProfit.graduationYear}</div><br>`)
+
+
+    // 6) упорядкувати список за спаданням прибутку
+
+    const listDescendingOrderProfit = listSites.sort((a,b) =>b.costSite - a.costSite)
+
+    document.write(`<div>6.Упорядкувати список за спаданням прибутку : `)
+
+    listDescendingOrderProfit.forEach(el =>{
+        document.write(` ${el.costSite}, `)
+    } )
+    document.write('</div><br>')
+
+    // 7) Створити 2 окремих списки з копіями об’єктів, що містять сайти з вартість до 10000 і більше 10000
+
+    let siteCostMore10000 = []
+    let siteCostLess10000 = []
+
+    let sortingSitesByCost = listSites.forEach(site =>{
+        if(site.costSite > 10000)
+          siteCostMore10000.push(JSON.parse(JSON.stringify(site)))
+        else
+          siteCostLess10000.push(JSON.parse(JSON.stringify(site)))
+    })
+
+    document.write(`<div>7.Створити 2 окремих списки з копіями об’єктів, що містять сайти з вартість до 10000 і більше 10000: `)
+
+        document.write('<br><div>-Список більше 10000 = ')
+            siteCostMore10000.forEach(el =>{
+            document.write(` ${el.costSite}, `)
+        })
+        document.write('</div>')
+
+        document.write('<div>-Список менше 10000 = ')
+            siteCostLess10000.forEach(el =>{
+            document.write(` ${el.costSite}, `)
+        })
+        document.write('</div><br>')
+
+    document.write('</div><br>')
+
+
+    document.write("</div>")
+
+    document.write(" <button class='btnBack'><a href='../lesson14.html'>До завдань</a></button>")
+    
+    </script>
+</body>
+</html>

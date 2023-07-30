@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!-- Задача 2. Розробити функцію, у яку передають об’єкт (день, місяць, рік). Визначити, який буде рік через N місяців. -->
+
+
+    <script>
+
+        // функція по визначенню дати
+        function getCertainYear({day,month,year}){
+
+            const userEntersNumMonths = parseInt(prompt("Введіть кількість місяців"))
+
+            // вираховую роки та місяці
+            let restMonths = userEntersNumMonths % 12
+            let numYears = (userEntersNumMonths - restMonths) / 12
+
+            year+=numYears
+            month+=restMonths
+
+            // якщо кількість місяців більше за 12 то віднімаю 12
+            if(month  >  12){
+                year++
+                month -=  12
+            } 
+
+            return {day,month,year}
+        }
+        document.write(`<div class = "result_block">`)
+
+        // обєкт з даними
+        let data = {
+            day : 30,
+            month : 7,
+            year : 2023
+        }
+
+        document.write(`<div class = "result_block">`)
+
+        document.write(`<div>Поточна дата: ${data.year}рік / ${data.month}місяць/ ${data.day}день</div><br>`)
+
+        let newData = getCertainYear(data)
+
+        document.write(`<div>Змінена дата: ${newData.year}рік / ${newData.month}місяць/ ${newData.day}день</div>`)
+
+
+
+
+
+
+    document.write("</div>")
+
+    document.write(" <button class='btnBack'><a href='../lesson14.html'>До завдань</a></button>")
+    
+    </script>
+</body>
+</html>
