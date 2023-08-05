@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+
+
+    <!-- Задача 5. Розробити клас «Керівник танців»
+
+    Поля
+    Масив імен хлопців
+    Масив імен дівчат
+
+    Методи
+    Метод випадкового вибору імені хлопця
+    Метод випадкового вибору імені дівчини
+    Метод виведення пари для танців
+    Метод run , який ініціює через кожні 5 секунд виведення нової пари для танців -->
+
+    <script>
+        class danceDirector{
+            constructor(boys,girls){
+                this.listBoys = boys;
+                this.listGirls = girls
+            }
+            // отримати рандомне число
+            getRandomNum(min,max){
+                return Math.floor(Math.random() * (max - min + min))
+            }
+            // Метод випадкового вибору імені хлопця
+            getNameBoy(){
+                let num = this.getRandomNum(1,this.listBoys.length)
+                return this.listBoys[num]
+            }
+            // Метод випадкового вибору імені дівчини
+            getNameGirl(){
+                let num = this.getRandomNum(1,this.listGirls.length)
+                return this.listGirls[num]
+            }
+            // Метод виведення пари для танців
+            showCoupleForDancing(){
+                let boy = this.getNameBoy()
+                let girl = this.getNameGirl()
+                alert(`Пара : ${boy} та ${girl}`)
+
+                // або
+                // alert(`Пара : ${this.getNameBoy()} та ${this.getNameGirl()}`)
+
+            }
+            // Метод run 
+            run(interval){
+                setInterval(() =>{this.showCoupleForDancing()},interval)
+            }
+
+        }
+
+    // масиви з іменами 
+    let boys = ["Саша","Ваня","Владік","Віталік"]
+    let girls = ["Ірина","Таня","Олена","Віка"]
+
+    let coupleForDancing = new danceDirector(boys,girls)
+    coupleForDancing.run(5000)
+
+
+
+    document.write(`<div class = "result_block">`)
+        document.write("<div>Задача 5. Розробити клас «Керівник танців» через кожні 5 секунд виведення нової пари для танців</div>")
+    document.write("</div>")
+    document.write(" <button class='btnBack'><a href='../lesson15.html'>До завдань</a></button>")
+    
+    </script>
+</body>
+</html>

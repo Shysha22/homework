@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+
+    <!-- Задача 0. Дано два об’єкта. Обидва містять масив цілих чисел. При цьому у одному з них є функція знаходження суми, а у іншому – функція для знаходження добутку тих, які знаходяться між заданими мінімальним і максимальних значенням.
+    Використати обидва методи стосовно обидвох об’єктів (використати call, apply) -->
+
+    <script>
+
+        let obj1 = {
+            numbers : [26,15,2,72,34,1,31,26,11,46],
+            getSumNum : function(){
+               return this.numbers.reduce((prevSum,num) => prevSum + num) 
+            }
+        }
+        let obj2 = {
+            numbers : [2,10,4,23,1,23,5],
+            getProductNum : function(min,max){
+               return this.numbers.reduce((prevProduct,num) => min < num && num < max ? prevProduct * num : prevProduct,1) 
+            }
+        }
+        // ---------обєкт 1 ------------
+        let sumObj1 = obj1.getSumNum()
+        let productObj1 = obj2.getProductNum.call(obj1,2,20)
+
+        // ---------обєкт 2 ------------
+        let sumObj2 = obj1.getSumNum.call(obj2)
+        let productObj2 = obj2.getProductNum(2,22)
+
+    document.write(`<div class = "result_block">`)
+        document.write(`<div>Сума 1 обєкта ${sumObj1}</div>`)
+        document.write(`<div>Добуток 1 обєкта ${productObj1}</div><br>`)    
+
+        document.write(`<div>Сума 2 обєкта ${sumObj2}</div>`)
+        document.write(`<div>Добуток 2 обєкта ${productObj2}</div>`)             
+ 
+    document.write("</div>")
+
+    document.write(" <button class='btnBack'><a href='../lesson15.html'>До завдань</a></button>")
+    
+    </script>
+</body>
+</html>

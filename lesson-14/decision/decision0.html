@@ -55,7 +55,7 @@
                 investing : 80000,
             },
             graduationYear : 2010,
-            costSite: 5000,
+            costSite: 6000,
 
         },
         {
@@ -145,12 +145,12 @@
     let siteCostMore10000 = []
     let siteCostLess10000 = []
 
-    let sortingSitesByCost = listSites.forEach(site =>{
-        if(site.costSite > 10000)
+   for(let  site of listSites) {
+    if(site.costSite > 10000)
           siteCostMore10000.push(JSON.parse(JSON.stringify(site)))
         else
           siteCostLess10000.push(JSON.parse(JSON.stringify(site)))
-    })
+    }
 
     document.write(`<div>7.Створити 2 окремих списки з копіями об’єктів, що містять сайти з вартість до 10000 і більше 10000: `)
 

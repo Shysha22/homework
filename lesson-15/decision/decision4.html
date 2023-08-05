@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- Задача 4. Розробити клас Baner-->
+
+    <!-- Поля
+    Масив об’єктів ( графічних зображень та посилань на сайти)
+
+
+    методи
+    Метод випадкового вибору об’єкта (графічного зображення та посилання)
+    Метод виведення випадкового банера -->
+
+
+    <script>
+
+        // створюю клас
+        class Baner{
+            constructor(list){
+                this.banerList = list
+            }
+            // рандомно вибираю обєкт з масиву
+            getRandomObjBaner(){
+                let numRandom = Math.floor(Math.random() * (this.banerList.length + 1 - 1))
+                return this.banerList[numRandom]
+            }
+            // виводжу банер
+            showBaner(){
+                let objBaner = this.getRandomObjBaner()
+                document.write(`<div><a href = ${objBaner.a}><img style = "width : 900px; height : 400px" src = ${objBaner.img} /></a></div>`)
+            }
+
+        }
+    // обєкти з інвормацією про банер
+    let banner1 = {img : "../resource/baner-1.jpg",a : "https://www.amazon.com/"}
+    let banner2 = {img : "../resource/baner-2.png",a : "https://uk-ua.facebook.com/"}
+    let banner3 = {img : "../resource/baner-3.jpg",a : "https://twitter.com/?lang=uk"}
+
+    let baner = new Baner([banner1,banner2,banner3])
+
+    document.write(`<div class = "result_block">`)
+        baner.showBaner()
+    document.write("</div>")
+
+    document.write(" <button class='btnBack'><a href='../lesson15.html'>До завдань</a></button>")
+    
+    </script>
+</body>
+</html>

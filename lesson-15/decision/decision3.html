@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- Задача 3. Розробити клас MultChecker для перевірки таблиці множення -->
+
+    <!-- Поля
+    Число, яке перевіряємо (наприклад, перевірка частини таблиці множення на 7)
+    Кількість правильних відповідей
+    Кількість неправильних відповідей
+
+    Методи
+    Генерування прикладу (метод випадковим чином визначає друге число, перше число фіксоване)
+    Перевірка правильності вказаної відповіді
+    render -->
+
+
+    <script>
+
+        // створюю клас
+        class MultChecker {
+
+            constructor(number){
+                this.number = number
+                this.rightAnswer = 0;
+                this.notCorrectAnswer = 0
+            }
+        
+        // метод визначення рандомного числа
+        getRandomNum(min = 1,max = 9){
+            return min + Math.floor(Math.random() * (max - min + min))
+        }
+
+        // метод перевірки прикладу
+        exampleGeneration(attempt){
+            // цикл по зменшенню кількості прикладів(користувач задає самостійно)
+            while(attempt > 0){
+                attempt--
+                let randomNum = this.getRandomNum()
+                let resultExample = parseInt(prompt(`Порахуйте ${this.number} * ${randomNum}`))
+
+                if(resultExample === randomNum * this.number){
+                    alert("Вірно")
+                    this.rightAnswer++
+                }
+                else{
+                    alert("Невірно")
+                    this.notCorrectAnswer++
+                }
+            }
+        }
+        // метод виводу кількості правильних та не правидьниї відповідей
+        render(){
+            document.write(`<div>Кількість правильних відповідей = ${this.rightAnswer}<br> неправильних = ${this.notCorrectAnswer}</div>`)
+            }
+
+          }
+
+let numberForProduct = parseInt(prompt("Виберіть число від 1 до 9"))
+let multChecker = new MultChecker(numberForProduct)
+
+let numAttempt = parseInt(prompt("Введіть бажану кількість спроб"))
+multChecker.exampleGeneration(numAttempt)
+   
+
+    document.write(`<div class = "result_block">`)
+        multChecker.render()
+    document.write("</div>")
+
+    document.write(" <button class='btnBack'><a href='../lesson15.html'>До завдань</a></button>")
+    
+    </script>
+</body>
+</html>

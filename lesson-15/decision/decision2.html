@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- Задача 2. Створити об’єкт «Авто».  -->
+    <!-- Авто	 -->
+    <!-- Поля(властивості)
+    Марка
+    Розмір бака
+    Кількість наявних літрів
+    Кількість місць
+    Кількість пасажирів
+    
+    Методи (дії)
+    Заправка на вказану кількість літрів
+    Виведення кількості пасажирів
+    Додавання пасажирів
+    Висадка пасажирів -->
+
+    <script>
+
+        class Car {
+
+            constructor(brand,tankSize,availableLiters,places,passengers){
+                this.brand = brand;
+                this.tankSize = tankSize;
+                this.numAvailableLiters = availableLiters;
+                this.places = places;
+                this.numPassengers = passengers;
+            }
+
+            refuelCar(liters){
+                if(liters + this.numAvailableLiters > this.tankSize){
+                    document.write('<div>Ваший бак замалий для такої кількості пального</div><br>')
+                }
+                else{
+                    this.numAvailableLiters += liters
+                    document.write(`<div>Ваш бак заповнений на ${this.numAvailableLiters}</div><br>`)
+                }
+            };
+            valueOf(){
+                document.write(`<div>Кількість пасажирів в автомобілі становить = ${this.numPassengers}</div><br>`)
+            }
+            addPassengers(passenger){
+                if(passenger + this.numPassengers > this.places){
+                    document.write("<div>Ви ввели забагато пасажирів</div><br>")
+                }
+                else{
+                    this.numPassengers += passenger;
+                    document.write(`<div>Кількість пасажирів з доданими = ${this.numPassengers}</div><br>`)
+                }
+  
+
+            }
+            removePassengers(passenger){
+                console.log(passenger)
+                if(passenger > this.numPassengers)
+                    document.write("<div>У вас не так багато пасажирів</div><br>")
+                
+                else{
+                    this.numPassengers -=passenger;
+                    document.write(`<div>Кількість пасажирів з висадженими = ${this.numPassengers}</div><br>`)
+                }
+            }
+
+        }
+
+    let car = new Car("BMW",80,30,5,2)
+    document.write(`<div class = "result_block">`)
+
+    // добавляємо паливо
+    let numLiters = parseFloat(prompt('Введіть кількість літрів яка хочете заправити?'))
+    car.refuelCar(numLiters)
+
+    // виводжу кількість пасажирів
+    car.valueOf()
+
+    // додаю пасажирів
+    let addPassengers = parseInt(prompt("Скількох пасажирів бажаєте додати?"))
+    car.addPassengers(addPassengers)
+
+    // видаляю пасажирів
+    let removePassengers = parseInt(prompt("Скількох пасажирів бажаєте висадити?"))
+    car.removePassengers(removePassengers)
+
+
+
+
+ 
+    document.write("</div>")
+
+    document.write(" <button class='btnBack'><a href='../lesson15.html'>До завдань</a></button>")
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- Задача 1. Створити об’єкт «Тир». У масиві зберігаються 1, якщо у цьому квадраті є заєць і 0 в іншому випадку. -->
+
+    <script>
+
+    // створюю обєкт
+    let shootingGallery = {
+        // створюю масив(ігрове поле)
+        playingField : new Array(9).fill(0),
+
+        // функція по додаванню 1 в масив(зайця)
+        fillPlayingField : function(){
+            let positionHare = Math.floor(Math.random() * (this.playingField.length + 1 - 1))
+            this.playingField[positionHare] = 1
+        },
+
+        // функція гра
+        gameUser : function(){
+            // вітаю користувача та дізнаюсь кількість спроб
+            alert("Вітаю вас в грі 'Тир'")
+            let attemptShot = parseInt(prompt(`Скільки бажаєте взяти пострілів?Квадратиків для пострілу ${this.playingField.length}`))
+
+            // цикл поки спроби не закінчуться
+            while(attemptShot > 0){
+                let shot = parseInt(prompt('Ваший постріл'))
+                attemptShot--
+                // якщо користувач влучив перериваю гру через return
+                if(this.playingField[shot] === 1){
+                    alert("Вітаю!Ви влучили")
+                    return 
+                }
+                else
+                    alert(`Мимо,залишилося ${attemptShot} постріли`)
+                
+            }
+            let losingGame = ("Ваші спроби закінчилися")
+        }
+
+
+
+    }
+// викликаю методи
+ shootingGallery.fillPlayingField()
+ shootingGallery.gameUser()
+    
+
+document.write(`<div class = "result_block">`)
+document.write("</div>")
+
+document.write(" <button class='btnBack'><a href='../lesson15.html'>До завдань</a></button>")
+    
+    </script>
+</body>
+</html>
