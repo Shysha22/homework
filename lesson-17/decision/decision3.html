@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!-- Особиста бібліотека. Картотека домашньої бібліотеки: дані книги (автори (піб, рік народження, короткий опис), назва книги, жанр, видавництво (назва, реєстраційний номер, рік засування)). Реалізувати розділи бібліотеки організувати додавання/вилучення книг та  вибір книг за назвою, за ПІБ автора, за видавництвом. -->
+
+    <script>
+ 
+        // створюю клас автора
+        class Authors{
+            constructor(authors,birthday,description){
+                this.authors = authors;
+                this.birthday = birthday;
+                this.description = description;
+            }
+        }
+        // створюю клас видавництва
+        class PublishingHouse{
+            constructor(namePublishingHouse,number,year){
+                this.namePublishingHouse = namePublishingHouse;
+                this.number = number;
+                this.year = year;
+            }
+        }
+
+        // створюю клас книги
+        class Book{
+            constructor(author,bookTitle,genre,publishingHouse){
+                this.author = author;
+                this.bookTitle = bookTitle;
+                this.genre = genre;
+                this.publishingHouse = publishingHouse;
+            }
+
+           
+        }
+
+        // список з описами книг
+        let books = [
+            new Book (
+                new Authors ("Ліна Костенко",1956),
+                "Маруся Чурай",
+                "Поезія",
+                new PublishingHouse("А-БА-БА-ГА-ЛА-МА-ГА", 23242,2018)
+                ),
+           new Book (
+                new Authors ("Тер'є Тведт",1966),
+                "Історія світу. Минуле як дзеркало сьогодення",
+                "Наука",
+                new PublishingHouse("Книжковий клуб «Клуб Сімейного", 5422,2016)
+               ),
+           new Book (
+                new Authors ("Джон Гарріс",1956),
+                "П’ять четвертинок апельсина",
+                "Детектив",
+                new PublishingHouse("Клуб Сімейного дозвілля", 3422,2010)
+            )
+        ] 
+
+        
+    // клас бібліотека
+    class Library{
+       
+
+        constructor(books){
+            this.booksList = books
+        }
+
+
+        // метод розділів бібліотеки за жанрами
+        librarySections(booksList){
+        //     let librarySections = {
+        //         poetry : [],
+        //         science : [],
+        //         detective : []
+        //     }
+        //     for(let book of booksList){
+        //         let {genre} = book
+        //         switch(genre){
+        //             case "Поезія" : librarySections.poetry.push(book)
+        //                 break;
+        //             case "Наука" : librarySections.science.push(book)
+        //                 break;
+        //             case "Детектив" : librarySections.detective.push(book)
+        //                 break;
+        //         }
+        //     }
+
+        //     console.log(librarySections)
+        }
+
+        // метод знаходження книги
+        findBook(books){
+            // let searchCharact = prompt("Яку книгу бажаєте знайти")
+
+            // let founBook = books.filter(book =>{
+
+            //     let {bookTitle,author,publishingHouse} = book
+          
+            //     if( searchCharact === bookTitle || searchCharact === author.authors || searchCharact === publishingHouse.namePublishingHouse ){
+            //         return book
+            //     }
+            // })
+            // console.log(founBook)
+        }
+
+        // метод видалення книги
+        removeBook(books){
+            // let searchCharact = prompt("Яку книгу бажаєте вилучити(Назва книги?")
+
+            // let listBook = books.filter(book => book.bookTitle !== searchCharact)
+
+            // console.log(listBook)
+
+
+
+        }
+
+        // метод додавання книги
+        addBook(bookList){
+            
+            // alert ("Ви вирішили додати нову книгу")
+
+            // let newBook =  new Book (
+            //     new Authors (prompt("Ім'я автора"),prompt("рік народження")),
+            //     prompt("Назва книги"),
+            //     prompt("Жанр"),
+            //     new PublishingHouse( prompt("Видавничтво"),  prompt("Код"), prompt("Рік друку"))
+            // )
+
+            // bookList.push(newBook)
+        }
+         
+        // метод виведення
+        run(){
+            this.findBook(this.booksList)
+            this.removeBook(this.booksList)
+            this.addBook(this.booksList)
+            this.librarySections(this.booksList)
+            for(let book of this.booksList){
+                document.write(`<div>${book.bookTitle}.(${book.author.authors})</div>`)
+            }
+        }
+    }
+
+    let library = new Library(books)
+
+
+    document.write('<div class = "result_block">')
+        document.write('<div>Доступні книги</div><br>')
+        library.run()
+        
+    document.write("</dvi>")
+
+    document.write(" <button class='btnBack'><a href='../lesson17.html'>До завдань</a></button>")
+
+
+
+    
+    </script>
+</body>
+</html>

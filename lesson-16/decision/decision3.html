@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    
+
+    <!-- Задача. Створити клас TBankomat, який моделює роботу банкомата. Клас повинен містити поля для зберігання кількості купюр кожного із номіналів від 5 до 200 гривень. Реалізувати методи знаходження максимальної та мінімальної сум, які може видати банкомат, та метод зняття деякої суми. -->
+
+
+    <script>
+
+    
+        // клас банкомат
+        class TBanlomat{
+
+            // приватне свойство введення готівки
+            #requestWithdrawalCash
+
+            constructor(cashWithdrawal){
+                // поле виведення готівки
+                this.RequestWithdrawalCash = cashWithdrawal;
+                // поле масив з номіналами та кількістю
+                this.nominals = [ 
+                    {nominal : 5,num : 200},
+                    {nominal : 10,num : 200},
+                    {nominal : 20,num : 200},
+                    {nominal : 50,num : 200},
+                    {nominal : 100,num : 200},
+                    {nominal : 200,num : 200}]
+            }
+
+
+            get RequestWithdrawalCash(){
+                return this.#requestWithdrawalCash
+            }
+            // перевіряю приватне поле
+            set RequestWithdrawalCash(requestCash){
+                if(requestCash < 0 )
+                    throw new Error ("Вашого балансу не достатньо")
+                else if(requestCash % 5 !== 0)
+                    throw new Error ("Ваша сума повинна бути кратна 5")
+
+                this.#requestWithdrawalCash = requestCash
+
+            }
+
+            // знаходжу баланс(суму всіх грошей)
+            findMaxSum(){
+               let sum =  this.nominals.reduce((prevSum,sum) => prevSum += sum.nominal * sum.num,0)
+               console.log(sum)
+
+               return sum - this.#requestWithdrawalCash
+            }
+
+            // знаходжу мінімальне число(банкноту) яку можна зняти
+            findMinSum(){
+                let minNum = Infinity
+                for(let {nominal} of this.nominals){
+                    if(nominal < minNum)
+                        minNum = nominal
+                }
+                return minNum
+            }
+
+            // реалізую метод зняття готівки
+            WithdrawaCash(){
+                // розвертаю масив щоб почати (видавати готіку) з більших банкнот
+                this.nominals.reverse()
+
+                // створю масив в який буду поміщати банкноти що знімаю
+                let arrBillAndSum = []
+
+
+                while(this.#requestWithdrawalCash !== 0){
+
+                    for(let obj of this.nominals){
+
+                        // знаходжу банкноти
+                       let bills = (this.#requestWithdrawalCash - (this.#requestWithdrawalCash % obj.nominal)) / obj.nominal
+
+                    //    віднімаю кількість банкнот яку збираюсь зняти
+                       obj.num -= bills 
+
+                    //    від початкової суми зняття віднімаю ту яку знайшов
+                       this.#requestWithdrawalCash -= bills * obj.nominal
+
+                    //    пушу обєкт з номіналом,кількістю і сумою що знайшов
+                       arrBillAndSum.push({nominal: obj.nominal,sum : bills * obj.nominal,num : bills })
+                    }
+                }
+                console.log(arrBillAndSum)
+                   
+                return  arrBillAndSum 
+            }
+
+            toString(){
+                // Виводжу
+                document.write(`<div>Ваша баланс : ${this.findMaxSum()} / Мінімальна сума для виведення : ${this.findMinSum()}</div>`)
+                document.write('<div>Ви зняли</div>')
+                // пробігаюсь по масиві з з виведення готівки
+                for( let bill of  this.WithdrawaCash()){
+                    // перевіряю якщо поле суми в масиві порожне то не виводжу його
+                    if(bill.sum !== 0)
+                        document.write(`<div>Банкнота ${bill.nominal},кількість : ${bill.num},сума : ${bill.sum}</div>`)
+                }
+            }
+        }
+        let cashWithdrawal = parseInt(prompt("Введіть суму яку бажаєте зняти"))
+        let bankomat = new TBanlomat(cashWithdrawal)
+    
+
+    document.write(`<div class = "result_block">`)
+        bankomat.toString()
+    document.write("</div>")
+
+
+    document.write(" <button class='btnBack'><a href='../lesson16.html'>До завдань</a></button>")
+    
+    </script>
+</body>
+</html>

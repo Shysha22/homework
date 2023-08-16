@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    
+    <!-- Задача 3. Об’єкт “Фірма” (використати члени-класи)
+
+    поля
+    назва фірми;
+    дата заснування (рік, місяць);
+    послуги (назва послуги, вартість, термін виконання);
+    адреси філіалів (країна, місто, вулиця, номер будинку);
+
+    методи
+    визначення кількості років існування фірми;
+    виведення всіх філіалів фірми у вказаному місті;
+    виведення на екран послуг, що можуть бути виконані за вказану суму грошей та вказаний термін часу; -->
+    
+    
+
+    <script>
+
+    // клас рік заснування
+    class YearFoundation{
+        constructor(year,month){
+            this.month = month;
+            this.year = year;
+        }
+    }
+    let yearFoundation = new YearFoundation(2010,10)
+
+    // клас сервіс
+    class Services{
+        constructor(serviceName,cost,deadline){
+            this.serviceName = serviceName;
+            this.cost = cost
+            this.deadline = deadline //годин
+            
+        }
+    }
+    let services = [
+        new Services("Клінінг",5000,5),
+        new Services("Клінінг офісу",10000,10),
+        new Services("Прибирання подвір'я",7500,4),
+        new Services("Чистка одягу", 1000,2)
+    ]
+
+    // масив філіалів
+    class AddressBranches{
+        constructor(contry,city,street,houseNumber){
+            this.contry = contry;
+            this.city = city;
+            this.street = street;
+            this.houseNumber = houseNumber;
+        }
+    }
+    let addressBranches = [
+        new AddressBranches ("Україна","Київ","Вишгородська",20),
+        new AddressBranches ("Україна","Львів","Сковороди",25),
+        new AddressBranches ("Україна","Харьів","Гонгадзе",10),
+        new AddressBranches ("Україна","Київ","Приозерна",5),
+        new AddressBranches ("Польща","Варшава","Грожека",43),
+    ]
+
+
+    // клас фірма
+    class Firma{
+        constructor(nameFirm,yearFoundation,services,addressBranches){
+            this.nameFirm = nameFirm;
+            this.yearFoundation = yearFoundation;
+            this.serviceName =services;
+            this.addressBranches = addressBranches
+        }
+        // метод визначення років фірми
+        ageFirm({year}){
+            let currentYear = 2023
+            return currentYear - year
+        }
+        // виведення всіх філіалів фірми у вказаному місті;
+        showBranches(addressBranches){
+            let city = prompt("Введіть місто в якому хочете дізнатися про філіал(Київ,Харків,Львів,Польща)","Київ")
+            let cityBranches = addressBranches.filter(branch => branch.city ===  city)
+            return(cityBranches)
+        }
+        // виведення на екран послуг, що можуть бути виконані за вказану суму грошей та вказаний термін часу; -->
+        showServicesForMoneyTime(services){
+
+            let userMoney = parseFloat(prompt("Введіть суму та ми підберемо доступні послуги","5000"))
+            let userTime = parseFloat(prompt("Максимальний час виконнання(години)?","5"))
+
+            let availableServices = services.filter(service =>{
+                if(userMoney >= service.cost && userTime >= service.deadline){
+                    return service
+                }
+            })
+
+            return availableServices
+
+            
+        }
+        toString(){
+            document.write(`<div>Фірмі - ${this.ageFirm(yearFoundation)} років</div><br>`)
+            console.log()
+            document.write("<br><div>Доступні філіали</div>")
+
+            // Виводжу результат Міста та філіали
+            for(let el of this.showBranches(addressBranches)){
+                let {contry,city,street,houseNumber} = el
+                document.write(`<div>Країна - ${contry}, місто - ${city}, вулиця - ${street}, будинок № ${houseNumber}</div>`)
+            }
+
+            // Виводжу результат Міста та філіали
+            document.write("<br><div>Доступні послуги</div>")
+            for(let el of this.showServicesForMoneyTime(services)){
+                let {serviceName,cost,deadline} = el
+                document.write(`<div> Послуга - ${serviceName}, ціна - ${cost} грн,час виконання - ${deadline}</div>`)
+            }
+            // console.log(this.showServicesForMoneyTime(services))
+        }
+    }
+
+
+    let firma = new Firma("Чистий дім",yearFoundation,services,addressBranches)
+
+    document.write(`<div class = "result_block">`)
+        firma.toString()
+    document.write("</div>")
+
+
+    document.write(" <button class='btnBack'><a href='../lesson16.html'>До завдань</a></button>")
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+
+    <!-- Задачаю 3.Створити клас Нагадувач. Кожні вказані кількості секунд (використати setInterval) програма нагадує про якусь подію (це просто текст) і також виводиться порядковий номер скільки раз вже нагадування було. Зробити так, щоб неможна було зробити одночасно декілька об’єктів-нагадувачів. Методи зупинки таймера, метод зміни повідомлення без зупинки таймера.. -->
+
+    <!-- клас Нагадувач через сінгтоп
+
+        силка статичного поля
+        
+        поле секунд
+        поле текст
+        поле номер кількості нагадувань
+
+        метод зупинки таймера
+        метод зміни повідомлення без зупинки -->
+
+    <script>
+
+        class Reminder{
+
+            static timerRef
+
+            constructor(message,second){
+                if(Reminder.timerRef)
+                    return timerRef
+                this.message = message;
+                this.second = second;
+                this.count = 0
+
+                Reminder.timerRef = this
+            }
+
+            showMessage(message,count ){
+                    document.write(`${count}.${message}<br>`)
+                
+            }
+
+            stopMesasge(show,changeMessage){
+
+                let stop = confirm("Бажаєте зупинити таймер")
+
+                if(stop){
+                    clearInterval(show)
+                    clearInterval(changeMessage)
+
+                }
+            }
+            changeMessage(message){
+                let change = confirm("Бажаєте змінити повідомлення")
+
+                if(change)
+                    this.message = prompt("Ваше нове нагадування")
+            }
+
+            run(){
+                let showMessage = setInterval(() =>{
+                    ++this.count
+                    this.showMessage(this.message,this.count)
+                },this.second)
+
+                let changeMessage = setInterval(() => this.changeMessage(),8000)
+                let stopMessage = setTimeout(() => this.stopMesasge(showMessage,changeMessage),20000)
+
+            }
+        }
+
+        let message = new Reminder ("Навчайся",1000)
+
+     
+
+    document.write('<div class = "result_block">')
+
+        message.run()
+        
+    document.write("</dvi>")
+
+    document.write(" <button class='btnBack'><a href='../lesson17.html'>До завдань</a></button>")
+
+
+
+    
+    </script>
+</body>
+</html>

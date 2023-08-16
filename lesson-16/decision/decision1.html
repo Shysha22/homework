@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!-- Задача 2. Створити клас TMoney для роботи з грошовими сумами. Сума повинна зберігатися у вигляді доларового еквіваленту. Реалізувати методи додавання/вилучення грошової маси, вказуючи необхідну суму у гривнях, та визначення курсу долара, при якому сума у гривнях збільшиться на 100. Курс долара зберігати в окремому полі.  -->
+
+
+    <script>
+
+
+// створюю клас для роботи з грошовими сумами
+        class TMoney{
+
+            // приватні поля
+            #balance
+            #coursUsd
+            constructor(grnSum,coursUsd){
+                this.CoursUsd = coursUsd;
+                this.Balance = grnSum;
+            }
+
+            // перевіряю приватні поля
+            get Balance(){
+                return this.#balance * this.CoursUsd
+            }
+            set Balance(sum){
+                if(sum < 0)
+                    throw new Error ("Сума повинна бути більше нуля");
+
+                this.#balance = sum / this.CoursUsd
+            }
+
+            get CoursUsd(){
+                return this.#coursUsd
+            }
+            set CoursUsd(course){
+                if(course < 0)
+                    throw new Error ("Курс повиннен бути більше нуля");
+                this.#coursUsd = course
+            }
+
+            // метод додавання суми до балансу
+            addMoneyBalance(sum){
+                if(sum < 0)
+                    throw new Error ("Сума повинна бути більше нуля");
+
+                return this.Balance+= sum
+            }
+            // метод додавання віднімання суми від балансу
+            withdrawalMoneyBalance(sum){
+                if(sum > this.Balance)
+                    throw new Error ("Недостатньо коштів");
+
+                return this.Balance-= sum
+            }
+            // метод визначення курсу долара, при якому сума у гривнях збільшиться на 100
+            getTarget100Rate(){
+                return (this.Balance + 100) / this.#coursUsd
+            }
+
+            toSting(){
+                return `Ваш поточний баланс = ${this.Balance}`
+            }
+
+        }
+
+        let userBalance = parseInt(prompt("Введіть ваш баланс"))
+        let money = new TMoney(userBalance,37.6)
+
+
+        // виводжу
+        document.write(`<div class = "result_block">`)
+
+
+        document.write(money.toSting())
+
+        let addMoneyBalance = parseInt(prompt("Введіть суму яку бажаєте покласти"))
+        document.write(`<br>Ви поклали гроші на баланс = ${money.addMoneyBalance(addMoneyBalance)}`)
+
+        let withdrawalMoneyBalance = parseInt(prompt("Введіть суму яку бажаєте зняти"))
+        document.write(`<br> Ви зняли гроші з балансу = ${money.withdrawalMoneyBalance(withdrawalMoneyBalance)}`)
+
+        document.write(`<br>Курс долара, при якому сума у гривнях збільшиться на 100 = ${money.getTarget100Rate().toFixed(2)}`)
+
+
+
+  
+    document.write("</div>")
+
+
+    document.write(" <button class='btnBack'><a href='../lesson16.html'>До завдань</a></button>")
+    
+    </script>
+</body>
+</html>

@@ -7,10 +7,137 @@
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-  
 
+
+    <!-- Задача 1. Створити клас TDate для роботи із датами у форматі “день.місяць.рік”. Дата представляється структурою із трьома полями. Реалізувати методи збільшення/зменшення дати на певну кількість днів, місяців чи років. Введення та виведення дати реалізувати за допомогою методу  toString. -->
+
+    <!-- створюю класс
+    поля день мфсяць рік
+
+    метод зменшення дати на певну кількість днів років місяців
+    захистити поля за допомогою get set
+    введення та виведення реалізувати за допомогою to string -->
     <script>
  
+    class TDate{
+
+        // приватні поля
+        #day
+        #month
+        #year
+
+        constructor(day,month,year){
+            this.Day = day;
+            this.Month = month;
+            this.Year = year;
+        }
+        // day
+        get Day(){
+            return this.#day
+        }
+        set Day(day){
+            if(day < 0 || day > 30) 
+                throw new Error ("Введіть коректне значення дня")
+            this.#day = day
+        }
+        // month
+        get Month(){
+            return this.#month
+        }
+        set Month(month){
+            if(month < 0  ||  month > 12) 
+                throw new Error ("Введіть коректне значення місяця")
+            this.#month = month
+        }
+        // year
+        get Year(){
+            return this.#year
+        }
+        set Year(year){
+            if(year < 1960) 
+                throw new Error ("Введіть коректне значення року")
+            this.#year = year
+        }
+
+        // метод додавання дати
+        getIncreaseData(data){
+
+            // дадавання дня (якщо днів введено більше 30 то дававляю + певну кількість місяців)
+            if(this.Day + data.newDay > 30){
+                let sumDays = this.Day + data.newDay
+                this.Day = sumDays % 30
+                this.Month +=(sumDays - sumDays % 30) / 30
+                
+            }
+            else
+                this.Day = this.Day + data.newDay
+            
+
+            // дадавання місяця (якщо місяців введено більше 12 то дававляю + певну кількість років)
+            if(this.Month + data.newMonth > 12){
+                let sumMonths = this.Month + data.newMonth
+                this.Month = sumMonths % 12
+                this.Year += (sumMonths - sumMonths % 12) / 12
+            }
+            else
+                this.Month = this.Month  + data.newMonth
+
+                // добавляю роки
+            this.Year = this.Year + data.newYear
+
+        }
+
+        // метод віднімання дати
+        getReduceDate(data){
+
+            if(this.Day - data.newDay < 0){
+                this.Day = Math.abs( 30 - (this.Day + Math.floor(data.newDay % 30)))
+                console.log(((this.Day + data.newDay) - ((this.Day + data.newDay) % 30)) / 30)
+                this.Month -=((this.Day + data.newDay) - ((this.Day + data.newDay) % 30)) / 30
+            }
+            else
+                // this.Day =  this.Day - data.newDay
+
+            // віднімання місяця (якщо місяців введено більше 12 то видаляю певну кількість років)
+            if(this.Month - data.newMonth <= 0){
+                this.Month = 12 + this.Month - Math.floor(data.newMonth % 12) 
+                this.Year--
+            }
+            else
+                this.Month = this.Month - data.newMonth
+
+            // добавляю роки
+            this.Year -= data.newYear
+
+        }
+        toString(){
+            alert(`Ваша поточна дата : ${this.#day}/${this.#month}/${this.#year}`)
+            document.write(`<div>Ваша поточна дата : ${this.#day}/${this.#month}/${this.#year}</div><br>`)
+            let choosChangeDate = confirm("Ви бажаєте збільшити дату 'Так',чи зменшити'Ні'")
+
+            let newDay = parseInt(prompt("Введіть кількість днів","2")),
+                newMonth = parseInt(prompt("Введіть кількість місяців","2")),
+                newYear = parseInt(prompt("Введіть кількість років","3"))
+
+            if(choosChangeDate)
+                this.getIncreaseData({newDay,newMonth,newYear})
+            else
+                this.getReduceDate({newDay,newMonth,newYear})
+
+            document.write(`Ваша змінена дата : ${this.#day}/${this.#month}/${this.#year}`)
+        }
+    }
+
+    let enretDay = parseInt(prompt("Введіть день","5"))
+    let enterMonth = parseInt(prompt("Введіть місяць","8"))
+    let enterYear = parseInt(prompt("Введіть рік","2023"))
+
+    let data = new TDate(enretDay,enterMonth,enterYear)
+
+    document.write(`<div class = "result_block">`)
+        data.toString()
+    document.write("</div>")
+
 
     document.write(" <button class='btnBack'><a href='../lesson16.html'>До завдань</a></button>")
     
