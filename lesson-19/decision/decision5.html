@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+           .conteinerr{
+            display: flex;
+            width: 700px;
+            border: 1px solid #000;
+            margin: 0 auto;
+            margin-top: 50px;
+            align-items:center;
+            justify-content: space-evenly;
+            height: 290px;
+        }
+        .box_athletes{
+            width: 300px;
+            height: 280px;
+            border: 2px solid #000;
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            justify-content: start;
+        }
+        .box_athletes li{
+            list-style-type: none;
+            display: flex;
+            justify-content: space-between;
+            align-items:center;
+            height: 30px;
+            margin: 5px;
+            padding: 0 5px;
+            border: 1px solid #000;
+       
+        }
+        .btnAdd{
+            width: 40px;
+            height: 20px;
+            cursor: pointer;
+            border-radius: 0 20px 20px 0;
+            border: none;
+            background-color: green;
+        }
+        .btnRemove{
+            width: 40px;
+            height: 20px;
+            cursor: pointer;
+            border-radius: 20px 0 0 20px;
+            border: none;
+            background-color: rgb(172, 0, 0);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="conteinerr">
+    </div>
+    <button class='btnBack'><a href='../lesson19.html'>До завдань</a></button>
+
+   
+    <script>
+    // Задача 6. Дано список спортсменів. Потрібно сформувати список тих, які будуть брати участь у змаганні. При цьому є два стовпці. В одному відображені всі спортсмени, в іншому – список тих, хто був вибраний. При натисканні на зелену стрілку спортсмен переміщається у список для змагань. При натисканні на червону стрілку спортсмен переміщається у загальний список.
+
+
+    class ListAthletes{
+        constructor(athletes){
+            this.listAthletes = athletes
+        }
+
+
+        // вибрані атлети
+        selectedAthletes(element){
+            let conteiner = document.querySelector('.conteinerr')
+            this.divSelectedAthletes = document.createElement("ul")
+            this.divSelectedAthletes.className = "box_athletes"
+            conteiner.append(this.divSelectedAthletes)
+        }
+
+
+
+// рендер
+        render(parentContainer){
+
+            this.container = document.querySelector(parentContainer)
+
+            this.divAllAthletes = document.createElement("ul")
+                this.divAllAthletes.className = "box_athletes"
+                this.container.append( this.divAllAthletes)
+
+
+            this.divSelectedAthletes = document.createElement("ul")
+                this.divSelectedAthletes.className = "box_athletes"
+                this.container.append(this.divSelectedAthletes)
+
+            for(let i = 0; i < this.listAthletes.length;i++){
+
+                let li = document.createElement("li")
+                    this.divAllAthletes.append(li)
+                    li.innerText =`${this.listAthletes[i]}`
+
+                let btn = document.createElement('button')
+                    btn.className = "btnAdd"
+                    btn.innerText = " ->"
+                    li.append(btn)
+            }
+
+
+            this.container.onclick = this.replacementAthletes.bind(this)
+
+        }
+
+        replacementAthletes(event){
+
+            let btn = event.target;
+
+            console.log(event.target)
+
+            if(btn.className === "btnAdd"){
+                this.divSelectedAthletes.append(btn.parentElement)
+                btn.innerText = "<-"
+                btn.className = "btnRemove"
+                btn.parentElement.prepend(btn)
+            }
+            else if(btn.className === "btnRemove"){
+                this.divAllAthletes.append(btn.parentElement)
+                btn.innerText = "->"
+                btn.className = "btnAdd"
+                btn.parentElement.append(btn)
+            }
+        }
+
+    }
+
+
+// список атлетів
+    let listAthletes = ["Іван","Степан","Ігор","Саша","Женя",]
+
+
+// виклик функції
+    window.onload = function(){
+        let list1 = new ListAthletes(listAthletes)
+        list1.render('.conteinerr')
+    }
+
+     
+
+        
+
+    
+
+    </script>
+</body>
+</html>

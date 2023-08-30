@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- Задача 3. Користувач задає рік народження. Визначити кількість років користувача. -->
+
+    <div class="conteiner">
+        <label for="yearBirth">
+            Введіть рік народження
+            <input id="yearBirth" type="number" name="year" placeholder="2000"/>
+        </label>
+        <br>
+        <button style = "width: 120px;margin: 0 auto;" id="countYears">Вирахувати</button>
+        <hr>
+        <label for="userYears">
+            Ваші роки
+            <input id="userYears" type="number" name="years" placeholder=""/>
+        </label>
+        
+    </div>
+    <button class='btnBack'><a href='../lesson18.html'>До завдань</a></button>
+
+    <script>
+
+        // константа рік
+        const currentYear = 2023
+
+        // функція для визначення років
+        function countYears(){
+            let yearBirth = parseInt(document.getElementById("yearBirth").value)
+
+            document.getElementById("userYears").value = currentYear - yearBirth
+            document.getElementById("userYears").value = currentYear - yearBirth
+          
+        }
+
+        document.getElementById("countYears").onclick = countYears
+
+      
+
+
+
+    </script>
+</body>
+</html>

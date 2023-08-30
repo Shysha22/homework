@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- Задача 1. Розробити калькулятор -->
+
+    <div class="conteiner">
+        <label for="firstNum">
+            First number
+            <input id="firstNum" type="number" name="firstNum" placeholder="10"/>
+        </label><br>
+        <label for="secondNum">
+            Second number
+            <input id="secondNum" type="number" name="secondNum" placeholder="2"/>
+        </label>
+        <div class="btn_action">
+            <button id="add">Додати</button>
+            <button id="subtract">Відняти</button>
+            <button id="multiply">Помножити</button>
+            <button id="share">Поділити</button>
+        </div>
+        <hr>
+        <label for="result">
+            Результат
+            <input id="result" type="number" name="result"/>
+        </label>
+    </div>
+    <button class='btnBack'><a href='../lesson18.html'>До завдань</a></button>
+
+    <script>
+        // варіант 1____________________________________________________________
+
+        // функція калькулятор
+        function calc(action){
+
+            // отримав значення введених полів
+            let firstNum = parseFloat(document.getElementById("firstNum").value)
+            let secondNum = parseFloat(document.getElementById("secondNum").value)
+            let sum = 0
+
+            // обчислення виразу
+            switch(action){
+                case "+" : sum = firstNum + secondNum
+                break;
+                case  "-" : sum = firstNum - secondNum
+                break;
+                case "*" : sum = firstNum * secondNum
+                break;
+                case "/" : sum = firstNum / secondNum
+                break;
+                default : sum = "ПОмилка спробуйте пізніше"
+            }
+
+            // виводжу
+            document.getElementById("result").value = sum
+        }
+
+        // навісив подію на кожну кнопку та передав подію
+        document.getElementById("add").onclick = () => calc("+")
+        document.getElementById("subtract").onclick = () => calc("-")
+        document.getElementById("multiply").onclick = () => calc("*")
+        document.getElementById("share").onclick = () => calc("/")
+
+
+
+        // варіант 2_________________________________________________________________________________________________
+
+        // тут створив окремі функції для кожної події
+
+        // function addNum(){
+        //     let firstNum = parseFloat(document.getElementById("firstNum").value)
+        //     let secondNum = parseFloat(document.getElementById("secondNum").value)
+        //     let s = firstNum + secondNum
+        //     document.getElementById("result").value = s
+        // }
+        // document.getElementById("add").onclick =  addNum
+
+        // function subtractNum(){
+        //     let firstNum = parseFloat(document.getElementById("firstNum").value)
+        //     let secondNum = parseFloat(document.getElementById("secondNum").value)
+        //     let difference = firstNum - secondNum
+        //     document.getElementById("result").value = difference
+        // }
+        // document.getElementById("subtract").onclick = subtractNum
+
+        // function multiplyNum(){
+        //     let firstNum = parseFloat(document.getElementById("firstNum").value)
+        //     let secondNum = parseFloat(document.getElementById("secondNum").value)
+        //     let  multiply = firstNum * secondNum
+        //     document.getElementById("result").value = multiply
+        // }
+        // document.getElementById("multiply").onclick = multiplyNum
+
+        // function shareNum(){
+        //     let firstNum = parseFloat(document.getElementById("firstNum").value)
+        //     let secondNum = parseFloat(document.getElementById("secondNum").value)
+        //     let  share = firstNum / secondNum
+        //     document.getElementById("result").value = share
+        // }
+        // document.getElementById("share").onclick = shareNum
+
+      
+
+
+        // document.getElementById("add").onclick = () => addNum()
+
+
+    </script>
+</body>
+</html>

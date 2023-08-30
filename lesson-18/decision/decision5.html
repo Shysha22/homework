@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!--Задача 6. Користувач задає кількість оцінок і натискає на кнопку «get table». В результаті формується таблиця з input, куди користувач вводить оцінки. Після цього натискає на кнопку “get sum” і знаходить середнє значення.… -->
+
+    <div class="conteiner">
+        <label for="countRating">
+            Кількість оцінок
+            <input type="number" name="tablRow" id="countRating" />
+        </label>
+        <button id="getTable">get table</button>
+    </div>
+    <button class='btnBack'><a href='../lesson18.html'>До завдань</a></button>
+    <script>
+
+        // знаходжу головний контейнер
+        let container = document.querySelector(".conteiner")
+
+
+        // функція знаходження суми
+        function getSum(){
+
+            // отримую всі оцінки
+            let tableRatings = document.querySelectorAll(".rating")
+            let sum = 0
+            let averageValue = 0
+
+            // знаходжу суму
+            for ( let el of tableRatings) {
+                sum += parseFloat(el.value)
+            }
+
+            // знаходжу середній бал
+            averageValue = sum / tableRatings.length
+
+            let div = document.createElement("div")
+            div.textContent = `Середня оцінка = ${Math.round(averageValue)}`
+            container.append(div)
+          
+        }
+
+
+        // функція формування таблиці
+        function tableRating(){
+            // отримую кількість оцінок
+            let countRating = document.getElementById("countRating").value
+
+            // створюю таблицю добавляю клас
+            let table = document.createElement("table")
+            table.classList.add("table")
+
+            // створюю кнопку знаходження суми,добавляю атрибут,текст,та подію
+            let btnSum = document.createElement("button")
+            btnSum.setAttribute("id","btnSum")
+            btnSum.innerText = "get sum"
+            btnSum.onclick = getSum
+
+
+            // створюю таблицю з інпутів
+            for(let i = 0; i < countRating;i++){
+                let row = document.createElement("tr")
+                let input = document.createElement("input")
+
+                input.setAttribute("type","number")
+                input.classList.add("rating")
+
+                row.append(input)
+                table.append(row)
+            }
+          
+            container.append(table,btnSum)
+        }
+
+        // виклик таблиці
+        document.getElementById("getTable").onclick = tableRating
+
+
+
+
+
+
+         
+
+    </script>
+</body>
+</html>

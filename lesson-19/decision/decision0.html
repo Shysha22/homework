@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- Задача 1. Дано 10 рядків тексту «Hello!» у окремих div. При кліку на якийсь із них усі наступні повинні бути зафарбовані у червоний колір. -->
+
+    <div class="conteiner">
+    </div>
+    <button class='btnBack'><a href='../lesson19.html'>До завдань</a></button>
+
+    <script>
+
+        class Greeting{
+            constructor(text,numLines = 10){
+                this.text = text;
+                this.numLines = numLines;
+            }
+            selectItem(){
+                this.style.color = "red"
+                let div = this
+                while (div.nextElementSibling){
+                    div = div.nextElementSibling
+                    div.style.color = "red"
+                }
+            }
+            render(parentElement ){
+                const conteiner = document.querySelector(parentElement)
+                for(let i = 0; i < this.numLines; i++){
+
+                    this.div = document.createElement("div")
+                    this.div.innerText = this.text
+                    this.div.setAttribute("number",`${i+1}`)
+
+                    conteiner.append(this.div)
+                    this.div.onclick = this.selectItem
+                }
+            }
+        }
+
+        window.onload = function(){
+            let greeting1 = new Greeting("Hello")
+            greeting1.render(".conteiner")
+        }
+
+      
+
+    </script>
+</body>
+</html>

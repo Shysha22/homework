@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .input{
+            margin: 0 auto;
+            width: 200px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="conteiner">
+    </div>
+    <button class='btnBack'><a href='../lesson19.html'>До завдань</a></button>
+
+    <!-- Задача 2. Дано 5 елементів input. При введенні значення у якийсь із них необхідно автоматично заповнювати інші (усі попередні у спадному порядку(кожен попередній має значення на 1 менше за наступний), усі наступні на 1 більше (кожен наступне на 1 більше за попереднього) -->
+
+    <script>
+
+        class Input{
+            constructor(countInput = 5){
+                this.countInput = countInput
+            }
+
+            changeInput(){
+                let input = this
+                let inputValue = input.value
+                console.log(input)
+                while(input.nextElementSibling){
+                    input = input.nextElementSibling
+                    input.value = ++inputValue
+                }
+                while(input.previousElementSibling){
+                    input = input.previousElementSibling
+                    input.value = --inputValue
+                }
+            }
+
+            render(parentElement){
+                let container = document.querySelector(parentElement)
+
+                for(let i = 0;i < this.countInput;i++){
+                    this.input = document.createElement("input")
+                    this.input.className = "input"
+                    this.input.setAttribute("number",`${i + 1}`)
+                    container.append(this.input)
+
+                    this.input.oninput = this.changeInput
+                }
+            }
+        }
+
+        window.onload = function(){
+            let input1 = new Input()
+            input1.render(".conteiner")
+        }
+
+    </script>
+</body>
+</html>

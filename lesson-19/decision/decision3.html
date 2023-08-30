@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+         .conteinerr{
+            display: flex;
+            width: 500px;
+            border: 1px solid #000;
+            height: 200px;
+            margin: 0 auto;
+            margin-top: 50px;
+            align-items:center;
+            justify-content: space-evenly;
+        }
+
+        table{
+            margin: 0 auto;
+            border: 1px solid #000;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        .table td{
+            padding: 5px;
+            border: 1px solid #000;
+            margin:3px;
+            cursor: pointer;
+        }
+        .table_wrapper{
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <div class="conteinerr">
+    </div>
+    <button class='btnBack'><a href='../lesson19.html'>До завдань</a></button>
+
+    <!-- Задача 4. Дано 3 таблиці розмірності 3*3 з випадковими числами. Якщо відбувається клік на якійсь із клітинок, то до відповідної таблиці додається червона рамка (спробуйте додати можливість відображення кількості кліків біля назви таблиці з використанням відповідно доданого для цього атрибута). -->
+    <script>
+
+        class Table{
+            constructor(numTable=3,numRow=3,numCol=3){
+                this.numTable = numTable;
+                this.numRow = numRow;
+                this.numCol = numCol;
+            }
+
+            addBorder(){
+                let number = this
+
+                 let count = number.parentElement.getAttribute("count")
+                 count++
+                 let newCount = number.parentElement.setAttribute("count",`${count}`)
+
+
+                 let span = document.createElement("span")
+                 this.parentElement.before(span)
+
+
+                 span.innerText = `кількість кліків ${count}`
+
+                 console.log(number.parentElement)
+
+                number.parentElement.style.border = "5px solid red"
+            }
+
+
+            render(parentElement){
+                let conteiner = document.querySelector(parentElement)
+                console.log(conteiner)
+
+                for(let i = 0; i < this.numTable; i++){
+                    let div = document.createElement('div')
+                    this.table = document.createElement('table')
+                    div.append(this.table)
+                    div.className = "table_wrapper"
+                    this.table.classList.add('table')
+                    conteiner.append(div)
+                    this.table.setAttribute("count","0")
+                    for(let r = 0; r < this.numRow;r++){
+                        let tr = document.createElement('tr')
+                        this.table.append(tr)
+                        for(let c = 0; c < this.numCol; c++){
+                            let td = document.createElement('td')
+                            let random = Math.floor(Math.random() * 50 )
+                            td.append(random)
+                            this.table.append(td)
+                            td.onclick = this.addBorder
+
+                        }
+
+                    }
+                }
+
+            }
+        }
+
+        window.onload = function(){
+            let table1 = new Table()
+            table1.render('.conteinerr')
+        }
+
+    
+
+    </script>
+</body>
+</html>

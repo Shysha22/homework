@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .conteinerr{
+            display: flex;
+            width: 500px;
+            border: 1px solid #000;
+            height: 200px;
+            margin: 0 auto;
+            margin-top: 50px;
+        }
+        ol{
+            width: 30px;
+            border: 1px solid #000;
+            margin: 0 auto;
+            margin-left: 10px;
+        }
+        li{
+            width: 20px;
+          
+        }
+        .btn_color{
+            width: 120px;
+            height: 60px;
+            background-color:antiquewhite;
+            margin-top: 20px;
+            border-radius:20px;
+            cursor: pointer;
+        }
+      
+        
+    </style>
+</head>
+<body>
+    <div class="conteinerr">
+    </div>
+    <button class='btnBack'><a href='../lesson19.html'>До завдань</a></button>
+
+    <!-- Задача 3. Дано 5 випадковим чином згенерованих нумерованих списків з рандомними числами (кількість елементів у списку випадкова від 1 до 10, елементи випадкові – від 1 до 100). При натисненні на кнопку нумеровані списки з парною кількістю елементів зафарбувати у зелений колір, інші у червоний. -->
+
+
+    
+
+    <script>
+
+    // створюю клас список чисел
+        class ListNumbers{
+            constructor(numList = 5){
+                this.numList = numList
+            }
+
+            // метод рандомного числа
+            randomNum(min,max){
+                return min + Math.floor(Math.random() * (max - min + 1))
+            }
+
+            // метод зміни кольору
+            changeColor(){
+                let list = document.querySelectorAll('ol')
+                for(let ol of list){
+                    if(ol.children.length % 2 === 0)
+                        ol.style.background = 'green'
+                    else
+                        ol.style.background = 'red'
+
+                }
+            }
+
+
+            // метод рендер
+            render(parentElement,minRow = 1,maxRow = 10,minNum = 1,maxNum = 100){
+                let container = document.querySelector(parentElement)
+                for(let i = 0; i < this.numList;i++){
+                    this.ol = document.createElement("ol")
+                    container.append(this.ol)
+                        let numElements = this.randomNum(minRow,maxRow)
+                        for(let k = 0; k < numElements;k++){
+                            let li = document.createElement('li')
+
+                            let randomNum = this.randomNum(minNum,maxNum)
+
+                            li.innerText = `${randomNum}`
+
+                            this.ol.append(li)
+                        }
+                }
+                let button = document.createElement("button")
+                button.textContent = "змінити колір"
+                button.className = "btn_color"
+                button.onclick = this.changeColor
+                container.after(button)
+            }
+        }
+
+        window.onload = function(){
+            let list = new ListNumbers()
+            list.render(".conteinerr")
+        }
+
+
+    </script>
+</body>
+</html>

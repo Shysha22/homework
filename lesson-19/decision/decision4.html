@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+         .conteinerr{
+            display: flex;
+            width: 700px;
+            border: 1px solid #000;
+            height: 200px;
+            margin: 0 auto;
+            margin-top: 50px;
+            align-items:center;
+            justify-content: space-evenly;
+            height: 290px;
+        }
+
+        .img{
+            width: 120px;
+        }
+        .product_wrapper{
+            border-right: 0.1px solid #ac9393;
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-rows: 15% 45% 25% 10%;
+        }
+        .share{
+            text-align: start;
+            padding: 7px;
+            margin: 5px;
+            border-radius: 20px;
+            width: 80px;
+            color: #000;
+            background-color: yellow;
+        }
+        .imgWrapper{
+            display: flex;
+            align-items:center;
+            justify-content: center;
+        }
+        .title{
+            font-size: 14px;
+            display: flex;
+            align-items:end;
+            padding: 0 10px;
+        }
+        .price{
+            display: flex;
+            align-items:end;
+            justify-content: start;
+            margin-left: 5px;
+            color: red;
+        }
+        .selectedProduct{
+            border : 3px solid rgb(36, 235, 36);
+        }
+    </style>
+</head>
+<body>
+    <div class="conteinerr">
+    </div>
+    <button class='btnBack'><a href='../lesson19.html'>До завдань</a></button>
+
+    <!-- Задача 5. Відображаємо картки товарів, які користувач може вибирати. Вибраний товар має зелену рамку (при кліку робити toogle з класом вибраного елемента) -->
+   
+    <script>
+
+        // класс товара
+
+        class Product{
+            constructor(shares,img,title,price){
+                this.shares = shares;
+                this.img = img;
+                this.title = title;
+                this.price = price;
+            }
+
+            render(parentContainer){
+
+                let container = parentContainer
+                console.log(container)
+
+                let divProduct = document.createElement('div')
+                divProduct.className = "product_wrapper"
+                container.append(divProduct)
+
+                let share = document.createElement("div")
+                share.innerHTML = this.shares
+                share.className = "share"
+                divProduct.append(share)
+
+                let imgWrapper = document.createElement("div")
+                imgWrapper.className = "imgWrapper"
+                let img = document.createElement("img")
+                img.setAttribute("src",this.img)
+                img.className = "img"
+                imgWrapper.append(img)
+                divProduct.append(imgWrapper)
+
+
+
+                let title = document.createElement("div")
+                title.className = "title"
+                title.innerHTML = this.title
+                divProduct.append(title)
+
+
+                let price =  document.createElement("div")
+                price.className ="price"
+                price.innerHTML = this.price
+                divProduct.append(price)
+
+
+            }
+        }
+
+        listProduct = [
+            new Product(
+                "Топ продаж",
+                "../resource/1.jpg",
+                "Ноутбук LENOVO IdeaPad 1 15ADA7 Cloud Grey ",
+                19999
+                ),
+            new Product(
+                "Топ продаж",
+                "../resource/2.jpg",
+                "Ноутбук LENOVO IdeaPad 1 15ADA7 Cloud Grey ",
+                29999
+            ),
+            new Product(
+                "Топ продаж",
+                "../resource/3.jpg",
+                "Ноутбук LENOVO IdeaPad 1 15ADA7 Cloud Grey ",
+                15999
+            ),
+            new Product(
+                "Топ продаж",
+                "../resource/4.jpg",
+                "Ноутбук LENOVO IdeaPad 1 15ADA7 Cloud Grey ",
+                1099
+            )
+           
+        ]
+
+        class ListProduct{
+            constructor(listProduct){
+                this.listProduct = listProduct
+            }
+
+            choiceProduct(){
+                let elementDiv = this
+                this.classList.add("selectedProduct")
+
+                // elementDiv.classList.toogle('selectedProduct')
+            }
+
+
+
+            render(parentDiv){
+                let parentContainer = document.querySelector(parentDiv)
+
+                for(let el of this.listProduct){
+                    el.render(parentContainer)
+                }
+
+                for( let el of parentContainer.children){
+                    el.onclick = this.choiceProduct
+                    // el.classList.toogle('selectedProduct')
+                    // el.onclick = el.classList.toogle('selectedProduct')
+
+                }
+
+                
+                // let container = document.querySelector(parentElement)
+               
+            }
+        }
+
+        window.onload = function(){
+            let list1 = new ListProduct(listProduct)
+            list1.render(".conteinerr")
+        }
+
+        
+
+    
+
+    </script>
+</body>
+</html>

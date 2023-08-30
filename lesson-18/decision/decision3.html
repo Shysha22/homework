@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- Задача 4. Наперед задано у скрипті масив зі списком бажань. Після завантаження сторінки випадковим чином вибираються 3 і відображаються у окремих div (їх треба створити і додати на сторінку) -->
+
+    <div class="conteiner">
+    </div>
+    <button class="btn_desires">Побажання</button>
+    <button class='btnBack'><a href='../lesson18.html'>До завдань</a></button>
+
+    <script>
+
+    //  масив бажань
+    let arrDesires = ["Злітати в Париж","Заробити 1000000","Мир","Побачити 7 чудес світу","Стрибнути з парашуту","Поплавати з акулами","Занутиритись з аквалангом","Навколосвітня подорож","Виспатися"]
+
+    // функція рандомного числа
+    function randomNum(){
+        // кількість потрібних елементів в масиві
+        let numDesires = 3
+        let arrRandomNum = []
+
+        while( arrRandomNum.length < numDesires){
+
+            let randomNum = Math.floor(Math.random() * arrDesires.length)
+
+            if(!arrRandomNum.includes(randomNum)){
+                arrRandomNum.push(randomNum)
+            }
+        }
+       
+        return arrRandomNum
+    }
+
+    // функція отримання бажання
+
+    function getDesires(){
+        let random = randomNum()
+        for(let i = 0; i < 3; i++){
+            let div = document.createElement("div")
+            div.innerText = (`- ${arrDesires[random[i]]}`)
+            let parrentEl = document.querySelector(".conteiner")
+            parrentEl.prepend(div)
+        }
+    }
+    // функція очистки
+    function clearField(){
+        document.querySelector(".conteiner").innerHTML = ""
+    }
+
+
+    // виводжу після завантаження сторінки
+      window.onload = function showDesires(){
+        getDesires()
+        document.querySelector(".btn_desires").onclick = () =>{
+            clearField()
+            getDesires()
+        }
+      }
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- Задача 7. Подорож складається з 3 етапів. На кожному етапі користувач може вибрати один з видів транспорту (авто, автобус, літак - випадаючий список), харчування (сніданок, обід, вечеря – checkbоx) та одного з 3-х гідів(використати  - radio buttons). Ціни визначте самі. Підрахувати загальну вартість. -->
+
+    <div class="conteiner">
+        <label for="transport">
+            Виберіть один з видів транспорту
+            <select name="transports" id="transports">
+                <option value="500">Автомобіль</option>
+                <option value="1000">Автобус</option>
+                <option value="2000">Літак</option>
+            </select>
+        </label>
+        <label for="foods">
+            Харчування
+            <br>
+            <label for="breakfast">Сніданок</label><input type="checkbox" class="food" value="200" name = "breakfast"><br>
+            <label for="lunch">Обід</label><input type="checkbox"  class="food" value="250" name = "lunch"><br>
+            <label for="dinner">Вечеря</label><input type="checkbox"  class="food" value="220" name = "dinner">
+        </label>
+        <label for="guides">
+            Виберіть одного гіда
+            <br>
+            <label for="guide1">Іван <input type="radio" class="guide" name="guide1" value="800"></label>
+            <label for="guide2">Степан <input type="radio" class="guide" name="guide2" value="1200"></label>
+            <label for="guide3">Андрій <input type="radio" class="guide" name="guide3" value="1500"></label>
+        </label>
+        <button id="getSum">вартість</button>
+    </div>
+    <button class='btnBack'><a href='../lesson18.html'>До завдань</a></button>
+    <script>
+
+        let sum = 0
+
+
+        // знаходження суми за транспорт
+        function getPriceForTransort(){
+            let transportPrice = parseInt(document.getElementById("transports").value)
+            sum +=transportPrice
+        }
+
+        // знаходженяя суми за їжу
+        function getPriceForFood(){
+            let listFood = document.querySelectorAll(".food")
+            for (let el of listFood) {
+                if(el.checked)
+                    sum += parseInt(el.value)
+            }
+        }
+
+        // знаходження суми за гіда
+        function getPriceForGuide(){
+            let listGuides = document.querySelectorAll(".guide")
+
+            for (let el of listGuides) {
+                if(el.checked)
+                    sum += parseInt(el.value)
+            }
+        }
+     
+        // функція виклику інших функцій та виведення суми
+        function getGeneralPrice(){
+            getPriceForTransort()
+            getPriceForFood()
+            getPriceForGuide()
+            let div = document.createElement("div")
+            div.classList.add("total_price")
+            div.textContent = `Сума = ${sum}`
+            document.querySelector(".conteiner").append(div)
+        }
+
+        document.getElementById("getSum").onclick = getGeneralPrice
+
+
+    </script>
+</body>
+</html>

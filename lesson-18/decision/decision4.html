@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- Задача 5. Користувач задає кількість рядків і стовпців. Відобразити таблицю, у клітинках якої знаходяться числа 1, 2, 3, … -->
+
+    <div class="conteiner">
+        <label for="tablRow">
+            Введіть кількість рядків
+            <input type="number" name="tablRow" id="tablRow" />
+        </label>
+        <label for="tablCol">
+            Введіть кількість стовбців
+            <input type="number" name="tablCol" id="tablCol"/>
+        </label>
+    </div>
+    <button class="btn_desires">Створити</button>
+    <button class='btnBack'><a href='../lesson18.html'>До завдань</a></button>
+    <script>
+
+
+            // функція створення таблиці
+            function createTable(){
+
+                // лічильник
+                let count = 0
+                // значення стовбців та рядків
+                let rowCount = document.getElementById("tablRow").value
+                let colCount =  document.getElementById("tablCol").value
+
+
+                // створюю таблицю
+                let table = document.createElement("table")
+                table.classList.add('table')
+
+
+                // створюю рядки та колонки
+                for(let row = 0; row < rowCount;row++){
+                    let row = document.createElement("tr")
+                    table.append(row)
+                    for(let col = 0; col < colCount;col++){
+                        count++
+                        let col = document.createElement("td")
+                        col.innerText = `${count}`
+                        row.append(col)
+                }
+                }
+
+                let conteiner = document.querySelector(".conteiner")
+                conteiner.prepend(table)
+
+            }
+
+            // створюю за кліком
+            document.querySelector(".btn_desires").onclick = () =>{
+                createTable()
+            }
+
+         
+
+    </script>
+</body>
+</html>
