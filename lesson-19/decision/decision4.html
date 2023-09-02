@@ -21,19 +21,24 @@
         .img{
             width: 120px;
         }
+        .product_action{
+            width: 100%;
+            height: 100%;
+        }
         .product_wrapper{
-            border-right: 0.1px solid #ac9393;
             width: 100%;
             height: 100%;
             display: grid;
+            border-right: 0.1px solid #ac9393;
             grid-template-rows: 15% 45% 25% 10%;
+          
         }
         .share{
             text-align: start;
             padding: 7px;
             margin: 5px;
             border-radius: 20px;
-            width: 80px;
+            width: 90px;
             color: #000;
             background-color: yellow;
         }
@@ -70,7 +75,6 @@
     <script>
 
         // класс товара
-
         class Product{
             constructor(shares,img,title,price){
                 this.shares = shares;
@@ -78,15 +82,20 @@
                 this.title = title;
                 this.price = price;
             }
-
+            // створюю картчку товара
             render(parentContainer){
 
                 let container = parentContainer
                 console.log(container)
 
+                let aAction = document.createElement('a')
+                
+                aAction.className = "product_action"
+                container.append(aAction)
+
                 let divProduct = document.createElement('div')
                 divProduct.className = "product_wrapper"
-                container.append(divProduct)
+                aAction.append(divProduct)
 
                 let share = document.createElement("div")
                 share.innerHTML = this.shares
@@ -100,8 +109,6 @@
                 img.className = "img"
                 imgWrapper.append(img)
                 divProduct.append(imgWrapper)
-
-
 
                 let title = document.createElement("div")
                 title.className = "title"
@@ -118,30 +125,31 @@
             }
         }
 
+        // срисок товарів
         listProduct = [
             new Product(
                 "Топ продаж",
                 "../resource/1.jpg",
                 "Ноутбук LENOVO IdeaPad 1 15ADA7 Cloud Grey ",
-                19999
+                "19999₴"
                 ),
             new Product(
-                "Топ продаж",
+                "Знижка 25%",
                 "../resource/2.jpg",
                 "Ноутбук LENOVO IdeaPad 1 15ADA7 Cloud Grey ",
-                29999
+                "29999₴"
             ),
             new Product(
-                "Топ продаж",
+                "Розпродаж",
                 "../resource/3.jpg",
                 "Ноутбук LENOVO IdeaPad 1 15ADA7 Cloud Grey ",
-                15999
+                "23999₴"
             ),
             new Product(
                 "Топ продаж",
                 "../resource/4.jpg",
                 "Ноутбук LENOVO IdeaPad 1 15ADA7 Cloud Grey ",
-                1099
+                "1099₴"
             )
            
         ]
@@ -151,31 +159,24 @@
                 this.listProduct = listProduct
             }
 
-            choiceProduct(){
-                let elementDiv = this
-                this.classList.add("selectedProduct")
-
-                // elementDiv.classList.toogle('selectedProduct')
-            }
-
-
-
             render(parentDiv){
-                let parentContainer = document.querySelector(parentDiv)
 
-                for(let el of this.listProduct){
-                    el.render(parentContainer)
+                // отримую батьківський контейнер
+               let parentContainer = document.querySelector(parentDiv)
+
+                // сворюю всі карточки
+                for( let div of this.listProduct){
+                     div.render(parentContainer)
                 }
 
+                // вішаю обробник подій
                 for( let el of parentContainer.children){
-                    el.onclick = this.choiceProduct
-                    // el.classList.toogle('selectedProduct')
-                    // el.onclick = el.classList.toogle('selectedProduct')
-
+                    console.log(el)
+                    el.onclick = () =>{
+                        el.classList.toggle("selectedProduct")
+                    }
                 }
-
                 
-                // let container = document.querySelector(parentElement)
                
             }
         }

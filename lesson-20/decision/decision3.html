@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .wrapper{
+            width: 700px;
+            height: 950px;
+            position: relative;
+            margin: 0 auto;
+        }
+        .btnBackBlack{
+            position: absolute;
+            width: 200px;
+            height: 70px;
+            background-color: aqua;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius:10px;
+            margin: 0 auto;
+            margin-top: 50px;
+            left: 50%;
+            bottom: 0;
+            transform: translate(-50%);
+        }
+        .btnBackBlack a{
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 500px;
+            color:#000;
+            padding: 10px;
+        }
+        .form{
+            width: 400px;
+            height: 400px;
+            margin: 0 auto;
+            border: 1px solid #000;
+            display: flex;
+            flex-direction: column;
+            align-items:center;
+            justify-content: space-evenly;
+        }
+        .input{
+            width: 250px;
+            height: 20px;
+            border: 1px solid #000
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <!-- Задача 3. На формі вводять 7 числових значень (вік, зріст, вага, заробітна плата, стаж, номер відділу, порядковий номер). Додати подію обробки події click на форму і якщо клік на внутрішньому input, то автоматично замінювати значення його на 0. Використати делегування -->
+
+
+    <div class="wrapper">
+
+        <button class='btnBackBlack'><a href='../lesson20.html'>До завдань</a></button>
+
+
+    </div>
+
+    <script>
+
+        // створюю клас
+        class Form{
+            constructor(listTitle){
+                this.listTitle = listTitle
+            }
+
+            changeValue(e){
+                if(e.target.tagName === "INPUT"){
+                    e.target.value = 0
+                }
+
+            }
+
+            // створюю форму
+            render(selector){
+
+                const form = document.createElement('form')
+                form.className = "form"
+
+                for(let i = 0; i < this.listTitle.length;i++){
+                    const input = document.createElement("input")
+                    input.className = "input"
+                    input.setAttribute("type","text")
+                    input.setAttribute("placeholder",this.listTitle[i])
+                    form.append(input)
+                }
+
+                this.form = form
+
+                this.form.onclick = this.changeValue.bind(this)
+
+                if(selector)
+                    document.querySelector(selector).append(form)
+                else
+                    return
+                
+
+            }
+        }
+
+        // список заголовків для форми
+        const listTitle = ["Вік","Вага","Зріст","Заробітня плата","Стаж","Номкр відділу","Порядковий номер",]
+
+        // виклик
+        window.onload = function(){
+            const form = new Form(listTitle)
+            form.render(".wrapper")
+        }
+
+     
+    </script>
+</body>
+</html>

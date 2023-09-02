@@ -15,13 +15,15 @@
 
     <script>
 
+        // створюю клас
         class Greeting{
             constructor(text,numLines = 10){
                 this.text = text;
                 this.numLines = numLines;
             }
+
+            // закрашуюю всі наступні
             selectItem(){
-                this.style.color = "red"
                 let div = this
                 while (div.nextElementSibling){
                     div = div.nextElementSibling
@@ -29,6 +31,7 @@
                 }
             }
             render(parentElement ){
+                // створюю елементи
                 const conteiner = document.querySelector(parentElement)
                 for(let i = 0; i < this.numLines; i++){
 

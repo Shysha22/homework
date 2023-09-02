@@ -66,35 +66,52 @@
 
 
     class ListAthletes{
+
         constructor(athletes){
             this.listAthletes = athletes
         }
 
+        replacementAthletes(event){
 
-        // вибрані атлети
-        selectedAthletes(element){
-            let conteiner = document.querySelector('.conteinerr')
-            this.divSelectedAthletes = document.createElement("ul")
-            this.divSelectedAthletes.className = "box_athletes"
-            conteiner.append(this.divSelectedAthletes)
+        // отримую кнопку
+        let btn = event.target;
+
+
+        // переміщую отлетів
+        
+        if(btn.className === "btnAdd"){
+            this.divSelectedAthletes.append(btn.parentElement)
+            btn.innerText = "<-"
+            btn.className = "btnRemove"
+            btn.parentElement.prepend(btn)
         }
-
-
-
-// рендер
+        else if(btn.className === "btnRemove"){
+            this.divAllAthletes.append(btn.parentElement)
+            btn.innerText = "->"
+            btn.className = "btnAdd"
+            btn.parentElement.append(btn)
+        }
+        }
+        // рендер
         render(parentContainer){
 
+            // отримую батьківський елемент
             this.container = document.querySelector(parentContainer)
 
+
+            // створюю контейнер всіх атлетів
             this.divAllAthletes = document.createElement("ul")
                 this.divAllAthletes.className = "box_athletes"
-                this.container.append( this.divAllAthletes)
+                this.container.append(this.divAllAthletes)
 
 
+            // створюю контейнер вибраних атлетів
             this.divSelectedAthletes = document.createElement("ul")
                 this.divSelectedAthletes.className = "box_athletes"
                 this.container.append(this.divSelectedAthletes)
 
+
+            // перебираю масив та створю li та кнопки
             for(let i = 0; i < this.listAthletes.length;i++){
 
                 let li = document.createElement("li")
@@ -107,50 +124,17 @@
                     li.append(btn)
             }
 
-
+            // вішаю обробник 
             this.container.onclick = this.replacementAthletes.bind(this)
-
         }
-
-        replacementAthletes(event){
-
-            let btn = event.target;
-
-            console.log(event.target)
-
-            if(btn.className === "btnAdd"){
-                this.divSelectedAthletes.append(btn.parentElement)
-                btn.innerText = "<-"
-                btn.className = "btnRemove"
-                btn.parentElement.prepend(btn)
-            }
-            else if(btn.className === "btnRemove"){
-                this.divAllAthletes.append(btn.parentElement)
-                btn.innerText = "->"
-                btn.className = "btnAdd"
-                btn.parentElement.append(btn)
-            }
-        }
-
     }
-
-
 // список атлетів
     let listAthletes = ["Іван","Степан","Ігор","Саша","Женя",]
-
-
 // виклик функції
     window.onload = function(){
         let list1 = new ListAthletes(listAthletes)
         list1.render('.conteinerr')
-    }
-
-     
-
-        
-
-    
-
+}
     </script>
 </body>
 </html>

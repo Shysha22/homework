@@ -33,6 +33,9 @@
             display: flex;
             flex-direction: column;
         }
+        .red{
+            border: 3px solid red;
+        }
     </style>
 </head>
 <body>
@@ -44,64 +47,84 @@
     <script>
 
         class Table{
-            constructor(numTable=3,numRow=3,numCol=3){
+            constructor(numTable=3,numRow=3,numCol=3,title){
                 this.numTable = numTable;
                 this.numRow = numRow;
                 this.numCol = numCol;
+                this.title = title
             }
 
-            addBorder(){
-                let number = this
-
-                 let count = number.parentElement.getAttribute("count")
-                 count++
-                 let newCount = number.parentElement.setAttribute("count",`${count}`)
-
-
-                 let span = document.createElement("span")
-                 this.parentElement.before(span)
-
-
-                 span.innerText = `кількість кліків ${count}`
-
-                 console.log(number.parentElement)
-
-                number.parentElement.style.border = "5px solid red"
+            // метод рандомного числа
+            randomNum(min = 1,max = 50){
+                return min + Math.floor(Math.random() * (max + min - 1)) 
             }
 
+            // додаю бордер
+            addBorder(e){
 
-            render(parentElement){
-                let conteiner = document.querySelector(parentElement)
-                console.log(conteiner)
+                let el = e.target
 
-                for(let i = 0; i < this.numTable; i++){
-                    let div = document.createElement('div')
-                    this.table = document.createElement('table')
-                    div.append(this.table)
-                    div.className = "table_wrapper"
-                    this.table.classList.add('table')
-                    conteiner.append(div)
-                    this.table.setAttribute("count","0")
+                if( el.tagName === "TD"){
+                    let parentEl = el.closest("table")
+                    parentEl.classList.add("red")
+
+                    // тут трішки намудрив зі спанами намагався відслідкувати кількість кліків
+
+                    let spanCounter = parentEl.previousElementSibling.lastChild
+
+                    let count = parseInt(parentEl.getAttribute("count"))
+                    count += 1
+                    spanCounter.innerText = count
+                    parentEl.setAttribute("count",`${count}`)
+
+
+
+                }
+            
+            }
+
+            render(conteinerSelector){
+
+                const conteiner = document.querySelector(conteinerSelector)
+
+                // створю таблицю
+
+                for(let i = 0;i < this.numTable;i++){
+                    const divTable = document.createElement("div")
+                    divTable.className = "table_wrapper"
+                    conteiner.append(divTable)
+
+                    const table = document.createElement('table')
+                    table.className = "table"
+                    table.setAttribute("count","0")
+                    divTable.append(table)
+
+                    // спан для виведення кількость кліків
+                    const spanText = document.createElement("span")
+                    const spanCounter = document.createElement("span")
+                    spanText.innerText = `${this.title[i]} : `
+                    spanText.append(spanCounter)
+                    divTable.prepend(spanText)
+
                     for(let r = 0; r < this.numRow;r++){
-                        let tr = document.createElement('tr')
-                        this.table.append(tr)
+                        const tr = document.createElement("tr")
+                        table.append(tr)
                         for(let c = 0; c < this.numCol; c++){
-                            let td = document.createElement('td')
-                            let random = Math.floor(Math.random() * 50 )
-                            td.append(random)
-                            this.table.append(td)
-                            td.onclick = this.addBorder
-
+                            const td = document.createElement("td")
+                            td.innerText = this.randomNum()
+                            tr.append(td)
                         }
-
                     }
                 }
-
+              
+                // навішую подію
+                conteiner.onclick = this.addBorder.bind(this)
             }
         }
 
+        let titleTb = ["Таблиця 1","Таблиця 2","Таблиця 3"]
         window.onload = function(){
-            let table1 = new Table()
+            let table1 = new Table(3,3,3,titleTb)
             table1.render('.conteinerr')
         }
 

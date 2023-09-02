@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .wrapper{
+            width: 700px;
+            height: 950px;
+            background-color:#faf0f0;
+            position: relative;
+            border-left: 3px solid #000;
+            border-right: 3px solid #000;
+            margin: 0 auto;
+        }
+        .btnBackBlack{
+            position: absolute;
+            width: 200px;
+            height: 70px;
+            background-color: aqua;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius:10px;
+            margin: 0 auto;
+            margin-top: 50px;
+            left: 50%;
+            bottom: 0;
+            transform: translate(-50%);
+        }
+        .btnBackBlack a{
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 500px;
+            color:#000;
+            padding: 10px;
+        }
+        .imgTank{
+            width: 40px;
+            height: 30px;
+            position: absolute;
+            cursor: pointer;
+        }
+        .tankConteiner{
+            background-color:red;
+            width: 30px;
+            height: 30px;
+            position: absolute;
+        }
+
+      
+
+
+    </style>
+</head>
+<body>
+
+    <!-- Задача 2. Байрактар. З верхньої частини екрану у випадковій позиції по горизонталі з’являються танки, які їдуть вниз. При кліку на танк він вибухає і зникає з екрану.  -->
+
+
+    <div class="wrapper">
+
+        <button class='btnBackBlack'><a href='../lesson20.html'>До завдань</a></button>
+
+
+    </div>
+
+    <script>
+
+        class Bycharacter{
+            constructor(imgPath,imgPathBoom){
+                this.imgPath = imgPath
+                this.imgPathBoom = imgPathBoom
+            }
+
+            randomNum(min,max){
+                return min + Math.floor(Math.random() * (max + min -1))
+            }
+
+            hitInTank(e){
+                console.log(this.intervalTank)
+                let selector = e.target
+                if(selector.tagName === "IMG"){
+                    selector.removeAttribute("src")
+                    selector.setAttribute("src", this.imgPathBoom)
+                    setTimeout(() =>{
+                        selector.remove()
+                    },200)
+
+
+                }
+
+            }
+            // встановлюю позицію танка
+            positionTank(){
+                const widthConteiner = this.container.clientWidth
+                const heightConteiner = this.container.clientHeight
+
+
+                this.img.style.left = this.randomNum(1,widthConteiner - 50) + "px"
+                this.img.style.top = "-50px"
+
+                let position = 0
+                const step = 1
+                this.intervalTank = setInterval(() =>{
+                    position += step
+                    this.img.style.top = position + "px"
+                    console.log(1)
+
+                    if(position > heightConteiner){
+                        clearInterval( this.intervalTank )
+                        this.img.remove()
+                    }
+                },this.randomNum(10,50))
+
+            }
+            render(selector){
+                const container = document.querySelector(selector)
+                const img = document.createElement("img")
+                img.setAttribute("src",this.imgPath)
+                img.className = "imgTank"
+                container.prepend(img)
+
+                this.container = container
+                this.img = img
+
+                this.positionTank.bind(this)
+                
+                this.positionTank()
+                this.container.onclick = this.hitInTank.bind(this)
+
+            }
+
+        }
+
+        const tankCount = 10
+
+        window.onload = function(){
+            for(let i = 0; i < tankCount; i++){
+                const tank = new Bycharacter("../resource/tank-1.png","../resource/tankBoom.png")
+                tank.render(".wrapper")
+            }
+        }
+    </script>
+</body>
+</html>

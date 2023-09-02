@@ -22,11 +22,13 @@
 
     <script>
 
+// створюю клас інпут
         class Input{
             constructor(countInput = 5){
                 this.countInput = countInput
             }
 
+            // метод збільшення та зменшення інпутів
             changeInput(){
                 let input = this
                 let inputValue = input.value
@@ -41,6 +43,7 @@
                 }
             }
 
+            // створюю інпути
             render(parentElement){
                 let container = document.querySelector(parentElement)
 

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .wrapper{
+            width: 100%;
+            height: 950px;
+            background-color:#000;
+            position: relative;
+        }
+        .btnBackBlack{
+            position: absolute;
+            width: 200px;
+            height: 70px;
+            background-color: aqua;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius:10px;
+            margin: 0 auto;
+            margin-top: 50px;
+            left: 50%;
+            bottom: 0;
+            transform: translate(-50%);
+        }
+        .btnBackBlack a{
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 500px;
+            color:#000;
+            padding: 10px;
+        }
+        .img{
+            position: absolute;
+            width: 1px;
+            box-shadow:0 0 5px #ddad0f;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <!-- Задача 1. Сяючі зорі. Вказана кількість зірочок повинна з’являтися у випадковій частині екрану. Кожна зірка (це екземпляр класу Star) з певним кроком і інтервалом збільшується від мінімального до максимального розміру. Як тільки досягнути максимального розміру зірочка повинна з’являтися у іншій випадковій позиції. -->
+
+    <div class="wrapper">
+
+        <!-- <img  style= "transform: scale(4);"img" src="../resource/star.svg" alt=""> -->
+
+        <button class='btnBackBlack'><a href='../lesson20.html'>До завдань</a></button>
+
+    </div>
+
+    <script>
+
+        // створюю клас
+        class Star{
+            constructor(imgPath,maxSize=50){
+                this.imgPath = imgPath
+                this.maxSize = maxSize
+            }
+            // отримуємо рандомне число
+            randomNum(min,max){
+                return min + Math.floor(Math.random() * (max + min -1))
+            }
+
+            // встановлюю рандомне позицію
+            positionStar(){
+                const maxWidth = this.container.clientWidth 
+                const maxHeight = this.container.clientHeight
+
+                this.img.style.top = this.randomNum(1,maxHeight) + "px"
+                this.img.style.left = this.randomNum(1,maxWidth) + "px"
+            }    
+            
+            // встановлюю розмір зірки та слідкую за ним
+            sizeStar(){
+
+                let step = 0
+                this.interval = setInterval(() =>{
+                    step++
+                    this.img.style.transform = `scale(${step})`
+                    if(step === this.maxSize){
+                        step = 0
+                        this.img.style.transform = `scale(${step})`
+                        this.positionStar()
+                    }
+
+
+                },this.randomNum(50,200))
+            }
+
+            // створюю
+            render(selector){
+                const container = document.querySelector(selector)
+
+                let img = document.createElement('img')
+                img.className = "img"
+                img.setAttribute("src",this.imgPath)
+                container.append(img)
+
+                this.container = container
+                this.img = img
+
+                // тут невпевнений чи потрібий bind? типу this.positionStar.bind(this)
+                this.positionStar()
+                this.sizeStar()
+
+            }
+        }
+
+        // кількість зірок
+        const numStars = 30
+        
+
+        // виклик
+        window.onload = function(){
+            for(let i = 0; i < numStars;i++){
+                let s1 = new Star("../resource/star.svg")
+                s1.render(".wrapper")
+            }
+        }
+
+
+    </script>
+</body>
+</html>

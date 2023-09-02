@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .conteinerr{
+            position: relative;
+            width: 100%;
+            height: 960px;
+        }
+        .move{
+            background-color:rgb(16, 119, 229)
+        }
+        .snowflake{
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 0;
+            /* left: 50%; */
+        }
+        .btnBackk{
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 200px;
+            height: 70px;
+            background-color: aqua;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius:10px;
+            margin: 0 auto;
+            margin-top: 50px;
+            transform: translateX(-50%);
+        }
+        .btnBackk a{
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 500px;
+            color:#000;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="conteinerr">
+    </div>
+    <button class='btnBackk'><a href='../lesson19.html'>До завдань</a></button>
+
+    <!-- <img src="../resource/work7.png" alt=""> -->
+   
+    <script>
+    // 7. Задача 1. Відобразити падаючий сніг. Сніжинка з’являється у верхній частині екрану (top =0) і з випадковою швидкістю рухається вниз (у setInterval викликати метод, у якому додавати крок до top). Як тільки сніжинка досягає нижньої частини екрану (top>maxTop) вона знову повинна з’явитись у верхній частині екрану (top=0).
+
+
+    // створюю клас сніжинка
+    class Snowflake{
+        constructor(way,num){
+            this.wayToImg = way;
+            this.numSnowflake = num
+           
+        }
+
+
+        // метод рандомного числа
+        randomNum(min,max){
+            return min + Math.floor(Math.random() * (max + min - 1))
+        }
+
+        // метод запуску
+        movement(event){
+
+            // отримати висоту контейнера
+            let maxTop = this.container.clientHeight
+
+            let positionTop = 0
+
+          
+            // запускаю інтервал та збільшую відступ з верху
+            if(event.target.contains = "conteinerr"){
+                    event.target.classList.toggle('move')
+                for(let el of (this.container.children)){
+                    let positionTop = 0
+
+                let move = setInterval(() =>{
+                        positionTop+= 15
+                        if(positionTop > maxTop)
+                            positionTop = 0
+                        el.style.top = `${positionTop}px`
+                },this.randomNum(500,2500))
+            }
+        }
+
+    
+      
+
+    }
+        render(parentContainer){
+
+            // отримую батьківський контейнер
+            this.container = document.querySelector(parentContainer)
+
+
+            // створюю елементи сніжинок,добавляю в батьківський контейнер,та клас
+            for(let i = 0; i < this.numSnowflake;i++){
+                
+                this.img = document.createElement('img')
+                this.container.append(this.img)
+
+                this.img.setAttribute("src",this.wayToImg)
+                this.img.className = "snowflake"
+            }
+
+            // отримую ширину контейнер
+            let maxWidth =  this.container.clientWidth
+            
+            // на сніжинки рандомно встановлюю позицію від лівого краю та розмір
+            for(let el of this.container.children){
+                el.style.left = `${this.randomNum(1,maxWidth)}px`
+                el.style.transform = `scale(${this.randomNum(0.6,4)})`
+            }
+
+            // навішую обработчик
+            this.container.onclick = this.movement.bind(this)
+
+        }
+    }
+    window.onload = function(){
+        alert("Для запуску клікніть по екрану")
+        let snowflake = new Snowflake('../resource/work7-1.png',50)
+            snowflake.render(".conteinerr")
+    }
+
+    </script>
+</body>
+</html>
