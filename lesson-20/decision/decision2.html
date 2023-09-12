@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/style.css">
     <style>
         .wrapper{
-            width: 700px;
+            width: 1200px;
             height: 950px;
             background-color:#faf0f0;
             position: relative;
@@ -64,30 +64,32 @@
 
         <button class='btnBackBlack'><a href='../lesson20.html'>До завдань</a></button>
 
-
     </div>
 
     <script>
 
         class Bycharacter{
-            constructor(imgPath,imgPathBoom){
+            constructor(imgPath,imgPathBoom,minInterval = 10,maxInterval = 50){
                 this.imgPath = imgPath
                 this.imgPathBoom = imgPathBoom
+                this.minInterval = minInterval
+                this.maxInterval = maxInterval
             }
 
             randomNum(min,max){
                 return min + Math.floor(Math.random() * (max + min -1))
             }
 
+
+            // метод попадання
             hitInTank(e){
-                console.log(this.intervalTank)
-                let selector = e.target
-                if(selector.tagName === "IMG"){
-                    selector.removeAttribute("src")
-                    selector.setAttribute("src", this.imgPathBoom)
+                let imgTank = e.target
+                if(imgTank.tagName === "IMG"){
+                    imgTank.removeAttribute("src")
+                    imgTank.setAttribute("src", this.imgPathBoom)
                     setTimeout(() =>{
-                        selector.remove()
-                    },200)
+                        imgTank.remove()
+                    },100)
 
 
                 }
@@ -95,28 +97,37 @@
             }
             // встановлюю позицію танка
             positionTank(){
-                const widthConteiner = this.container.clientWidth
+                // отримую розміри контейнера та встанавлюю позицію танка
+                // від штрини контейнера віднімаю штрину танка щоб не заходило за рамки
+                const widthConteiner = this.container.clientWidth -  this.img.style.width
                 const heightConteiner = this.container.clientHeight
 
+                const imgStyle = this.img.style
 
-                this.img.style.left = this.randomNum(1,widthConteiner - 50) + "px"
-                this.img.style.top = "-50px"
+                
+                imgStyle.left = this.randomNum(1,widthConteiner - 50) + "px"
+                imgStyle.top = "-50px"
 
                 let position = 0
                 const step = 1
                 this.intervalTank = setInterval(() =>{
                     position += step
-                    this.img.style.top = position + "px"
-                    console.log(1)
+                    imgStyle.top = position + "px"
 
                     if(position > heightConteiner){
                         clearInterval( this.intervalTank )
                         this.img.remove()
                     }
-                },this.randomNum(10,50))
+                },this.randomNum(this.minInterval,this.maxInterval))
 
             }
             render(selector){
+
+                // перевірка чи є селектор
+                if(!selector)
+                    return
+
+                // створю танк
                 const container = document.querySelector(selector)
                 const img = document.createElement("img")
                 img.setAttribute("src",this.imgPath)
@@ -135,13 +146,19 @@
 
         }
 
-        const tankCount = 10
+
 
         window.onload = function(){
-            for(let i = 0; i < tankCount; i++){
+          
+            let showTankInterval = setInterval(() =>{
                 const tank = new Bycharacter("../resource/tank-1.png","../resource/tankBoom.png")
                 tank.render(".wrapper")
-            }
+            },1500)
+
+            setTimeout(() =>{
+                clearInterval(showTankInterval)
+            },20000)
+              
         }
     </script>
 </body>

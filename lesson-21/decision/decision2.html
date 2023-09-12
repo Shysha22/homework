@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .wrapper{
+            width: 100%;
+            height: 550px;
+            display: flex;
+            align-items:center;
+            justify-content: center;
+            position: relative;
+        }
+        .btnBackBlack{
+            position: absolute;
+            width: 200px;
+            height: 70px;
+            background-color: aqua;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius:10px;
+            margin: 0 auto;
+            margin-top: 50px;
+            left: 50%;
+            bottom: 0;
+            transform: translate(-50%);
+        }
+        .btnBackBlack a{
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 500px;
+            color:#000;
+            padding: 10px;
+        }
+        .client_wrapper{
+            border: 1px solid #000;
+            width: 400px;
+            height: 200px;
+            margin-left: 5px;
+            border-radius : 10px
+        }
+        .client_wrapper div{
+            border: 1px solid #000;
+            margin:2px;
+        }
+        .balans_wrapper{
+            border: 1px solid #000;
+            width: 300px;
+            height: 100px;
+            display: flex;
+            align-items:center;
+            justify-content: center;
+            border-radius : 10px;
+            margin-left: 5px;
+
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="wrapper">
+        <div class="client">
+        </div>
+        <div class="client_gold">
+        </div>
+
+        <button class='btnBackBlack'><a href='../lesson21.html'>До завдань</a></button>
+
+    </div>
+
+  
+
+    <script>
+
+    // Задача 2. Створити клас Bank, у якому зберігається масив клієнтів. Виконати такі операції
+    // Вивести усіх простих клієнтів;
+    // Вивести усіх клієнтів GoldenClient;
+    // Знати сумарну кількість грошей на рахунку;
+
+
+        const listClient = [
+
+            {
+                initial : "Петренко Іван Степанович",
+                balans : 222000,
+                vip : true
+            },
+            {
+                initial : "Іванов Петро Степанович",
+                balans : 5000,
+                vip : false
+            },
+            {
+                initial : "Шевченко Світлана Степанович",
+                balans : 5000,
+                vip : true
+            },
+            {
+                initial : "Якубович Іван Юрійович",
+                balans : 122000,
+                status: "gold",
+                vip : true
+            },
+            {
+                initial : "Кошовий Євген Степанович",
+                balans : 222000,
+                status: "gold",
+                vip : true
+            }
+        ]
+    
+// клас клієнт
+        class Client{
+            constructor(initial,balans){
+                this.initial = initial
+                this.balans = balans
+            }
+        }
+//  клас золотий клієнт
+        class GoldenClient extends Client{
+            constructor(initial,balans,creditLimit = 2000,creditInterest = 10){
+                super(initial,balans)
+                this.creditLimit = creditLimit;
+                this.creditInterest = creditInterest;
+            }
+        }
+
+// клас банк
+        class Bank{
+            constructor(listClient){
+                this.allClients = listClient
+            }
+
+
+            // сортую список клієнтів на масиви
+            sortClients(list){
+
+                this.clients = [];
+                this.clientsGold = [];
+
+                for(let client of list){
+                    let {vip,initial,balans} = client
+                    if(vip === true){
+                        let goldClient = new GoldenClient(initial,balans)
+                        this.clientsGold.push(goldClient)
+                    }
+                    else{
+                        let client = new Client(initial,balans)
+                        this.clients.push(client)
+                    }
+                }
+            }
+
+            // метод виведення клієнтів
+            showClientsForStatus(selector,list,title){
+                console.log(selector)
+
+                const clientsList = document.createElement("div")
+                clientsList.className = "client_wrapper"
+                clientsList.innerText = title
+
+                for(let client of list){
+                    let {initial,balans} = client
+                    const div = document.createElement("div")
+                    div.innerText = `ПІБ ${initial},баланс : ${balans}`
+                    clientsList.append(div)
+                }
+
+                if(selector)
+                    document.querySelector(selector).append(clientsList)
+                else
+                    return
+            }
+
+            // метод знаходження сумарної кількості грошей
+            findAllMoneyClients(selector,list1,list2){
+
+                let moneyList1 = list1.reduce((prevSum,sum) => prevSum + sum.balans,0)
+
+                let moneyList2 = list2.reduce((prevSum,sum) => prevSum + sum.balans,0)
+
+                let totalMoney = moneyList1 + moneyList2
+
+                const divBalans = document.createElement("div")
+                divBalans.className = "balans_wrapper"
+
+                divBalans.innerText = `Загальний баланс становить = ${totalMoney}грн`
+
+                if(selector)
+                    document.querySelector(selector).append(divBalans)
+                else
+                    return
+              
+            }
+            run(selector){
+                this.sortClients(this.allClients)
+
+                this.showClientsForStatus(selector,this.clients,"Клійєнти")
+                this.showClientsForStatus(selector,this.clientsGold,"Gold-клієнти")
+
+                this.findAllMoneyClients(selector,this.clients,this.clientsGold)
+            }
+        }
+        
+        window.onload = function(){
+            const bank = new Bank(listClient)
+            bank.run(".wrapper")
+         }
+
+   
+
+     
+
+
+    </script>
+</body>
+</html>

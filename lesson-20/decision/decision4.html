@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .wrapper{
+            width: 700px;
+            height: 950px;
+            position: relative;
+            margin: 0 auto;
+            display: flex;
+            border: 1px solid #000;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items:center;
+           
+           
+        }
+        .btnBackBlack{
+            position: absolute;
+            width: 200px;
+            height: 70px;
+            background-color: aqua;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius:10px;
+            margin: 0 auto;
+            margin-top: 50px;
+            left: 50%;
+            bottom: 0;
+            transform: translate(-50%);
+        }
+        .btnBackBlack a{
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 500px;
+            color:#000;
+            padding: 10px;
+        }
+        .input{
+            width: 200px;
+            height: 40px;
+            cursor: pointer;
+            text-align: center;
+            margin: 5px;
+
+        }
+        .btn{
+            width: 100px;
+            height: 70px;
+            cursor: pointer;
+            margin: 5px;
+
+        }
+        .input_wrapper,.btn_wrapper{
+            width: 350px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .div_wrapper{
+            display: flex;
+        }
+        .div_counter{
+            width: 400px;
+            height: 100px;
+            border-bottom: 1px solid #000;
+            display: flex;
+            align-items:end;
+            justify-content:space-between
+        }
+
+    </style>
+</head>
+<body>
+
+
+
+    <div class="wrapper">
+
+        <button class='btnBackBlack'><a href='../lesson20.html'>До завдань</a></button>
+
+
+    </div>
+
+    <script>
+        // Задача 4. На сторінці міститься певна кількість кнопок і інпутів. Підраховувати загальну кількість кліків окремо на кнопках і окремо на інпутах.
+
+
+        class CountClick{
+            constructor(inputNum,btnNum){
+                this.inputNum = inputNum;
+                this.btnNum = btnNum;
+            }
+
+            countClick(e){
+
+                const target = e.target
+
+                // перевіряю чи подія спрацювала на кнопкі
+                if(target.tagName === "BUTTON"){
+                    let initialValue = parseInt(this.counterSection.lastChild.textContent)
+                    initialValue++
+                    this.counterSection.lastChild.textContent = initialValue
+                }
+
+                // перевіряю чи подія спрацювала на інпуту
+                if(target.tagName === "INPUT"){
+                    let initialValue = parseInt(this.counterSection.firstChild.textContent)
+                    initialValue++
+                    this.counterSection.firstChild.textContent = initialValue
+                }
+            }
+
+
+            render(selector){
+                if(!selector)
+                    return
+
+                const container = document.querySelector(selector)
+
+                // дів лічильника
+                const counterSection = document.createElement("div")
+                counterSection.className = "div_counter"
+
+                // окремі діви для виведення кількості кліків
+                let countClickInput = document.createElement("div")
+                countClickInput.innerText = "0"
+                let countClickBtn = document.createElement("div")
+                countClickBtn.innerText = "0"
+
+                counterSection.innerHTML = "Кількість кліків"
+                counterSection.prepend(countClickInput)
+                counterSection.append(countClickBtn)
+                container.prepend(counterSection)
+
+                // дів оболочка компонентів кнопок та інпутів
+                const divWrapperInputAndBtn = document.createElement('div')
+                divWrapperInputAndBtn.className = "div_wrapper"
+                container.append(divWrapperInputAndBtn)
+
+                // контейнер інпута
+                const containerInput = document.createElement('div')
+                containerInput.className = "input_wrapper"
+                divWrapperInputAndBtn.append(containerInput)
+
+                // контейнер кнопки
+                const containerButton = document.createElement('div')
+                containerButton.className = "btn_wrapper"
+                divWrapperInputAndBtn.append(containerButton)
+
+
+                // створюю інпути
+                for(let i = 0; i < this.inputNum;i++){
+                    const input = document.createElement("input")
+                    input.setAttribute("type","text")
+                    input.setAttribute("placeholder","text")
+                    input.className ="input"
+                    containerInput.append(input)
+                }
+
+                // створюю кнопки
+                for(let i = 0; i < this.btnNum;i++){
+                    const btn = document.createElement("button")
+                    btn.className ="btn"
+                    btn.innerHTML = "BTN"
+                    containerButton.append(btn)
+                }
+
+
+                this.container = container
+                this.counterSection = counterSection
+
+                this.container.onclick = this.countClick.bind(this)
+
+            }
+        }
+
+        const numBtn = 9
+        const numInput = 11
+
+        window.onload = function(){
+            const countClick = new CountClick(numInput,numBtn)
+            countClick.render(".wrapper")
+        }
+
+     
+    </script>
+</body>
+</html>

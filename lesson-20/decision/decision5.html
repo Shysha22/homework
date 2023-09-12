@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .wrapper{
+            width: 700px;
+            height: 950px;
+            position: relative;
+            margin: 0 auto;
+            display: flex;
+            border: 1px solid #000;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items:center;
+           
+           
+        }
+        .btnBackBlack{
+            position: absolute;
+            width: 200px;
+            height: 70px;
+            background-color: aqua;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius:10px;
+            margin: 0 auto;
+            margin-top: 50px;
+            left: 50%;
+            bottom: 0;
+            transform: translate(-50%);
+        }
+        .btnBackBlack a{
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 500px;
+            color:#000;
+            padding: 10px;
+        }
+        .filterDiv{
+            display: flex;
+            align-items:center;
+            justify-content: space-around;
+            width: 100%;
+            height: 200px;
+            border-bottom: 2px solid #000;
+        }
+        select{
+            width: 200px;
+            height: 30px;
+        }
+        .listCars{
+            width: 100%;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            text-align: start;
+            padding-top: 10px;
+            padding-left: 10px;
+        }
+    </style>
+</head>
+<body>
+
+
+
+    <div class="wrapper">
+
+        <button class='btnBackBlack'><a href='../lesson20.html'>До завдань</a></button>
+
+
+    </div>
+
+    <script>
+
+
+    // Задача. Дано список автомобілів (марка, рік випуску, ціна). Сформувати елементи для фільтрування з використанням випадаючого списку (контент цих випадаючих списків сформувати у залежності від переданого списку).
+
+    // масив машин
+
+    // клас автомобіля
+    // клас фільтрації
+
+
+
+    let carList = [
+        {
+            brand : "Audi",
+            graduationYear : 2004,
+            price: 4000
+        },  {
+            brand : "Kia",
+            graduationYear : 2001,
+            price: 16000
+        },
+        {
+            brand : "BMW",
+            graduationYear : 2012,
+            price: 13500
+        },
+        {
+            brand : "BMW",
+            graduationYear : 2014,
+            price: 8000
+        },
+        {
+            brand : "Mercedes",
+            graduationYear : 1999,
+            price: 20000
+        },
+        {
+            brand : "Toyota",
+            graduationYear : 2009,
+            price: 15000
+        }
+
+    ]
+
+    class CarList{
+        constructor(carList){
+            this.carList = [...carList];
+        }
+
+        findCar(e){
+
+           
+            console.log(e.target)
+
+            if(e.target.tagName === "SELECT"){
+
+                for(let car of this.carList){
+                    
+                let {brand,graduationYear} = car
+                if(e.target.value === brand || e.target.value === graduationYear){
+                    const findCar = new CustomEvent("findCar",{
+                    detail:{
+                        car : car
+                    }
+                })
+                this.selectBrand.dispatchEvent(findCar)
+                this.selectPrice.dispatchEvent(findCar)
+                }
+            }
+
+           
+            }
+
+           
+        }
+
+        render(select){
+
+            const divFilter = document.createElement("div")
+            divFilter.className = "filterDiv"
+            select.prepend(divFilter)
+
+            const selectBrand = document.createElement("select")
+            selectBrand.className = "select"
+            divFilter.append(selectBrand)
+
+            const selectPrice = document.createElement("select")
+            selectPrice.className = "select"
+            divFilter.append(selectPrice)
+
+            for( let car of this.carList){
+
+                let {brand,graduationYear,price} = car
+
+                let optionBrand = document.createElement("option")
+                optionBrand.innerHTML = brand
+                selectBrand.append(optionBrand)
+
+                let optionYear = document.createElement("option")
+                optionYear.innerHTML = graduationYear
+                selectPrice.append(optionYear)
+
+                
+            }
+
+            this.selectBrand = selectBrand
+            this.selectPrice = selectBrand
+           
+            select.onclick = this.findCar.bind(this)
+
+
+
+
+        }
+
+      
+    }
+
+
+
+
+   class FilterCar{
+        constructor(){
+        }
+
+        findCar(e){
+            const div = document.createElement("div")
+
+            let {brand,graduationYear,price} = e.detail.car
+
+            div.innerHTML = `${brand} - ${graduationYear} - ${price}$`
+
+            this.divList.append(div)
+
+
+        }
+
+        render(selector){
+
+            if(!selector)   
+                return
+
+
+            const container = document.querySelector(selector)
+
+
+            const divList = document.createElement("div")
+            divList.className = "listDiv"
+            container.append(divList)
+
+
+            const filterDiv = new CarList(carList)
+            filterDiv.render(container)
+
+            this.divList = divList
+
+            filterDiv.selectBrand.addEventListener(
+                'findCar',
+                this.findCar.bind(this)
+            )
+
+    
+
+        }
+   }
+
+   window.onload = function(){
+    const filter = new FilterCar(carList)
+    filter.render(".wrapper")
+   }
+
+// --------------------------------------------------------
+
+
+
+
+
+
+     
+    </script>
+</body>
+</html>

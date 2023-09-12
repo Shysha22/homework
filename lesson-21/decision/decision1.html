@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .wrapper{
+            width: 100%;
+            height: 950px;
+            display: flex;
+            align-items:center;
+            justify-content: center;
+            position: relative;
+        }
+        .btnBackBlack{
+            position: absolute;
+            width: 200px;
+            height: 70px;
+            background-color: aqua;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius:10px;
+            margin: 0 auto;
+            margin-top: 50px;
+            left: 50%;
+            bottom: 0;
+            transform: translate(-50%);
+        }
+        .btnBackBlack a{
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 500px;
+            color:#000;
+            padding: 10px;
+        }
+        .client_card{
+            width: 300px;
+            height: 400px;
+            border: 2px solid #000;
+            display: flex;
+            flex-direction: column;
+            align-items:center;
+            justify-content: center;
+        }
+        .client_card div{
+            margin-top: 20px;
+        }
+        .box_balans{
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="wrapper">
+        <div class="client_card">
+        </div>
+
+        <button class='btnBackBlack'><a href='../lesson20.html'>До завдань</a></button>
+
+    </div>
+
+  
+
+    <script>
+
+    // створюю клас Client
+        class Client{
+
+            constructor(id,initial,balans){
+                this.id = id;
+                this.initial = initial;
+                this.balans = balans
+            }
+
+            toString(selector){
+
+                let clientCard = document.querySelector(selector)
+
+                const clientId = document.createElement("div")
+                clientCard.append(clientId)
+                clientId.innerHTML = `ID : ${   this.id }`
+
+                const clientInitial = document.createElement("div")
+                clientCard.append(clientInitial)
+                clientInitial.innerHTML =`ПІБ : ${this.initial}` 
+
+
+                const clientBalans = document.createElement("div")
+                clientBalans.innerHTML = `Баланс : `
+                const boxBalans = document.createElement("div")
+                boxBalans.className = "box_balans"
+                boxBalans.innerText = this.balans
+                clientBalans.append(boxBalans)
+                clientCard.append(clientBalans)
+
+
+                const addMoney =  document.createElement("div")
+                const addLabel = document.createElement("label")
+                addLabel.innerText = "Додати гроші"
+                const addMoneyInput =  document.createElement("input")
+                addMoney.append(addLabel)
+                addMoney.append(addMoneyInput)
+                clientCard.append(addMoney) 
+
+                const withdrawalMoney =  document.createElement("div")
+                const withdLabel = document.createElement("label")
+                withdLabel.innerText = "Зняти гроші"
+                const withdMoneyInput =  document.createElement("input")
+                withdrawalMoney.append(withdLabel)
+                withdrawalMoney.append(withdMoneyInput)
+                clientCard.append(withdrawalMoney) 
+
+
+                this.addMoneyInput = addMoneyInput
+                this.withdMoneyInput = withdMoneyInput
+                this.boxBalans = boxBalans
+
+                this.addMoneyInput.onchange = this.addingMoney.bind(this)
+                this.withdMoneyInput.onchange = this.withdrawalMoney.bind(this)
+
+
+                // return `Ваш № ID ${this.id}<br>ПІБ - ${this.initials}<br>Ваш баланс = ${this.balans}`
+
+            }
+                
+        }
+
+        // кдас золотого клієнта
+        class GoldenClient extends Client{
+            constructor(id,initial,balans,creditLimit,creditInterest){
+                super(id,initial,balans)
+                this.creditLimit = creditLimit;
+                this.creditInterest = creditInterest;
+            }
+            // метод додавання
+            addingMoney(e){
+                let sum = parseInt(e.target.value)
+
+                if(sum > 0){
+                    this.boxBalans.innerText = ""
+                    this.balans += sum
+                    e.target.value = ""
+                    this.boxBalans.innerHTML = this.balans
+                }
+                else{
+                    e.target.value = "некоректа дія"
+                }
+                
+            }
+
+        // метод зняття грошей
+            withdrawalMoney(e){
+
+                 let sum = parseInt(e.target.value)
+
+                if(sum < this.balans){
+                    this.boxBalans.innerText = ""
+                    this.balans -= sum
+                    e.target.value = 0
+                    this.boxBalans.innerHTML = this.balans
+                }
+                else
+                    e.target.value = "недостатньо коштів"
+                    
+                }
+
+
+
+            // метод визначення кредитної пені
+            definitionPenalty(){
+                return this.creditLimit *  this.creditInterest / 100
+            }
+
+            // виведення
+            toString(selector){
+
+                const client = super.toString(selector)
+
+                let clientCard = document.querySelector(selector)
+
+                const creditLimit = document.createElement("div")
+                clientCard.append(creditLimit)
+                creditLimit.innerHTML = `Кредитний ліміт : ${this.creditLimit }`
+
+
+                const creditInterest = document.createElement("div")
+                clientCard.append(creditInterest)
+                creditInterest.innerHTML = `Пеня за кредитні кошти ${this.creditInterest}% становитиме ${this.definitionPenalty()}грн`
+
+
+                // return ` ${client}Доступний кредитний ліміт ${this.creditLimit}<br> Пеня за кредитними коштами становитиме ${this.definitionPenalty()} за рік`
+            }
+
+        }
+
+        // список клієнтів
+        listGoldClient = [
+            {
+                id : 234421223,
+                initial : "Петренко Володимир Іванович",
+                balans : 0,
+                creditLimit : 5000,
+                creditInterest : 4  
+            }
+        ]
+
+        // виклик
+        window.onload = function(){
+            console.log(1)
+            for(let client of listGoldClient){
+                let {id,initial,balans,creditLimit,creditInterest} = client;
+                const clientGold = new GoldenClient(id,initial,balans,creditLimit,creditInterest)
+                clientGold.toString(".client_card")
+            }
+        }
+
+
+    </script>
+</body>
+</html>

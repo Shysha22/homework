@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .wrapper{
+            width: 700px;
+            height: 550px;
+            position: relative;
+            margin: 0 auto;
+            display: flex;
+            border: 1px solid #000;
+            border-radius: 20px;
+            display: flex;
+            align-items:center;
+            flex-direction: column;
+            justify-content: center;
+           
+           
+        }
+        .btnBackBlack{
+            position: absolute;
+            width: 200px;
+            height: 70px;
+            background-color: aqua;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius:10px;
+            margin: 0 auto;
+            margin-top: 50px;
+            left: 50%;
+            bottom: 0;
+            transform: translate(-50%);
+        }
+        .btnBackBlack a{
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 500px;
+            color:#000;
+            padding: 10px;
+        }
+        .inputWrapper{
+            width: 300px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items:center;
+        }
+        .list_name_wrapper{
+            width: 300px;
+            height: 500px;
+        }
+    </style>
+</head>
+<body>
+
+
+
+    <div class="wrapper">
+
+        <button class='btnBackBlack'><a href='../lesson20.html'>До завдань</a></button>
+
+
+    </div>
+
+    <script>
+
+
+// Задача. Динамічний пошук. Є список працівників і поле пошуку. При введенні відображаються усі, які містять вказаний фрагмент
+const listName = [
+        "Саша",
+        "Ваня",
+        "Степан",
+        "Андрій",
+        "Валерій",
+        "Оксана",
+        "Ірина",
+        "Марина",
+    ]
+
+    // клас пошукове поле
+    class SearchField{
+
+        findName(e){
+            const findElement = new CustomEvent("findName",{
+                detail : {
+                    name : e.target.value
+                }
+            })
+            this.input.dispatchEvent(findElement)
+        }
+        render(selector){
+       
+            const inputWrapper = document.createElement("div")
+            inputWrapper.className = "inputWrapper"
+        
+
+            const input = document.createElement('input')
+            input.setAttribute("type","text")
+            input.setAttribute("placeholder","Введіть ім'я")
+            inputWrapper.append(input)
+
+            this.input = input
+
+            this.input.onchange = this.findName.bind(this)
+
+            if(selector)
+                document.querySelector(selector).append(inputWrapper)
+            else
+                return
+        }
+
+    }
+
+    // клас виведення імен
+    class ListName{
+        constructor(listName){
+            this.listName = listName
+        }
+
+        createElement(list,container){
+            for(let i = 0; i < list.length;i++){
+                const el = document.createElement("div")
+                el.textContent = list[i]
+                container.append(el)
+            }
+        }
+
+        render(selector){
+                
+
+            const listNamesBox = document.createElement("div")
+            listNamesBox.className = "list_name_wrapper"
+
+            this.listNamesBox = listNamesBox
+
+          
+
+            if(selector)
+                document.querySelector(selector).append(listNamesBox)
+            else
+                return
+
+                this.createElement(this.listName,this.listNamesBox)
+
+        }
+        run(e){
+
+            let value = (e.detail.name)
+
+            let filterArr = this.listName.filter(name => name.toUpperCase() === value.toUpperCase())
+
+            this.listNamesBox.innerHTML = ""
+
+            this.createElement(filterArr,this.listNamesBox)
+
+                
+        }
+}
+
+   window.onload = function(){
+
+    const searchField = new SearchField()
+    searchField.render(".wrapper") 
+    const list = new ListName([...listName])
+    list.render(".wrapper")
+
+    searchField.input.addEventListener("findName",list.run.bind(list))
+   }
+
+// --------------------------------------------------------
+
+
+
+
+
+
+     
+    </script>
+</body>
+</html>

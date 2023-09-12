@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .wrapper{
+            width: 100%;
+            height: 550px;
+            display: flex;
+            align-items:center;
+            justify-content: center;
+            position: relative;
+        }
+        .btnBackBlack{
+            position: absolute;
+            width: 200px;
+            height: 70px;
+            background-color: aqua;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius:10px;
+            margin: 0 auto;
+            margin-top: 50px;
+            left: 50%;
+            bottom: 0;
+            transform: translate(-50%);
+        }
+        .btnBackBlack a{
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 500px;
+            color:#000;
+            padding: 10px;
+        }
+        .element_wrapper{
+            position: absolute;
+        }
+        .img{
+            width: 100px;
+            height: 100px;
+        }
+
+    </style>
+</head>
+<body>
+
+
+    <div class="wrapper">
+        </div>
+
+        <button class='btnBackBlack'><a href='../lesson21.html'>До завдань</a></button>
+
+    </div>
+
+
+    <script>
+
+        // батьківський клас
+        class Parent{
+            constructor(coordinateX,coordinateY,pathImg,interval){
+                this.coordinateX = coordinateX;
+                this.coordinateY = coordinateY;
+                this.pathImg = pathImg;
+                this.interval = interval;
+            }
+            rabdomNum(min,max){
+                return min + Math.floor(Math.random() * (max + min - 1))
+            }
+
+            // створюю обєкт
+            generationElement(selector){
+
+                const element = document.createElement('div')
+                element.className = "element_wrapper"
+
+                this.img = document.createElement('img')
+                this.img.className = "img"
+                this.img.setAttribute("src",this.pathImg)
+                element.append(this.img)
+
+                element.style.top = this.coordinateY + "px"
+                element.style.left =  this.coordinateX + "px"
+
+                this.element = element
+
+                if(selector){
+                    this.selector = document.querySelector(selector)
+                    this.selector.append(this.element)
+                }
+                else    
+                    return
+            }
+        }
+
+
+        // клас собаки
+        class Dog extends Parent{
+            constructor(coordinateX,coordinateY,pathImg,interval){
+                super(coordinateX,coordinateY,pathImg,interval)
+            }
+
+        // змінюю положення
+        update(){
+
+            const widthContainer = this.selector.clientWidth
+            let increaseValue = setInterval(() =>{
+                let randomNum = this.rabdomNum(1,widthContainer)
+                this.element.style.left = randomNum + "px"
+            },this.interval)
+        }
+     
+        }
+
+        // клас пташки
+        class Bird extends Parent{
+            constructor(coordinateX,coordinateY,pathImg,interval){
+                super(coordinateX,coordinateY,pathImg,interval)
+            }
+
+        // змінюю положення
+            update(){
+                const containerWidth = this.selector.clientWidth
+                const containerHeigth = this.selector.clientHeight
+
+                let increaseValue = setInterval(() =>{
+                    let width = this.rabdomNum(1,containerWidth)
+                    let heigth = this.rabdomNum(1,containerHeigth)
+                    this.element.style.left = width + "px"
+                    this.element.style.top = heigth + "px"
+                },this.interval)
+            }
+        }
+
+        // клас будинок
+        class House extends Parent{
+            constructor(coordinateX,coordinateY,pathImg,interval){
+                super(coordinateX,coordinateY,pathImg,interval)
+            }
+
+        // змінюю положення
+            update(min,max){
+                setInterval(() =>{  
+                    let sizeEl = this.rabdomNum(min,max)
+                    this.img.style.transform = `scale(${sizeEl})`
+                },this.interval)
+// ----------------------------------------------
+                // намагався створити інтервал щоб будинок збільшувався до певного моменту та зменшувався(плавно)
+
+                // let step = 0.01
+                // let position = 1
+                // let maxValue = 4
+
+                // let decreaseValue = () =>{
+                //     position-=step
+                //     this.img.style.transform = `scale(${position})`
+                //     if(position < 1){
+                //         clearInterval(this.decrease)
+                //         this.increase = setInterval(increaseValue,this.interval)
+                //     }
+                
+                // }
+                // let increaseValue =  () =>{
+                //     position+=step
+                //     this.img.style.transform = `scale(${position})`
+                //     if(position > maxValue){
+                //         clearInterval(this.increase)
+                //         this.decrease = setInterval(decreaseValue,this.interval)
+                //     }
+                // }
+                // this.increase = setInterval(increaseValue,this.interval)
+                }
+        }
+
+        window.onload = function(){
+            
+            const dog = new Dog(200,500,"../resource/dog.jpg",3000)
+            dog.generationElement(".wrapper")
+            dog.update()
+            
+            const bird = new Bird(600,100,"../resource/bird.jpg",2000)
+            bird.generationElement(".wrapper")
+            bird.update()
+            
+            
+
+            const house = new House(900,500,"../resource/house.jpg",2000)
+            house.generationElement(".wrapper")
+            house.update(1,4)
+
+        }
+
+
+    </script>
+</body>
+</html>
