@@ -42,26 +42,21 @@
             color:#000;
             padding: 10px;
         }
-        .filterDiv{
+        .filterContainer{
             display: flex;
             align-items:center;
             justify-content: space-around;
-            width: 100%;
+            width: 600px;
             height: 200px;
             border-bottom: 2px solid #000;
         }
-        select{
-            width: 200px;
-            height: 30px;
-        }
-        .listCars{
-            width: 100%;
-            height: 300px;
+        
+
+        .listUl{
+            width: 600px;
             display: flex;
             flex-direction: column;
-            text-align: start;
-            padding-top: 10px;
-            padding-left: 10px;
+            align-items: center;
         }
     </style>
 </head>
@@ -70,6 +65,12 @@
 
 
     <div class="wrapper">
+        <div class="list_car_container">
+       
+            <div class="find_car_container">
+            </div>
+        </div>
+
 
         <button class='btnBackBlack'><a href='../lesson20.html'>До завдань</a></button>
 
@@ -81,14 +82,21 @@
 
     // Задача. Дано список автомобілів (марка, рік випуску, ціна). Сформувати елементи для фільтрування з використанням випадаючого списку (контент цих випадаючих списків сформувати у залежності від переданого списку).
 
-    // масив машин
-
-    // клас автомобіля
-    // клас фільтрації
 
 
+        // список автомобілів
 
     let carList = [
+        {
+            brand : "Toyota",
+            graduationYear : 2012,
+            price: 14000
+        },
+        {
+            brand : "Kia",
+            graduationYear : 2011,
+            price: 19000
+        },
         {
             brand : "Audi",
             graduationYear : 2004,
@@ -115,144 +123,159 @@
         },
         {
             brand : "Toyota",
+            graduationYear : 2019,
+            price: 18000
+        }, 
+        {
+            brand : "Mercedes",
             graduationYear : 2009,
             price: 15000
         }
 
     ]
 
-    class CarList{
-        constructor(carList){
-            this.carList = [...carList];
-        }
+        // клас фільтрації
+        class FilterCar{
+            constructor(list){
+                this.listCar = list
+            }
 
-        findCar(e){
+            filterCarList(e){
 
-           
-            console.log(e.target)
+                const targetValue = e.target.value
 
-            if(e.target.tagName === "SELECT"){
+                // створюю масив який буде з вибраним автомобілем
+                let filterCarsList = []
 
-                for(let car of this.carList){
-                    
-                let {brand,graduationYear} = car
-                if(e.target.value === brand || e.target.value === graduationYear){
-                    const findCar = new CustomEvent("findCar",{
+                for( const carObj of  this.listCar){
+
+                    const {brand,graduationYear} = carObj
+
+                    if(brand === targetValue){
+                        filterCarsList.push(carObj)
+                    }
+
+                    if(graduationYear === parseInt(targetValue)){
+                        filterCarsList.push(carObj)
+                    }
+                }
+
+                const selectCar = new CustomEvent("selectCar",{
                     detail:{
-                        car : car
+                        carList : filterCarsList
                     }
                 })
-                this.selectBrand.dispatchEvent(findCar)
-                this.selectPrice.dispatchEvent(findCar)
+                this.filterContainer.dispatchEvent(selectCar)
+
+
+            }
+
+
+
+            // метод динамічно створю опшини з параметрами фільтрації
+            createOptionCar([...list]){ 
+
+                // нові масиви для назви машини та року випуску
+                const filterBrandName = []
+                const filterYear = []
+
+                for( let obj of list){
+                    if(!filterBrandName.includes(obj.brand))
+                    filterBrandName.push(obj.brand)
+
+                    if(!filterYear.includes(obj.graduationYear))
+                    filterYear.push(obj.graduationYear)
+                }
+
+                filterBrandName.sort()
+                filterYear.sort()
+
+
+
+                for(const brand of filterBrandName){
+                    const optionCar = document.createElement("option")
+                    optionCar.innerHTML = brand
+                    this.selectBrand.append(optionCar)
+                }
+                for(const year of filterYear){
+                    const optionYear = document.createElement("option")
+                    optionYear.innerHTML = year
+                    this.selectYear.append(optionYear)
                 }
             }
 
-           
-            }
 
-           
-        }
+            render(select){
 
-        render(select){
+                const filterContainer = document.createElement("div")
+                filterContainer.className = "filterContainer"
 
-            const divFilter = document.createElement("div")
-            divFilter.className = "filterDiv"
-            select.prepend(divFilter)
+                // створю пошук селект бренд
+                const selectedCarBrand = document.createElement("div")
+                selectedCarBrand.className = "selected_brand"
+                const selectBrand = document.createElement("select")
+                selectedCarBrand.append(selectBrand)
+                filterContainer.prepend(selectedCarBrand)
 
-            const selectBrand = document.createElement("select")
-            selectBrand.className = "select"
-            divFilter.append(selectBrand)
+                // створю пошук селект рік
+                const  selectedCarYear = document.createElement("div")
+                selectedCarYear.className = "selected_brand"
+                const selectYear = document.createElement("select")
+                selectedCarYear.append(selectYear)
+                filterContainer.append(selectedCarYear)
 
-            const selectPrice = document.createElement("select")
-            selectPrice.className = "select"
-            divFilter.append(selectPrice)
-
-            for( let car of this.carList){
-
-                let {brand,graduationYear,price} = car
-
-                let optionBrand = document.createElement("option")
-                optionBrand.innerHTML = brand
-                selectBrand.append(optionBrand)
-
-                let optionYear = document.createElement("option")
-                optionYear.innerHTML = graduationYear
-                selectPrice.append(optionYear)
+                this.filterContainer = filterContainer
+                this.selectBrand = selectBrand
+                this.selectYear = selectYear
 
                 
+
+                this.createOptionCar.bind(this)
+
+                this.createOptionCar(this.listCar)
+
+                this.filterContainer.onchange = this.filterCarList.bind(this)
+
+            if(select){
+                console.log(1)
+                    document.querySelector(select).prepend(filterContainer)
             }
-
-            this.selectBrand = selectBrand
-            this.selectPrice = selectBrand
-           
-            select.onclick = this.findCar.bind(this)
-
-
-
-
-        }
-
-      
-    }
-
-
-
-
-   class FilterCar{
-        constructor(){
-        }
-
-        findCar(e){
-            const div = document.createElement("div")
-
-            let {brand,graduationYear,price} = e.detail.car
-
-            div.innerHTML = `${brand} - ${graduationYear} - ${price}$`
-
-            this.divList.append(div)
-
-
-        }
-
-        render(selector){
-
-            if(!selector)   
+            
+            else
                 return
 
+            }
+        }
 
-            const container = document.querySelector(selector)
+        
+        // функція виведення результату пошуку
+        function createElement(e){
 
+            const parentEl = document.querySelector(".find_car_container")
 
-            const divList = document.createElement("div")
-            divList.className = "listDiv"
-            container.append(divList)
+            const newListCar = e.detail.carList
 
+            parentEl.innerHTML = ""
 
-            const filterDiv = new CarList(carList)
-            filterDiv.render(container)
+            for(const car of newListCar){
+                const div = document.createElement('div')
+                let {brand,graduationYear,price} = car
+                div.innerHTML = `${brand} - ${graduationYear} - ${price} ,`
+                parentEl.append(div)
 
-            this.divList = divList
-
-            filterDiv.selectBrand.addEventListener(
-                'findCar',
-                this.findCar.bind(this)
-            )
-
-    
+            }
+            console.log(e.detail)
 
         }
-   }
-
-   window.onload = function(){
-    const filter = new FilterCar(carList)
-    filter.render(".wrapper")
-   }
-
-// --------------------------------------------------------
 
 
+        window.onload = function(){
+            const filter  = new FilterCar(carList)
+            filter.render(".list_car_container")
 
+            filter.filterContainer.addEventListener("selectCar",createElement)
 
+        }
 
 
      
