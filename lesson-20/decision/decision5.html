@@ -138,40 +138,41 @@
         class FilterCar{
             constructor(list){
                 this.listCar = list
+                this.brandValue
+                this.yearValue
             }
 
-            filterCarList(e){
-
-                const targetValue = e.target.value
-
-                // створюю масив який буде з вибраним автомобілем
-                let filterCarsList = []
-
-                for( const carObj of  this.listCar){
-
-                    const {brand,graduationYear} = carObj
-
-                    if(brand === targetValue){
-                        filterCarsList.push(carObj)
-                    }
-
-                    if(graduationYear === parseInt(targetValue)){
-                        filterCarsList.push(carObj)
-                    }
+            // метод фільтрації
+            filterCarList(e){ 
+                // превіряю де спрацював селект та запоминаю його
+                if(e.target.className === "brand"){
+                    this.brandValue = e.target.value
+                }
+                if(e.target.className === "year"){
+                    this.yearValue = e.target.value
                 }
 
-                const selectCar = new CustomEvent("selectCar",{
-                    detail:{
-                        carList : filterCarsList
+                // переіфряю чи він не андевайн
+                if( this.brandValue  !== undefined && this.yearValue !== undefined){
+
+                    let filterCarsList = []
+
+                    for( const carObj of  this.listCar){
+
+                        const {brand,graduationYear} = carObj
+
+                        if(brand === this.brandValue  &&  graduationYear === parseInt(this.yearValue))
+                            filterCarsList.push(carObj)
+                        }
+                    const selectCar = new CustomEvent("selectCar",{
+                        detail:{
+                            carList : filterCarsList
+                        }
+                        })
+                    this.filterContainer.dispatchEvent(selectCar)
                     }
-                })
-                this.filterContainer.dispatchEvent(selectCar)
-
-
-            }
-
-
-
+                }
+               
             // метод динамічно створю опшини з параметрами фільтрації
             createOptionCar([...list]){ 
 
@@ -195,6 +196,7 @@
                 for(const brand of filterBrandName){
                     const optionCar = document.createElement("option")
                     optionCar.innerHTML = brand
+                    
                     this.selectBrand.append(optionCar)
                 }
                 for(const year of filterYear){
@@ -203,8 +205,6 @@
                     this.selectYear.append(optionYear)
                 }
             }
-
-
             render(select){
 
                 const filterContainer = document.createElement("div")
@@ -214,6 +214,7 @@
                 const selectedCarBrand = document.createElement("div")
                 selectedCarBrand.className = "selected_brand"
                 const selectBrand = document.createElement("select")
+                selectBrand.className = "brand"
                 selectedCarBrand.append(selectBrand)
                 filterContainer.prepend(selectedCarBrand)
 
@@ -221,6 +222,7 @@
                 const  selectedCarYear = document.createElement("div")
                 selectedCarYear.className = "selected_brand"
                 const selectYear = document.createElement("select")
+                selectYear.className = "year"
                 selectedCarYear.append(selectYear)
                 filterContainer.append(selectedCarYear)
 
@@ -243,32 +245,36 @@
             
             else
                 return
-
+         
             }
         }
 
         
-        // функція виведення результату пошуку
+        //--------------------------------------- функція виведення результату пошуку-------------------------------------------------------
         function createElement(e){
 
             const parentEl = document.querySelector(".find_car_container")
 
             const newListCar = e.detail.carList
-
             parentEl.innerHTML = ""
+
+            if(newListCar.length === 0){
+                const div = document.createElement("div")
+                div.innerHTML = `Такого варіанту не знайдено,спробуйте ще`
+                parentEl.append(div)
+            }
+
 
             for(const car of newListCar){
                 const div = document.createElement('div')
                 let {brand,graduationYear,price} = car
-                div.innerHTML = `${brand} - ${graduationYear} - ${price} ,`
+                div.innerHTML = `${brand} - ${graduationYear} - ${price}$ ,`
                 parentEl.append(div)
 
             }
             console.log(e.detail)
 
         }
-
-
         window.onload = function(){
             const filter  = new FilterCar(carList)
             filter.render(".list_car_container")
