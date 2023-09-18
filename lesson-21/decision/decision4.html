@@ -64,6 +64,10 @@
         .blue{
             color: blue;
         }
+        .title{
+            width: 600px;
+            margin-bottom: 10px;
+        }
 
     </style>
 </head>
@@ -71,6 +75,7 @@
 
 
     <div class="wrapper">
+        <div class="title"> Задача 4. Користувач задає місяць навчання учня (перевіряти чи є числом, чи від 1 до 12, чи не канікули) та оцінку (перевіряти чи є числом, чи від 1 до 100). Вивести чи зможе він виправити оцінку (якщо оцінка погана і це не останній місяць у семестрі) . Обробку усіх помилок зробити з використанням відповідних класів</div>
        
 
         </div>
@@ -158,10 +163,10 @@
                     if( 1 > valueRating || valueRating > 100) throw new IsNotFindRatingNumber(1,100)
 
                     // якщо оцінка погана і це не останній місяць у семестрі (тут оцінка не менше 20)
-                    if(valueRating < 20 && (valueMonth !== 12 || valueMonth !== 5)) throw new IsNotCorrectRating()
+                    if(valueRating < 20 && (valueMonth === 12 || valueMonth === 5)) throw new IsNotCorrectRating()
 
                    
-                    this.showMessageResult(this.container,"Так,ви можете виправити оцінкy",true)
+                    this.showMessageResult("Так,ви можете виправити оцінкy",true)
 
                     this.monthInput.value = ""
                     this.ratingInput.value = ""
@@ -186,7 +191,7 @@
                     }
 
                     if(err instanceof IsNotCorrectRating){
-                        this.showMessageResult(this.container,err.message,false)
+                        this.showMessageResult(err.message,false)
                     }
             }
         }
@@ -198,12 +203,13 @@
                 boxError.innerHTML = message
             }
 
-  // фінальне повідомлення
-            showMessageResult(container,message,value){
-                    const result = document.createElement("span")
-                    value ? result.className = "blue" : result.className = "red"
-                    result.innerText = message
-                    container.before(result)
+
+        // фінальне повідомлення
+            showMessageResult(message,value){
+                this.showMessage.innerHTML = ""
+                    value ? this.showMessage.className = "blue" : this.showMessage.className = "red"
+                    this.showMessage.innerText = message
+                  
 
             }
 
@@ -212,6 +218,8 @@
 
                 const container = document.createElement("div")
                 container.className = "user_check"
+
+                this.showMessage = document.createElement("span")
 
                 const monthWrapper = document.createElement('div')
                 this.errMonth = document.createElement("span")
@@ -234,6 +242,7 @@
                 container.append(monthWrapper)
                 container.append(ratingWrapper)
                 container.append(btn)
+                container.prepend(this.showMessage)
 
                 this.container = container
 

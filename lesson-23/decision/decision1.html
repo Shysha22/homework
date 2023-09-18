@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .wrapper{
+            width: 100%;
+            height: 950px;
+            display: flex;
+            align-items:center;
+            justify-content: center;
+            position: relative;
+            flex-direction: column;
+        }
+        .btnBackBlack{
+            position: absolute;
+            width: 200px;
+            height: 70px;
+            background-color: aqua;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius:10px;
+            margin: 0 auto;
+            margin-top: 50px;
+            left: 50%;
+            bottom: 0;
+            transform: translate(-50%);
+        }
+        .btnBackBlack a{
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 500px;
+            color:#000;
+            padding: 10px;
+        }
+        .container{
+            width: 400px;
+            height: 300px;
+            border: 1px solid #000;
+            display: flex;
+            align-items:center;
+            justify-content: center;
+            border-radius: 20px;
+            flex-direction: column;
+        }
+        .box{
+            width: 100%;
+            border:1px solid #000;
+            margin-top: 10px;
+            height: 30px;
+            display: flex;
+            align-items:center;
+            justify-content: center;
+            border-radius: 10px
+        }
+
+
+        .exm_container{
+            font-size: 26px;
+        }
+        input{
+            width: 60px;
+            height: 26px;
+            background-color:rgba(0, 0, 0, 0.01);
+            border:none;
+            border: 1px solid #000;
+            margin-left: 5px;
+            border-radius:10px;
+            text-align: center;
+        }
+        .right{
+            color : blue;
+            font-size: 24px
+        }
+        .not_right{
+            color : red;
+            font-size: 24px
+        }
+        .title{
+            margin-bottom: 10px;
+        }
+        .container_expiration{
+            width: 400px;
+            height: 150px;
+            display: flex;
+            align-items:center;
+            justify-content: center;
+        }
+        .btn{
+            width: 120px;
+            height: 40px;
+            border-radius:20px;
+            background-color: #c49d9d;
+            cursor: pointer;
+        }
+        .suitable{
+            color: blue;
+        }
+        .not_suitable{
+            color: red;
+        }
+
+      
+    </style>
+</head>
+<body>
+
+
+    <div class="wrapper">
+        <div class="container">
+        </div>
+
+        <button class='btnBackBlack'><a href='../lesson23.html'>До завдань</a></button>
+
+    </div>
+
+    <script>
+
+        const containerBase = document.querySelector(".container")
+        
+        let arr = ["поле","рррд","машина911","бббб","погода","23фільми","машина","рік2023","вввв","тест245"]
+
+        // Задача 1.Дано масив рядків. Вивести ті, у яких є цифри (використати метод test та регулярні вирази)-------------------------------
+        // let arrNumber = arr.filter(el => /\d/ig.test(el))
+        // containerBase.innerHTML = arrNumber.join(", ")
+
+
+        // // Задача 2. Дано масив рядків. Вивести ті, у яких немає цифр.-------------------------------
+        // let arrNotNumber = arr.filter((el) => /^\D+$/ig.test(el) )
+        // containerBase.innerHTML = arrNotNumber.join(", ")
+
+        // Задача 3. Дано масив рядків. Вивести ті, у яких є голосні літери.
+        // let arrVowelsLet = arr.filter( el => /[аоуеиі]/ig.test(el))
+        // containerBase.innerHTML = arrVowelsLet.join(", ")
+
+        // Задача 4. Дано масив рядків. Вивести ті, у яких немає голосних літер.
+        // containerBase.innerHTML =""
+        // let arrNotVowelsLet = arr.filter( el => el.match(/^[^АОУЕИІ]+$/ig))
+        // containerBase.innerHTML = arrNotVowelsLet.join(", ")
+
+        // Задача 5. Дано масив рядків. Вивести ті, у яких є або цифра 1 або цифра 3.
+        // containerBase.innerHTML =""
+        // let arrNun = arr.filter( el => el.match(/1|3/ig))
+        // containerBase.innerHTML = arrNun.join(", ")
+
+        // Задача 6. Дано рядок тексту, вивести усі числа, які є у тексті.
+        // containerBase.innerHTML =""
+        // let nums = "тест 233 тест перевірка 1 2 тест 9"
+        // let num = nums.match(/\d+/ig) 
+        // containerBase.innerHTML = num.join(", ")
+
+
+        // Задача 7. Дано рядок тексту. Знайти усі знаки пунктуації, які були використано.
+        // containerBase.innerHTML =""
+        // let nums = "тест-233,тест перевірка:1 2 тест 9"
+        // let num = nums.match(/[^\d\w\s а-яі]/ig) 
+        // containerBase.innerHTML = num.join(" | ")
+
+
+        // Задача 8. Дано рядок тексту. Вивести усі складові, які розділені розділовими знаками. 
+        containerBase.innerHTML =""
+        let text = "test chek test,attempt chekchek test-attempt chek test:attempt"
+
+        let check = text.match(/\S\W+\w+/ig)
+        // let check = text.match(/\S+\w+/ig)
+        console.log(check)
+
+        // Задача 9. Дано рядок тексту. Перевірити, чи містить він дату у форматі dd.mm.yyyy (dd- день, mm- місяць, yyyy- рік).
+        // let date = "Сьогодні 16-12-2023"
+        // let check = date.match(/\d{2}.\d{2}.\d{4}/ig)
+        // containerBase.innerHTML =""
+        // containerBase.innerHTML = check
+
+
+        // Задача 10. Дано рядок тексту. Підрахувати кількість двоцифрових чисел у рядку.
+        // let text = '2000 Визначним98 місцем України є острів9 Хортиця 123 – цитадель запорізького 22 козацтва.1 '
+
+        // let res = text.match(/\b\d{2}\b/ig)
+        // containerBase.innerHTML =""
+        // containerBase.innerHTML = res.length
+
+
+        // Задача 11. Визначити чи може бути рядок тексту номером банківської картки (приклад: «4142-3433-2323-3434»). Знайти усі такі номери.
+        // let string = "Визначити чи може бути рядок тексту номером банківської картки (приклад: «4142-3433-2323-3434»). Знайти усі такі номери. «4142-3433-2323-3434»"
+        // let check =  string.match(/\d{4}.\d{4}.\d{4}.\d{4}/g)
+        // containerBase.innerHTML =""
+        // containerBase.innerHTML = check
+
+
+        // Задача 12. Дано адресу сайту. Визначити, чи є він урядовим (містить домен “gov”)----------------------------------------------------------
+
+        // let path = "https://www.kmu.gov.ua/"
+        // let check = /\bgov\b/ig.test(path)
+        // containerBase.innerHTML =""
+        // check?  containerBase.innerHTML = "сайт є урядовим" : containerBase.innerHTML = "сайт не є урядовим"
+
+
+        // Задача 13. Вибрати усі роки після 2021 року з отриманого повідомлення---------------------------------------------------------------------
+
+        //  let string = "Така булачарівна весна 2021,але весна 2022 була жорстока та залишиться в пам'яті і на 2023,2024 2025  та інші роки,та не забудемо навіть в 2055"
+
+        //  let check = string.match(/\b20[2-9]\B[2-9]/g)
+        // containerBase.innerHTML =""
+        // containerBase.innerHTML = check
+
+
+        // Задача 14. Дано номер телефону. Перевірити, чи є цей телефон телефоном з України (починаєтсья на «+38»)------------------------------------
+        // let number = "+380954445875"
+
+        // let check = (number).match(/\+38\d{10}$/g)
+        // check?  containerBase.innerHTML = "Так,з України" : containerBase.innerHTML = "невідомий номер"
+
+        // Задача 15. Користувач вводить прізвище та ім’я в одному рядку через пробіл.  Замінити пробіл на дефіс.--------------------------------------
+        // let string = " Petrov Ivan "
+        // let transform = string.trim().replace(/\s/g, '+')
+        // containerBase.innerHTML = transform
+
+        // Задача 16. Користувач вводить дату у форматі «день.місяць.рік». Отримати рядкове представлення дати у форматі «день/місяць/рік»--------------
+        
+        // let date = "10.10.2023"
+        // let transform = date.replace(/\./g, '/')
+        // containerBase.innerHTML = transform
+
+
+        // Задача 17. Користувач вводить день (номер дня (0-6) або «sun,mon,tue,wed,thu,fri,sat»). Визначити, чи  є це день вихідним------------------------
+
+        // let userDay = "0"
+        // let check = userDay.match(/[0|6]|(sat|sun)/ig)
+        // check ?  containerBase.innerHTML = "Вихідний день" :  containerBase.innerHTML ="Робочий день"
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .wrapper{
+            width: 100%;
+            height: 950px;
+            display: flex;
+            align-items:center;
+            justify-content: center;
+            position: relative;
+        }
+        .btnBackBlack{
+            position: absolute;
+            width: 200px;
+            height: 70px;
+            background-color: aqua;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius:10px;
+            margin: 0 auto;
+            margin-top: 50px;
+            left: 50%;
+            bottom: 0;
+            transform: translate(-50%);
+        }
+        .btnBackBlack a{
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 500px;
+            color:#000;
+            padding: 10px;
+        }
+        .container{
+            width: 300px;
+            height: 400px;
+            border: 2px solid #000;
+            display: flex;
+            flex-direction: column;
+            align-items:center;
+            justify-content: center;
+        }
+      
+    </style>
+</head>
+<body>
+
+
+    <div class="wrapper">
+        <div class="container">
+        </div>
+
+        <button class='btnBackBlack'><a href='../lesson22.html'>До завдань</a></button>
+
+    </div>
+
+    
+
+    <script>
+
+// Задача 2. Вивести дату у форматі
+// “місяць – рік – вихідний/робочий”
+
+
+    function date(){
+
+        const container = document.querySelector(".container")
+
+        const listMonths = ["Січень","Лютий","Березень","Квітень","Травень","Червень","Липень","Серпень","Вересень","Жовтень","Листопад","Грудень",]
+
+        let dateContainer = document.createElement("div")
+        container.append(dateContainer)
+
+        const date = new Date()
+
+        let year = date.getUTCFullYear()
+        let month = date.getUTCMonth()
+        let day = date.getUTCDay()
+        console.log(day)
+
+        day <= 5 ? day = "Робочий" : day = "Вихідний"
+
+        dateContainer.innerHTML = `${listMonths[month]} - ${year} - ${day}`
+
+    }
+
+       
+    window.onload = function(){
+        date()
+    }
+
+    </script>
+</body>
+</html>
