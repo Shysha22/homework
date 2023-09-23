@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .wrapper{
+            width: 100%;
+            height: 950px;
+            display: flex;
+            align-items:center;
+            justify-content: center;
+            position: relative;
+            flex-direction: column;
+        }
+        .btnBackBlack{
+            position: absolute;
+            width: 200px;
+            height: 70px;
+            background-color: aqua;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius:10px;
+            margin: 0 auto;
+            margin-top: 50px;
+            left: 50%;
+            bottom: 0;
+            transform: translate(-50%);
+        }
+        .btnBackBlack a{
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 500px;
+            color:#000;
+            padding: 10px;
+        }
+        .container{
+            width: 400px;
+            height: 300px;
+            border: 1px solid #000;
+            display: flex;
+            align-items:center;
+            justify-content: center;
+            border-radius: 20px;
+            flex-direction: column;
+        }
+        .box{
+            width: 100%;
+            border:1px solid #000;
+            margin-top: 10px;
+            height: 30px;
+            display: flex;
+            align-items:center;
+            justify-content: center;
+            border-radius: 10px
+        }
+
+
+        .exm_container{
+            font-size: 26px;
+        }
+        input{
+            width: 60px;
+            height: 26px;
+            background-color:rgba(0, 0, 0, 0.01);
+            border:none;
+            border: 1px solid #000;
+            margin-left: 5px;
+            border-radius:10px;
+            text-align: center;
+        }
+        .right{
+            color : blue;
+            font-size: 24px
+        }
+        .not_right{
+            color : red;
+            font-size: 24px
+        }
+        .title{
+            margin-bottom: 10px;
+        }
+        .container_expiration{
+            width: 400px;
+            height: 150px;
+            display: flex;
+            align-items:center;
+            justify-content: center;
+        }
+        .btn{
+            width: 120px;
+            height: 40px;
+            border-radius:20px;
+            background-color: #c49d9d;
+            cursor: pointer;
+        }
+        .suitable{
+            color: blue;
+        }
+        .not_suitable{
+            color: red;
+        }
+
+      
+    </style>
+</head>
+<body>
+
+
+    <div class="wrapper">
+        <div class="container">
+        </div>
+
+        <button class='btnBackBlack'><a href='../lesson24.html'>До завдань</a></button>
+
+    </div>
+
+    <script>
+      
+    //  Задача 6.  Дано масив книг (назва, рік видання, автор). Підрахувати кількість книг для кожного автора.
+
+
+    let arrBooks = [
+        {
+            bookTitle : "Синичка",
+            yearPublication : 2007,
+            author : "Світлана Шевченко"
+        },
+        {
+            bookTitle : "Золоте століття",
+            yearPublication : 2010,
+            author : "Світлана Шевченко"
+        },
+        {
+            bookTitle : "Шум",
+            yearPublication : 2002,
+            author : "Павно Миколенко"
+        },
+        {
+            bookTitle : "Мистецтво Війни",
+            yearPublication : 2009,
+            author : "Сунь-дзи"
+        },
+        {
+            bookTitle : "Там, де вітер",
+            yearPublication : 2011,
+            author : "Любко Дереш"
+        },
+        {
+            bookTitle : "Нові Темні Віки",
+            yearPublication : 2009,
+            author : "Павно Миколенко"
+        },
+    ]
+
+    let countBooksAutor = new Map()
+
+    for(let el of arrBooks){
+        let {author} = el
+        let bookCount = countBooksAutor.get(author) ?? 0
+        countBooksAutor.set(author,bookCount + 1)
+    }
+
+    let container = document.querySelector(".container")
+    countBooksAutor.forEach((value,key) =>{
+        let div = document.createElement("div")
+        container.append(div)
+        div.innerHTML = `${key} - ${value} книги`
+    } )
+
+    </script>
+</body>
+</html>
