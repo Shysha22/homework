@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .wrapper{
+            width: 100%;
+            height: 950px;
+            display: flex;
+            align-items:center;
+            justify-content: center;
+            position: relative;
+            flex-direction: column;
+        }
+        .btnBackBlack{
+            position: absolute;
+            width: 200px;
+            height: 70px;
+            background-color: aqua;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius:10px;
+            margin: 0 auto;
+            margin-top: 50px;
+            left: 50%;
+            bottom: 0;
+            transform: translate(-50%);
+        }
+        .btnBackBlack a{
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 500px;
+            color:#000;
+            padding: 10px;
+        }
+        .container{
+            width: 400px;
+            height: 300px;
+            border: 1px solid #000;
+            display: flex;
+            align-items:center;
+            justify-content: center;
+            border-radius: 20px;
+            flex-direction: column;
+        }
+        .box{
+            width: 100%;
+            border:1px solid #000;
+            margin-top: 10px;
+            height: 30px;
+            display: flex;
+            align-items:center;
+            justify-content: center;
+            border-radius: 10px
+        }
+
+
+        .exm_container{
+            font-size: 26px;
+        }
+        input{
+            width: 160px;
+            height: 26px;
+            background-color:rgba(0, 0, 0, 0.01);
+            border:none;
+            border: 1px solid #000;
+            margin-left: 5px;
+            border-radius:10px;
+            text-align: center;
+            margin: 5px;
+        }
+        .right{
+            border: 1px solid blue
+        }
+        .not_right{
+            border: 1px solid red
+        }
+        .title{
+            margin-bottom: 10px;
+        }
+        .container_expiration{
+            width: 400px;
+            height: 150px;
+            display: flex;
+            align-items:center;
+            justify-content: center;
+        }
+        .btn{
+            width: 120px;
+            height: 40px;
+            border-radius:20px;
+            background-color: #c49d9d;
+            cursor: pointer;
+            border:none;
+            margin-top: 10px;
+        }
+        .suitable{
+            color: blue;
+        }
+        .not_suitable{
+            color: red;
+        }
+        .userPhoneContainer{
+            display: flex;
+            flex-direction: column;
+            align-items:center;
+            justify-content: center;
+        }
+        
+
+      
+    </style>
+</head>
+<body>
+
+
+    <div class="wrapper">
+        <div class="container">
+          
+        </div>
+
+
+        <button class='btnBackBlack'><a href='../lesson25.html'>До завдань</a></button>
+
+    </div>
+
+    <script>
+
+    // Задача 2. Дано Shop  -- клас, що містить список товарів (масив об’єктів класу Product (назва, ціна, кількість одиниць). Додати можливість ітератора до класу Shop, щоб при ітеруванні для кожного елемента виводився рядок «товар-загальна вартість»
+
+    // клас товара
+    class Product{
+        constructor(name,price,numUnitsProduct){
+            this.name = name;
+            this.price = price;
+            this.countUnitProduct = numUnitsProduct;
+        }
+    }
+
+    // список товарів
+    let listProduct = [
+        new Product("Навушники",200,150),
+        new Product("Монітор",300,350),
+        new Product("Часи",100,100)
+    ]
+
+    // клас магазин
+    class Shop{
+        constructor(listProduct){
+            this.listProduct = listProduct
+        }
+        [Symbol.iterator](){
+            this.countProduct = 0
+            return this
+        }
+        next(){
+            if(this.countProduct < this.listProduct.length){
+                let {name,price,countUnitProduct} =  this.listProduct[this.countProduct]
+                this.countProduct++
+                return {done : false,value : `${name} - ${price * countUnitProduct} грн`}
+            }
+            return {done : true}
+        }
+    }
+    window.onload = function(){
+        const container = document.querySelector(".container")
+        let shop = new Shop(listProduct)
+        for (const product of shop) {
+            let div = document.createElement("div")
+            div.innerHTML = product
+            container.append(div)
+        }
+    }
+
+
+
+
+    </script>
+</body>
+</html>

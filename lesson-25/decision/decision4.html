@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .wrapper{
+            width: 100%;
+            height: 950px;
+            display: flex;
+            align-items:center;
+            justify-content: center;
+            position: relative;
+            flex-direction: column;
+        }
+        .btnBackBlack{
+            position: absolute;
+            width: 200px;
+            height: 70px;
+            background-color: aqua;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius:10px;
+            margin: 0 auto;
+            margin-top: 50px;
+            left: 50%;
+            bottom: 0;
+            transform: translate(-50%);
+        }
+        .btnBackBlack a{
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 500px;
+            color:#000;
+            padding: 10px;
+        }
+        .container{
+            width: 400px;
+            height: 250px;
+            border: 1px solid #000;
+            display: flex;
+            align-items:center;
+            justify-content: center;
+            border-radius: 20px;
+            flex-direction: column;
+            overflow: hidden;
+            background-color:#fff
+        }
+        .box{
+            width: 100%;
+            border:1px solid #000;
+            margin-top: 10px;
+            height: 30px;
+            display: flex;
+            align-items:center;
+            justify-content: center;
+            border-radius: 10px
+        }
+
+
+        .exm_container{
+            font-size: 26px;
+        }
+        input{
+            width: 160px;
+            height: 26px;
+            background-color:rgba(0, 0, 0, 0.01);
+            border:none;
+            border: 1px solid #000;
+            margin-left: 5px;
+            border-radius:10px;
+            text-align: center;
+            margin: 5px;
+        }
+        .right{
+            border: 1px solid blue
+        }
+        .not_right{
+            border: 1px solid red
+        }
+        .title{
+            margin-bottom: 10px;
+        }
+        .container_expiration{
+            width: 400px;
+            height: 150px;
+            display: flex;
+            align-items:center;
+            justify-content: center;
+        }
+        .btn, .update{
+            width: 120px;
+            height: 40px;
+            border-radius:20px;
+            background-color: #c49d9d;
+            cursor: pointer;
+            border:none;
+            margin-top: 10px;
+        }
+        .update:hover{
+            background-color:#d3bfbf
+        }
+        .suitable{
+            color: blue;
+        }
+        .not_suitable{
+            color: red;
+        }
+        .userPhoneContainer{
+            display: flex;
+            flex-direction: column;
+            align-items:center;
+            justify-content: center;
+        }
+        img{
+            width: 100%;
+            height: 100%;
+        }
+        .loading{
+            width: 60px;
+            height: 60px;
+        }
+        
+
+      
+    </style>
+</head>
+<body>
+
+
+    <div class="wrapper">
+        <div class="container_wrapper">
+            <div class="container"></div>
+            <button class="update">Оновити</button>
+        </div>
+        <button class='btnBackBlack'><a href='../lesson25.html'>До завдань</a></button>
+
+    </div>
+
+    <script>
+
+    // Задача 4. Використовуючи один з АРІ.та функцію fetch організувати завантаження та відображення даних
+
+    // виріш url винести в окрему змінну
+    const parhUrl = "https://dog.ceo/api/breeds/image/random"
+
+    // функція загрузки
+    function loading(container){
+        container.innerHTML =`<img class = 'loading' src = '../resource/loading.jpg'>`
+    }
+
+// Варіант 1-----------------------------------------------
+    async function getImgCat(path,selector){
+        const container = document.querySelector(selector)
+        loading(container)
+        let response = await fetch(path)
+        .then((response) => response.json())
+        .then(({message}) =>{
+            container.innerHTML = `<img src = ${message}>`
+           })
+        .catch((err) =>{
+            let errorDiv = document.createElement("div")
+            container.before(errorDiv)
+            errorDiv.innerHTML = err.message
+            container.innerHTML = `<img src ='../resource/error.png' >`
+        } )
+    }
+    window.onload = function(){
+        getImgCat(parhUrl,".container")
+        const btnUpdate = document.querySelector(".update")
+        btnUpdate.addEventListener("click",() =>getImgCat(parhUrl,".container"))
+    }
+
+
+// варіант 2-----------------------------------
+// спробував try,catch 
+// async function getImgCat(path,selector){
+//         const container = document.querySelector(selector)
+//         loading(container)
+//         try{
+//             let response = await fetch(path)
+//             if(!response.ok){
+//                throw new Error("Помилка сервера,спробуйте пізніше")
+//             }
+//             const data = await response.json()
+//             container.innerHTML = `<img  src = ${data.message}>`
+//         }
+//        catch(err){
+//             let errorDiv = document.createElement("div")
+//             container.before(errorDiv)
+//             errorDiv.innerHTML = err.message
+//             container.innerHTML = `<img src ='../resource/error.png' >`
+//        }
+//        finally{
+//             console.log("Дякую")
+//        }
+      
+//     }
+
+//     window.onload = function(){
+//         getImgCat(parhUrl,".container")
+//         const btnUpdate = document.querySelector(".update")
+//         btnUpdate.addEventListener("click",() => getImgCat(parhUrl,".container"))
+//     }
+//     // ___________________________________________________________________________________
+
+
+
+   
+    </script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .wrapper{
+            width: 100%;
+            height: 950px;
+            display: flex;
+            align-items:center;
+            justify-content: center;
+            position: relative;
+            flex-direction: column;
+        }
+        .btnBackBlack{
+            position: absolute;
+            width: 200px;
+            height: 70px;
+            background-color: aqua;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius:10px;
+            margin: 0 auto;
+            margin-top: 50px;
+            left: 50%;
+            bottom: 0;
+            transform: translate(-50%);
+        }
+        .btnBackBlack a{
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 500px;
+            color:#000;
+            padding: 10px;
+        }
+        .container{
+            width: 400px;
+            height: 300px;
+            border: 1px solid #c2a3a3;
+            display: flex;
+            align-items:center;
+            justify-content: center;
+            border-radius: 20px;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .box{
+            width: 100%;
+            border:1px solid #000;
+            margin-top: 10px;
+            height: 30px;
+            display: flex;
+            align-items:center;
+            justify-content: center;
+            border-radius: 10px
+        }
+
+
+        .exm_container{
+            font-size: 26px;
+        }
+        input{
+            width: 400px;
+            height: 300px;
+        }
+        
+
+      
+    </style>
+</head>
+<body>
+
+
+    <div class="wrapper">
+        <div class="counterChange"></div>
+        <div class="container">
+            Зберігати у пам’яті список справ, які користувачу треба виконати (зберігати у localStorage). Періодично випадковим чином вибирати якусь з справ і виводити користувачу (з використанням confirm). Якщо користувач натискає на «Ок», то видаляти цю задачу.
+        </div>
+        <button class='btnBackBlack'><a href='../lesson24.html'>До завдань</a></button>
+
+    </div>
+
+    <script>
+
+    // Задача 12. Зберігати у пам’яті список справ, які користувачу треба виконати (зберігати у localStorage). Періодично випадковим чином вибирати якусь з справ і виводити користувачу (з використанням confirm). Якщо користувач натискає на «Ок», то видаляти цю задачу.
+
+
+
+    const listTask = ["Проснутися в 6","Зустрітися з другом","Зварити кави","Почитати книгу","Сходити в кіно"]
+
+    class ToDoManager{
+        constructor(list){
+            this.listTusk = list
+        }
+
+        // зберігаю
+        saveListTask(list){
+            localStorage.setItem( 'list',JSON.stringify(list))
+        }
+        // отримую
+        getListTask(){
+            return JSON.parse(localStorage.getItem("list"))
+        }
+        getRandomNum(max){
+            return Math.floor(Math.random() * max)
+        }
+
+        // показую задачу та фільтрую масив
+        showRandomTask(){
+            let taskList = this.getListTask()
+            let randomNum = this.getRandomNum(taskList.length)
+            let choiceAction = confirm(taskList[randomNum])
+            if(choiceAction){
+                let filterTusk = taskList.filter(el => el !== taskList[randomNum])
+                this.saveListTask(filterTusk)
+            }
+         
+        }
+        run(){
+                this.saveListTask(this.listTusk)
+
+                let showTuskInterval = setInterval(() =>{
+                    this.showRandomTask()
+                    if(this.getListTask().length === 0){
+                        clearInterval(showTuskInterval)
+                        alert("Всі задачі завершені")
+                    }
+                },4000)
+        }
+    }
+
+    window.onload = function(){
+        let userToDoList = new ToDoManager(listTask)
+        userToDoList.run()
+
+    }
+    </script>
+</body>
+</html>

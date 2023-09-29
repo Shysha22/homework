@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .wrapper{
+            width: 100%;
+            height: 950px;
+            display: flex;
+            align-items:center;
+            justify-content: center;
+            position: relative;
+            flex-direction: column;
+        }
+        .btnBackBlack{
+            position: absolute;
+            width: 200px;
+            height: 70px;
+            background-color: aqua;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius:10px;
+            margin: 0 auto;
+            margin-top: 50px;
+            left: 50%;
+            bottom: 0;
+            transform: translate(-50%);
+        }
+        .btnBackBlack a{
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 500px;
+            color:#000;
+            padding: 10px;
+        }
+        .container{
+            width: 400px;
+            height: 300px;
+            border: 1px solid #000;
+            display: flex;
+            align-items:center;
+            justify-content: center;
+            border-radius: 20px;
+            flex-direction: column;
+        }
+        .box{
+            width: 100%;
+            border:1px solid #000;
+            margin-top: 10px;
+            height: 30px;
+            display: flex;
+            align-items:center;
+            justify-content: center;
+            border-radius: 10px
+        }
+
+
+        .exm_container{
+            font-size: 26px;
+        }
+        input{
+            width: 60px;
+            height: 26px;
+            background-color:rgba(0, 0, 0, 0.01);
+            border:none;
+            border: 1px solid #000;
+            margin-left: 5px;
+            border-radius:10px;
+            text-align: center;
+        }
+        .right{
+            color : blue;
+            font-size: 24px
+        }
+        .not_right{
+            color : red;
+            font-size: 24px
+        }
+        .title{
+            margin-bottom: 10px;
+        }
+        .container_expiration{
+            width: 400px;
+            height: 150px;
+            display: flex;
+            align-items:center;
+            justify-content: center;
+        }
+        .btn{
+            width: 120px;
+            height: 40px;
+            border-radius:20px;
+            background-color: #c49d9d;
+            cursor: pointer;
+        }
+        .suitable{
+            color: blue;
+        }
+        .not_suitable{
+            color: red;
+        }
+
+      
+    </style>
+</head>
+<body>
+
+
+    <div class="wrapper">
+        <div class="container">
+        </div>
+        <button class='btnBackBlack'><a href='../lesson24.html'>До завдань</a></button>
+
+    </div>  
+
+    <script>
+      
+    //   Задача 10 Дано два списки прізвищ студентів, що відвідують гуртки з математики і історії. Підрахувати скільки студентів з гуртка з історії також відвідують гурток з математики. Також підрахувати скільки всього студентів відвідують хоча б один гурток. 
+
+    
+    const facultyMathematics = ["Терещенко","Степаненко","Іванов","Сидоров","Миколенко"]
+    const facultyHystory = ["Крикуненко","Миколенко","Іванов","Дуда","Терещенко"]
+
+
+    const hystoryCollection = new Set(facultyHystory)
+    const mathematicsCollection = new Set(facultyMathematics)
+
+
+    const  visitBothFaculty = [...hystoryCollection].filter(std => mathematicsCollection.has(std))
+
+    const allStudens = [...facultyHystory,...facultyMathematics]
+
+    let visitOneFaculty = new Set ([...facultyHystory,...facultyMathematics])   
+    console.log(visitOneFaculty)
+
+    const container = document.querySelector(".container")
+
+    container.innerHTML = `
+        <div>Кількість студентів які відвідали хоча б 1 гурток : ${visitOneFaculty.size}
+        <div>Кількість студентів які відвідали 2 гуртки : ${visitBothFaculty.length}
+
+    `
+    </script>
+</body>
+</html>

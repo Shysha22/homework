@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .wrapper{
+            width: 100%;
+            height: 950px;
+            display: flex;
+            align-items:center;
+            justify-content: center;
+            position: relative;
+            flex-direction: column;
+        }
+        .btnBackBlack{
+            position: absolute;
+            width: 200px;
+            height: 70px;
+            background-color: aqua;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius:10px;
+            margin: 0 auto;
+            margin-top: 50px;
+            left: 50%;
+            bottom: 0;
+            transform: translate(-50%);
+        }
+        .btnBackBlack a{
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 500px;
+            color:#000;
+            padding: 10px;
+        }
+        .container{
+            width: 400px;
+            height: 300px;
+            border: 1px solid #000;
+            display: flex;
+            align-items:center;
+            justify-content: center;
+            border-radius: 20px;
+            flex-direction: column;
+        }
+        .box{
+            width: 100%;
+            border:1px solid #000;
+            margin-top: 10px;
+            height: 30px;
+            display: flex;
+            align-items:center;
+            justify-content: center;
+            border-radius: 10px
+        }
+
+
+        .exm_container{
+            font-size: 26px;
+        }
+        input{
+            width: 160px;
+            height: 26px;
+            background-color:rgba(0, 0, 0, 0.01);
+            border:none;
+            border: 1px solid #000;
+            margin-left: 5px;
+            border-radius:10px;
+            text-align: center;
+            margin: 5px;
+        }
+        .correct{
+            border: 1px solid blue
+        }
+        .not_correct{
+            border: 1px solid red
+        }
+        .title{
+            margin-bottom: 10px;
+        }
+        .container_expiration{
+            width: 400px;
+            height: 150px;
+            display: flex;
+            align-items:center;
+            justify-content: center;
+        }
+        .btn{
+            width: 120px;
+            height: 40px;
+            border-radius:20px;
+            background-color: #c49d9d;
+            cursor: pointer;
+            border:none;
+            margin-top: 10px;
+        }
+        .suitable{
+            color: blue;
+        }
+        .not_suitable{
+            color: red;
+        }
+        .userPhoneContainer{
+            display: flex;
+            flex-direction: column;
+            align-items:center;
+            justify-content: center;
+        }
+        
+
+      
+    </style>
+</head>
+<body>
+
+
+    <div class="wrapper">
+        <div class="container">
+            <form action="#">
+                <div class="userPhoneContainer">
+                    <label>Введіть номер телефону</label>
+                    <input type="number" class="user_number">
+                     <button class="btn">Визначити оператора</button>
+                </div>
+            </form>
+            <div class="showMessage"></div>
+        </div>
+
+
+        <button class='btnBackBlack'><a href='../lesson25.html'>До завдань</a></button>
+
+    </div>
+
+    <script>
+        // Задача 1. Дано клас PhoneNumber. Створити функцію перетворення до string, при якому на основі номера виводиться оператор (050….  🡪 MTC, 096… 🡪 Kyivstar, ….)
+
+        // клас помилки (некоректний номер)
+        class ErrorNotCorrectNumber extends Error{
+            constructor(){
+                super();
+                this.message = "Некоректний номер";
+                this.name = "IsNotCorrectNumber"
+            }
+        }
+
+        // створюю PhoneNumber
+        class PhoneNumber{
+            constructor(number){
+                this.phoneNumber = number
+            }
+            // метод визначення перших 3 чифр
+            validateCodePhone(phoneNumber){
+                let validateExpsn = /\b\d{3}/g
+                let operationCode = phoneNumber.match(validateExpsn)
+                return operationCode[0]
+            }
+            [Symbol.toPrimitive](hint){
+
+                let operatorName
+
+                switch(this.validateCodePhone(this.phoneNumber)){
+                    case '050' : case'066': case'095' : case'099': operatorName = "MTC"
+                    break;
+                    case '096' : case'068' : case'098' : case'097' : operatorName = "Kyivstart"
+                    break;
+                    default : operatorName = "Невідомий"
+                }
+                return operatorName
+            }
+        }
+
+
+        // функція виведення повідомлення 
+        function showMessage(operattor,selectorDiv){
+            const div = document.querySelector(selectorDiv)
+            div.innerHTML = ""
+            div.innerHTML = `Ваш оператор ${operattor}`
+        }
+
+
+        function chekedPhoneNum(input){
+
+            const phoneInput = document.querySelector(input)
+
+            try{
+                    // отримую значення інпута
+                    let phoneNumber = phoneInput.value
+                    if(phoneNumber.length !== 10) throw new ErrorNotCorrectNumber()
+
+                    // добавляю клас якщо кількість цифир коректна
+                    phoneInput.classList.remove("not_correct")
+                    phoneInput.classList.add("correct")
+
+                    // створюю клас
+                    const userPhoneNumber = new PhoneNumber(phoneNumber)
+                    // функція яка показує повідомлення
+                    let message = showMessage(userPhoneNumber,".showMessage")
+
+                    // очищаю поле інпута і прибираю зайві класи
+                    setTimeout(() =>{
+                        phoneInput.value = ""
+                        phoneInput.className = "user_number"
+                },1000)
+                }
+            catch(err){
+                if(err instanceof ErrorNotCorrectNumber){
+                    phoneInput.classList.remove("correct")
+                    phoneInput.classList.add("not_correct")
+                }
+            }
+        }
+        window.onload = function(){
+            const btnSubmit = document.querySelector(".btn")
+            btnSubmit.addEventListener("click",() =>{
+                chekedPhoneNum(".user_number")
+            })
+        }
+
+
+
+
+
+    </script>
+</body>
+</html>
